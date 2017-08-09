@@ -11,7 +11,7 @@
 import SimpleMDE from 'SimpleMDE';
 
 export default {
-    props: ['label', 'name', 'translations', 'limit', 'placeholder'],
+    props: ['label', 'name', 'limit', 'placeholder'],
     data() {
         return {
             id: this._uid,
