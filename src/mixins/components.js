@@ -19,3 +19,4 @@ Vue.component('wysiwyg', require('../modules/wysiwyg.vue'));
 Vue.component('repeater', require('../modules/repeater.vue'));
 Vue.component('genericfield', require('../modules/genericfield.vue'));
 Vue.component('checkboxfield', require('../modules/checkboxfield.vue'));
+Vue.component('radiofield', require('../modules/radiofield.vue'));

@@ -14,7 +14,9 @@ export default {
                 'image': 'imagefield',
                 'file': 'filefield',
                 'url': 'urlfield',
-                'wysiwyg': 'wysiwyg'
+                'wysiwyg': 'wysiwyg',
+                'checkbox': 'checkboxfield',
+                'radio': 'radiofield'
             }
         }
     },
