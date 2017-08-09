@@ -1,0 +1,67 @@
+.searchbox {
+    width: col(6, 24);
+    height: s(45);
+
+    &--shake {
+        animation: shake .4s $ease-out-quad;
+
+        .searchbox__textfield {
+            border-color: $cGray;
+        }
+    }
+
+    &__container {
+        position: relative;
+    }
+
+    &__textfield {
+        font-size: s($s2);
+        position: absolute;
+        border: 1px solid $cWhite3;
+        border-right: none;
+        border-radius: s(3, $s2) 0 0 s(3, $s2);
+        padding: s(12, $s2) s(20, $s2);
+        width: calc(100% - #{s(65, $s2)});
+        height: s(45, $s2);
+        transition: border-color .2s $ease-out-quad;
+
+        &::placeholder {
+            color: $cAnthracite1;
+        }
+
+        &:focus {
+            outline: none;
+            border-color: $cGray;
+        }
+    }
+
+    &__submit {
+        font-size: s($s2);
+        position: absolute;
+        right: 0;
+        top: 0;
+        height: s(45, $s2);
+        width: s(65, $s2);
+        border: none;
+        box-shadow: none;
+        background: $cAnthracite1;
+        cursor: pointer;
+        border-radius: 0 s(3, $s2) s(3, $s2) 0;
+        transition: background .2s $ease-out-quad;
+
+        &:focus {
+            outline: none;
+        }
+
+        &:before {
+            @include icon(github);
+            color: $cWhite2;
+            font-size: s(17, $s2);
+            line-height: s(25, 17);
+        }
+
+        &:hover {
+            background: $cAnthracite2;
+        }
+    }
+}

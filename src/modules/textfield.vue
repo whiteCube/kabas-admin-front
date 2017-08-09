@@ -1,0 +1,75 @@
+<template>
+    <div class="field textfield" :class="classes">
+        <label class="field__label" :for="randomID">{{ label }}</label>
+        <div class="field__container" :data-remaining="remaining">
+            <input  v-if="!this.hasProp('email') && !this.hasProp('password') && !this.hasProp('textarea')" 
+                    @input="input" v-model="val" 
+                    type="text" :name="name" 
+                    class="field__element" :id="randomID"
+                    :placeholder="placeholder">
+            <input  v-if="this.hasProp('email')" 
+                    v-model="val" type="email" 
+                    :name="name" class="field__element" 
+                    :placeholder="placeholder" :id="randomID">
+            <input  v-if="this.hasProp('password')" 
+                    v-model="val" type="password" 
+                    :name="name" class="field__element" 
+                    :placeholder="placeholder" :id="randomID">
+            <textarea   v-if="this.hasProp('textarea')"
+                        class="field__element" :id="randomID"
+                        v-model="val" :name="name"
+                        :placeholder="placeholder"></textarea>
+        </div>
+    </div>
+</template>
+
+<script>
+
+export default {
+    props: ['label', 'placeholder', 'name', 'limit', 'password', 'email', 'textarea', 'value'],
+
+    data() {
+        return {
+            val: '',
+            shaking: false,
+            randomID: this._uid
+        }
+    },
+
+    created() {
+        if(typeof this.value !== 'undefined') this.val = this.value;
+    },
+
+    methods: {
+        input() {
+            if(!this.hasProp('limit')) return;
+            if(this.remaining == 0) this.shake();
+            if(this.remaining <= 0) this.val = this.val.substring(0, this.limit);
+        },
+
+        shake() {
+            this.shaking = true;
+            setTimeout(() => {
+                this.shaking = false;
+            }, 400);
+        }
+    },
+
+    computed: {
+        classes() {
+            return {
+                'textfield--limited': this.hasProp('limit'),
+                'textfield--password': this.hasProp('password'),
+                'textfield--email': this.hasProp('email'),
+                'textfield--textarea': this.hasProp('textarea'),
+                'field--shake': this.shaking
+            };
+        },
+
+        remaining() {
+            let remaining = this.limit - this.val.length;
+            return remaining > 0 ? remaining : 0;
+        }
+    }
+}
+</script>

@@ -1,0 +1,93 @@
+.genericfield {
+    margin-bottom: s(45);
+}
+
+.field {
+    display: block;
+    margin-bottom: s(45);
+
+    &--shake {
+        animation: shake .4s $ease-out-quad infinite;
+    }
+
+    &__label,
+    &__error {
+        font-weight: 600;
+        font-size: s($s2);
+    }
+
+    &__label {
+        display: inline-block;
+        margin-bottom: s(10, $s2);
+        user-select: none;
+        cursor: default;
+        transition: color .2s $ease-out-quad;
+
+        &:before {
+            @include icon(github);
+            color: $cAccent;
+            font-size: s(16, $s2);
+            margin-right: s(10, 16);
+            vertical-align: s(-2, 16);
+            opacity: 0;
+            margin-left: s(-25, 16);
+            transition: opacity .2s $ease-out-quad, margin-left .2s $ease-out-quad;
+        }
+    }
+
+    &--error {
+        > .field__label {
+            color: $cAccent;
+
+            &:before {
+                opacity: 1;
+                margin-left: 0;
+            }
+        }
+    }
+
+    &__error {
+        display: block;
+        color: $cAccent;
+        margin-top: s(10, $s2);
+
+        &.slideDown-enter-active, &.slideDown-leave-active {
+            transition: opacity .2s $ease-out-quad, transform .2s $ease-out-quad;
+        }
+
+        &.slideDown-enter, &.slideDown-leave-to {
+            opacity: 0;
+            transform: translateY(s(-5, $s2));
+        }
+    }
+
+    &__container {
+        position: relative;
+    }
+
+    &__footer {
+        padding: s(20);
+        border-top: 1px solid $cWhite5;
+        @include clearfix();
+    }
+
+    &__action {
+        & + & {
+            margin-left: s(5, $s2);
+        }
+    }
+
+    &__actions {
+        float: right;
+        text-align: right;
+    }
+
+    &__tip {
+        font-style: italic;
+        color: $cGray2;
+        font-size: s($s2);
+        width: 70%;
+        float: left;
+        margin-top: s(10, $s2);
+    }
+}

@@ -1,0 +1,16 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+    color: $cAnthracite1;
+}
+
+.container {
+    max-width: s($ws_sGridzTotalWidth);
+    margin: 0 auto;
+    height: 100%;
+    position: relative;
+}
+
+.sro {
+    @include hidden();
+}

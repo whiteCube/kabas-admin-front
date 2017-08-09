@@ -1,0 +1,101 @@
+body {
+    max-width: 1142px;
+    margin: 60px auto;
+    padding: 0 col(1, 26);
+}
+
+h1 {
+    font-size: 2em;
+    font-weight: 700;
+    margin-bottom: 1em;
+}
+
+h2 {
+    font-size: 1.2em;
+    font-weight: 600;
+    margin-bottom: 1em;
+    display: inline-block;
+    margin-right: 12px;
+}
+
+section {
+    margin-bottom: 6em;
+    clear: both;
+    @include clearfix();
+}
+
+pre {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 12px;
+    margin-top: 25px;
+    margin-bottom: 6px;
+}
+
+.item {
+    margin-bottom: 15px;
+}
+
+.hseparator {
+    display: inline-block;
+    width: 10px;
+}
+
+.vseparator {
+    display: block;
+    height: 15px;
+}
+
+.tooltip {
+    display: block;
+    text-align: center;
+}
+
+.cheatcode {
+    display: none;
+    margin-top: 0;
+}
+
+.cheat {
+    display: none;
+}
+
+.cheatlabel {
+    user-select: none;
+    font-size: s(12);
+    cursor: pointer;
+    display: inline-block;
+    font-family: 'Roboto Mono', monospace;
+    vertical-align: 1px;
+    margin-bottom: s(10, 12);
+
+    &:before {
+        content: '→';
+        color: $cAccent;
+        font-size: s(15, 12);
+        display: inline-block;
+        margin-right: s(5, 15);
+    }
+}
+
+.cheat:checked + pre {
+    display: block;
+}
+
+.hljs {
+    padding: 0 s(25);
+    line-height: 1.7em;
+    border-radius: 4px;
+    margin-bottom: s(35);
+}
+
+.hljs-attr {
+    color: #e0ccb8;
+}
+
+div.field {
+    margin-bottom: 5px;
+}
+
+.field + .cheatlabel ~ .field {
+    margin-top: 35px;
+}

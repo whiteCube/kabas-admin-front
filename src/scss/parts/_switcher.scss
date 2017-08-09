@@ -1,0 +1,60 @@
+.switcher {
+    @include clearfix(left);
+
+    &__item {
+        display: block;
+        float: left;
+        border: 1px solid $cWhite3;
+        width: s(54);
+        height: s(45);
+        text-align: center;
+        text-decoration: none;
+        transition: background .2s $ease-out-quad;
+
+        &:hover {
+            background: $cWhite1;
+
+            &:before {
+                color: $cAnthracite1;
+            }
+        }
+
+        &:before {
+            @include iconBase();
+            color: $cGray;
+            font-size: s(21);
+            line-height: s(44, 21);
+            transition: color .2s $ease-out-quad;
+        }
+
+        & + & {
+            border-left: none;
+        }
+
+        &:first-child {
+            border-radius: s(3) 0 0 s(3);
+        }
+
+        &:last-child {
+            border-radius: 0 s(3) s(3) 0;
+        }
+
+        &--active {
+            &:before {
+                color: $cAccent;
+            }
+
+            &:hover:before {
+                color: $cAccentDarker2;
+            }
+        }
+
+        &--cards:before {
+            @include iconInclude(github);
+        }
+
+        &--list:before {
+            @include iconInclude(twitter);
+        }
+    }
+}

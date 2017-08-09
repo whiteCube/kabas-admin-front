@@ -1,0 +1,103 @@
+.textfield .field__element,
+.url .field__element {
+    border: 1px solid $cWhite5;
+    font-size: s($s2);
+    border-radius: s(3, $s2);
+    display: block;
+    width: 100%;
+    padding: s(15, $s2);
+    transition: border-color .2s $ease-out-quad;
+
+    &:focus {
+        outline: none;
+        border-color: $cGray;
+    }
+
+    .field--error > & {
+        border-color: $cAccent;
+    }
+}
+
+.textfield--limited,
+.textfield--email,
+.textfield--password {
+    .field__container:before {
+        display: inline-block;
+        font-size: s($s1);
+        text-align: center;
+        font-weight: 700;
+        position: absolute;
+        top: 1px;
+        bottom: 1px;
+        overflow: hidden;
+        border-right: 1px solid $cWhite5;
+     }
+}
+
+.textfield--email,
+.textfield--password {
+    .field__container:before {
+        font-size: s($s3);
+        width: s(50);
+        line-height: s(45);
+    }
+
+    .field__element {
+        padding-left: s(70, $s2);
+    }
+}
+
+.textfield--limited {
+    .field__container:before {
+        content: attr(data-remaining);
+        width: s(65, $s1);
+        line-height: s(45, $s1);
+        transition: color .2s $ease-out-quad;
+    }
+
+    .field__element {
+        padding-left: s(85, $s2);
+    }
+
+    &.field--shake {
+        .field__container:before {
+            color: $cAccent;
+        }
+    }
+}
+
+.textfield--email .field__container {
+    &:before {
+        content: '@';
+    }
+}
+
+.textfield--password .field__container {
+    &:before {
+        @include icon(github);
+        line-height: s(45);
+    }
+}
+
+.textfield--textarea {
+    position: relative;
+
+    &:after {
+        @include icon(github);
+        width: s(16);
+        height: s(16);
+        background: $cWhite;
+        position: absolute;
+        bottom: 1px;
+        right: 1px;
+        pointer-events: none;
+        color: $cWhite6;
+    }
+
+    .field__element {
+        min-height: s(150);
+        resize: vertical;
+        line-height: s($s6, $s2);
+    }
+}
+

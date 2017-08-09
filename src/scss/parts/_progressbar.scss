@@ -1,0 +1,16 @@
+.progressbar {
+    height: s(18);
+    border-radius: s(3);
+    box-shadow: inset 0px 0px 0px 1px $cWhite5;
+
+    &__fill {
+        display: block;
+        height: 100%;
+        background: $cAnthracite1;
+        border-radius: s(3);
+    }
+
+    &--danger .progressbar__fill {
+        background: $cAccent;
+    }
+}

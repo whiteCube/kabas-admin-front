@@ -1,0 +1,17 @@
+.numstats {
+    &__label {
+        font-weight: 600;
+        font-size: s($s2);
+    }
+
+    &__data {
+        display: block;
+        margin-top: s(11);
+        margin-bottom: s(50);
+    }
+
+    &__number {
+        font-size: s($s9);
+        font-weight: 800;
+    }
+}

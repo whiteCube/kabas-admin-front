@@ -1,0 +1,45 @@
+.topbar {
+    @include clearfix(left);
+
+    &__title {
+        font-weight: 700;
+        font-size: s($s7);
+        display: inline;
+        line-height: s(42, $s7);
+    }
+
+    &__counter {
+        display: inline-block;
+        background: $cAccent;
+        color: $cWhite2;
+        height: s(24, $s1);
+        width: s(24, $s1);
+        border-radius: 50%;
+        font-size: s($s1);
+        text-align: center;
+        line-height: s(23, $s1);
+        vertical-align: s(2, $s1);
+        margin-left: s(10, $s1);
+    }
+
+    &__text {
+        float: left;
+        width: col(7, 24);
+        margin-right: calc(100% - (#{col(21, 24)} + 108px));
+    }
+
+    .switcher, .searchbox {
+        float: left;
+        margin-right: col(1, 24);
+    }
+
+    .searchbox {
+        width: col(6, 24);
+    }
+
+    .btn {
+        float: left;
+        display: block;
+        width: col(6, 24);
+    }
+}

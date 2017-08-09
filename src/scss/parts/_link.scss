@@ -1,0 +1,14 @@
+.link {
+    color: $cAccentDarker1;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color .2s $ease-out-quad;
+    position: relative;
+    display: inline-block;
+    padding: s(2) 0;
+    vertical-align: top;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}

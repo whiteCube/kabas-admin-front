@@ -1,0 +1,116 @@
+.table {
+    width: 100%;
+    border: 1px solid $cWhite3;
+    font-size: s($s2);
+    border-radius: s(3, $s2);
+
+    &__element {
+        width: 100%;
+        border-collapse: collapse;
+        display: table;
+    }
+
+    &__col {
+        padding: s(15, $s2);
+        border-right: 1px solid $cWhite3;
+        width: col(5, 24);
+        display: table-cell;
+
+        &:last-child {
+            border-right: none;
+        }
+
+        &--main {
+            width: col(11, 24);
+        }
+
+        &--right {
+            text-align: right;
+        }
+    }
+
+    &__heading {
+        text-align: left;
+        font-weight: 700;
+        border-bottom: 1px solid $cWhite3;
+        border-right: 1px solid $cWhite3;
+
+        &:last-child {
+            border-right: none;
+        }
+
+        &.table__col--right {
+            text-align: right;
+        }
+    }
+
+    &__link {
+        position: absolute;
+        right: 0;
+        left: 0;
+        top: 0;
+        bottom: 0;
+    }
+
+    &__row {
+        display: table-row;
+        text-decoration: none;
+        color: inherit;
+        transition: background .2s $ease-out-quad;
+        position: relative;
+
+        &:nth-child(even) {
+            background: $cWhite1;
+        }
+
+        &:hover {
+            background: $cWhite4;
+        }
+
+        &--danger.table__row {
+            background: $cAccent;
+            color: $cWhite;
+
+            .table__col {
+                border-color: $cAccentDarker2;
+            }
+
+            &:hover {
+                background: $cAccentDarker1;
+                color: $cWhite;
+            }
+        }
+    }
+
+    &--numbered {
+
+        .table__element {
+            position: relative;
+        }
+
+        .table__row:first-child + .table__row {
+            counter-reset: rowNumber;
+        }
+
+        .table__row {
+            counter-increment: rowNumber;
+        }
+
+        .table__col:first-child {
+            padding-left: s(50, $s2);
+
+            &:before {
+                content: counter(rowNumber);
+                position: absolute;
+                text-align: right;
+                left: s(10, $s2);
+                width: s(25, $s2);
+            }
+        }
+
+        .table__heading:before {
+            display: none;
+        }
+    }
+
+}

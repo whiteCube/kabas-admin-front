@@ -1,0 +1,76 @@
+.repeater {
+
+    .field {
+        margin-bottom: s(30);
+    }
+
+    > .field__container {
+        border-radius: s(3);
+        border: 1px solid $cWhite5;
+        transition: min-height .3s $ease-out-quad;
+    }
+
+    &__item {
+        padding: s(25, $s2) s(20, $s2);
+        font-size: s($s2);
+        border-top: 1px solid $cWhite5;
+        position: relative;
+
+        &:first-child {
+            border-top: none;
+        }
+    }
+
+    &__number {
+        font-weight: 700;
+        margin-right: s(5, $s2);
+    }
+
+    &__title {
+        margin-bottom: s(5, $s2);
+    }
+
+    &__control {
+        color: $cGray2;
+        text-decoration: none;
+        transition: color .2s $ease-out-quad;
+
+        & + &:before {
+            content: '-';
+            display: inline-block;
+            margin-right: s(7, $s2);
+            margin-left: s(3, $s2);
+        }
+
+        &:hover {
+            color: $cAccent;
+
+            &:before {
+                color: $cGray2;
+            }
+        }
+
+        &--edit {
+            &:after {
+                text-decoration: none;
+                content: '';
+                display: block;
+                @include cover();
+            }
+        }
+
+        &--delete {
+            position: relative;
+            z-index: 15;
+        }
+    }
+
+    .slide-enter, .slide-leave-to {
+        transform: none;
+    }
+
+    &__fields {
+        padding: s(20);
+    }
+
+}

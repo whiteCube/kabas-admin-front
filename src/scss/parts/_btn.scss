@@ -1,0 +1,83 @@
+.btn {
+    display: inline-block;
+    font-family: $fSans;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: s($s1);
+    border-radius: s(3, $s1);
+    text-transform: uppercase;
+    letter-spacing: s(0.7, $s1);
+    padding: s(17, $s1);
+    background: $cWhite;
+    box-shadow: inset 0px 0px 0px 1px $cAnthracite1;
+    color: $cAnthracite1;
+    text-align: center;
+    transition: background .2s $ease-out-quad;
+
+    &:hover {
+        background: $cWhite4;
+    }
+
+    &--primary, &--secondary {
+        color: $cWhite2;
+        box-shadow: none;
+    }
+
+    &--primary {
+        background: $cAccent;
+
+        &:hover {
+            background: $cAccentDarker2;
+
+            &.btn--icon:after {
+                background: $cAccentDarker1;
+            }
+        }
+
+        &.btn--icon:after {
+            border: none;
+            transition: background .2s $ease-out-quad;
+            background: $cAccentDarker2;
+        }
+    }
+
+    &--secondary {
+        background: $cAnthracite1;
+
+        &:hover {
+            background: $cAnthracite3;
+        }
+
+        &.btn--icon:after {
+            border: none;
+            background: $cAnthracite2;
+        }
+    }
+
+    &--tiny {
+        padding: s(12, $s1) s(15, $s1);
+    }
+
+    &--icon {
+        overflow: hidden;
+        position: relative;
+        padding-left: s(25, $s1);
+        padding-right: s(65 + 25, $s1);
+
+        &:after {
+            @include iconBase();
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            font-size: s($s4, $s1);
+            width: s(65, $s4);
+            line-height: s(45, $s4);
+            border-left: 1px solid $cAnthracite1;
+        }
+    }
+
+    &--cog:after {
+        @include iconInclude(github);
+    }
+}

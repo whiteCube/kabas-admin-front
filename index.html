@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Kabas admin showcase</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,700,700i,800" rel="stylesheet">
+    <link rel="stylesheet" href="https://highlightjs.org/static/demo/styles/ocean.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <!-- <link rel="stylesheet" href="dist/app.css"> -->
+  </head>
+  <body>
+    <div id="app" translations='{
+    "fields": {
+        "color": {
+            "hue": "Hue",
+            "sat": "Saturation",
+            "lum": "Luminosity",
+            "red": "Red",
+            "green": "Green",
+            "blue": "Blue",
+            "cancel": "Cancel",
+            "finish": "Finish"
+        },
+        "url": {
+            "external": "External",
+            "internal": "Internal"
+        },
+        "file": {
+            "choose": "Choose a file",
+            "prompt": "Click here to pick a file on your computer, or drag and drop your file into this box directly.",
+            "formats": "Accepted formats",
+            "errors": {
+                "notsupported": "This file type is not allowed for this field",
+                "size": "This file exceeds the size limit for this field"
+            }
+        },
+        "image": {
+            "choose": "Choose an image",
+            "prompt": "Click here to pick a file on your computer, or drag and drop your file into this box directly.",
+            "formats": "Accepted formats",
+            "alt": "Alt text",
+            "sizes": "Size constraints",
+            "height": "Height",
+            "width": "Width",
+            "min": "min",
+            "max": "max",
+            "errors": {
+                "notsupported": "This file type is not allowed for this field",
+                "size": "This image exceeds the size limit for this field",
+                "dimensions": "The dimensions of this image do not conform to the limits of this field"
+            }
+        },
+        "repeater": {
+            "tip": "Click on an element to edit it.",
+            "add": "Add",
+            "cancel": "Cancel",
+            "editTip": "Click finish to save this element.",
+            "finish": "Finish",
+            "elements": "%s element|%s elements",
+            "subEdit": "Edit this repeater",
+            "empty": "Click to add the first element.",
+            "delete": "Delete",
+            "edit": "Edit"
+        }
+    }
+}'>
+        <h1>Kabas admin showcase</h1>
+        <section>
+            <div>
+                <h2>Buttons</h2>
+                <label for="cheat1" class="cheatlabel">Show/hide code example</label>
+                <input type="checkbox" class="cheat" id="cheat1">
+                <pre class="cheatcode"><code class="html">
+&lt;btn href=&quot;#&quot;&gt;A simple button&lt;/btn&gt;
+&lt;btn primary href=&quot;#&quot;&gt;A primary button&lt;/btn&gt;
+&lt;btn secondary href=&quot;#&quot;&gt;A secondary button&lt;/btn&gt;
+                </code></pre>
+            </div>
+
+            <btn href="#">A simple button</btn>
+            <btn primary href="#">A primary button</btn>
+            <btn secondary href="#">A secondary button</btn>
+        </section>
+
+        <section>
+            <div>
+                <h2>Tiny buttons</h2>
+                <label for="cheat2" class="cheatlabel">Show/hide code example</label>
+                <input type="checkbox" class="cheat" id="cheat2">
+                <pre class="cheatcode"><code class="html">
+&lt;btn tiny href=&quot;#&quot;&gt;Tiny button&lt;/btn&gt;
+&lt;btn tiny primary href=&quot;#&quot;&gt;Tiny primary button&lt;/btn&gt;
+&lt;btn tiny secondary href=&quot;#&quot;&gt;Tiny secondary button&lt;/btn&gt;
+                </code></pre>
+            </div>
+
+            <btn tiny href="#">Tiny button</btn>
+            <btn tiny primary href="#">Tiny primary button</btn>
+            <btn tiny secondary href="#">Tiny secondary button</btn>
+        </section>
+
+        <section>
+            <div>
+                <h2>Icon buttons</h2>
+                <label for="cheat3" class="cheatlabel">Show/hide code example</label>
+                <input type="checkbox" class="cheat" id="cheat3">
+                <pre class="cheatcode"><code class="html">
+&lt;btn icon=&quot;cog&quot; href=&quot;#&quot;&gt;A simple button&lt;/btn&gt;
+&lt;btn primary icon=&quot;cog&quot; href=&quot;#&quot;&gt;A simple button&lt;/btn&gt;
+&lt;btn secondary icon=&quot;cog&quot; href=&quot;#&quot;&gt;A simple button&lt;/btn&gt;
+                </code></pre>
+            </div>
+
+            <btn icon="cog" href="#">A simple button</btn>
+            <btn primary icon="cog" href="#">A simple button</btn>
+            <btn secondary icon="cog" href="#">A simple button</btn>
+        </section>
+
+        <section>
+            <div>
+                <h2>Links</h2>
+                <label for="cheat4" class="cheatlabel">Show/hide code example</label>
+                <input type="checkbox" class="cheat" id="cheat4">
+                <pre class="cheatcode"><code class="html">
+&lt;a href=&quot;#&quot; class=&quot;link&quot;&gt;https://www.kabas.io&lt;/a&gt;
+&lt;a href=&quot;#&quot; class=&quot;icon-link icon-link--gh&quot;&gt;GitHub&lt;/a&gt;
+&lt;a href=&quot;#&quot; class=&quot;icon-link icon-link--tw&quot;&gt;Twitter&lt;/a&gt;
+                </code></pre>
+            </div>
+            
+            <a href="#" class="link">https://www.kabas.io</a>
+            <span class="vseparator"></span>
+            <a href="#" class="icon-link icon-link--gh">GitHub</a>
+            <span class="vseparator"></span>
+            <a href="#" class="icon-link icon-link--tw">Twitter</a>
+        </section>
+
+        <section>
+            <div>
+                <h2>Numerical stats</h2>
+                <label for="cheat5" class="cheatlabel">Show/hide code example</label>
+                <input type="checkbox" class="cheat" id="cheat5">
+                <pre class="cheatcode"><code class="html">
+&lt;dl class=&quot;numstats&quot;&gt;
+    &lt;dt class=&quot;numstats__label&quot;&gt;Bounce rate&lt;/dt&gt;
+    &lt;dd class=&quot;numstats__data&quot;&gt;
+        &lt;em class=&quot;numstats__number&quot;&gt;23&lt;/em&gt; %
+    &lt;/dd&gt;
+    &lt;dt class=&quot;numstats__label&quot;&gt;Unique visitors this month&lt;/dt&gt;
+    &lt;dd class=&quot;numstats__data&quot;&gt;
+        &lt;em class=&quot;numstats__number&quot;&gt;78&lt;/em&gt; sessions
+    &lt;/dd&gt;
+&lt;/dl&gt;
+                </code></pre>
+            </div>
+
+            <dl class="numstats">
+                <dt class="numstats__label">Bounce rate</dt>
+                <dd class="numstats__data">
+                    <em class="numstats__number">23</em> %
+                </dd>
+                <dt class="numstats__label">Unique visitors this month</dt>
+                <dd class="numstats__data">
+                    <em class="numstats__number">78</em> sessions
+                </dd>
+            </dl>
+        </section>
+
+        <section>
+            <div>
+                <h2>Tables</h2>
+                <label for="cheat6" class="cheatlabel">Show/hide code example</label>
+                <input type="checkbox" class="cheat" id="cheat6">
+                <pre class="cheatcode"><code class="html">
+&lt;ktable&gt;
+    &lt;tablerow&gt;
+        &lt;tableheading main id=&quot;page&quot;&gt;Page&lt;/tableheading&gt;
+        &lt;tableheading right id=&quot;edited&quot;&gt;Last edit&lt;/tableheading&gt;
+        &lt;tableheading id=&quot;status&quot;&gt;Status&lt;/tableheading&gt;
+    &lt;/tablerow&gt;
+    &lt;tablerow href=&quot;#&quot;&gt;
+        &lt;tablecell label=&quot;page&quot;&gt;Home&lt;/tablecell&gt;
+        &lt;tablecell right label=&quot;edited&quot;&gt;May 15 2017 - 08:34&lt;/tablecell&gt;
+        &lt;tablecell label=&quot;status&quot;&gt;Published&lt;/tablecell&gt;
+    &lt;/tablerow&gt;
+&lt;/ktable&gt;
+
+&lt;!-- For a numbered table --&gt;
+&lt;ktable numbered&gt;
+    &lt;tablerow&gt;
+        &lt;tableheading main id=&quot;page&quot;&gt;Page&lt;/tableheading&gt;
+        &lt;tableheading right id=&quot;edited&quot;&gt;Last edit&lt;/tableheading&gt;
+        &lt;tableheading id=&quot;status&quot;&gt;Status&lt;/tableheading&gt;
+    &lt;/tablerow&gt;
+    &lt;tablerow href=&quot;#&quot;&gt;
+        &lt;tablecell label=&quot;page&quot;&gt;Home&lt;/tablecell&gt;
+        &lt;tablecell right label=&quot;edited&quot;&gt;May 15 2017 - 08:34&lt;/tablecell&gt;
+        &lt;tablecell label=&quot;status&quot;&gt;Published&lt;/tablecell&gt;
+    &lt;/tablerow&gt;
+&lt;/ktable&gt;
+                </code></pre>
+            </div>
+
+            <ktable>
+                <tablerow>
+                    <tableheading main id="page">Page</tableheading>
+                    <tableheading right id="edited">Last edit</tableheading>
+                    <tableheading id="status">Status</tableheading>
+                </tablerow>
+                <tablerow href="#">
+                    <tablecell label="page">Home</tablecell>
+                    <tablecell right label="edited">May 15 2017 - 08:34</tablecell>
+                    <tablecell label="status">Published</tablecell>
+                </tablerow>
+                <tablerow>
+                    <tablecell label="page">Contact</tablecell>
+                    <tablecell right label="edited">May 15 2017 - 08:34</tablecell>
+                    <tablecell label="status">Published</tablecell>
+                </tablerow>
+                <tablerow>
+                    <tablecell label="page">Home</tablecell>
+                    <tablecell right label="edited">May 15 2017 - 08:34</tablecell>
+                    <tablecell label="status">Published</tablecell>
+                </tablerow>
+            </ktable>
+
+            <span class="vseparator"></span>
+            <span class="vseparator"></span>
+            
+            <ktable numbered>
+                <tablerow>
+                    <tableheading main id="page">Page</tableheading>
+                    <tableheading right id="edited">Last edit</tableheading>
+                    <tableheading id="status">Status</tableheading>
+                </tablerow>
+                <tablerow href="#">
+                    <tablecell label="page">Home</tablecell>
+                    <tablecell right label="edited">May 15 2017 - 08:34</tablecell>
+                    <tablecell label="status">Published</tablecell>
+                </tablerow>
+                <tablerow danger>
+                    <tablecell label="page">Contact</tablecell>
+                    <tablecell right label="edited">May 15 2017 - 08:34</tablecell>
+                    <tablecell label="status">Published</tablecell>
+                </tablerow>
+                <tablerow>
+                    <tablecell label="page">Home</tablecell>
+                    <tablecell right label="edited">May 15 2017 - 08:34</tablecell>
+                    <tablecell label="status">Published</tablecell>
+                </tablerow>
+            </ktable>
+        </section>
+
+        <section>
+            <div>
+                <h2>Progress bars</h2>
+                <label for="cheat7" class="cheatlabel">Show/hide code example</label>
+                <input type="checkbox" class="cheat" id="cheat7">
+                <pre class="cheatcode"><code class="html">
+&lt;progressbar value=&quot;34&quot;&gt;&lt;/progressbar&gt;
+&lt;progressbar danger value=&quot;92&quot;&gt;&lt;/progressbar&gt;
+                </code></pre>
+            </div>
+
+            <progressbar value="34"></progressbar>
+            <span class="vseparator"></span>
+            <progressbar danger value="92"></progressbar>
+        </section>
+
+        <section>
+            <div>
+                <h2>Search box</h2>
+                <label for="cheat8" class="cheatlabel">Show/hide code example</label>
+                <input type="checkbox" class="cheat" id="cheat8">
+                <pre class="cheatcode"><code class="html">
+&lt;searchbox action=&quot;#&quot; placeholder=&quot;Search...&quot; btntext=&quot;Search&quot;&gt;&lt;/searchbox&gt;
+                </code></pre>
+            </div>
+
+            <searchbox action="#" placeholder="Search..." btntext="Search"></searchbox>
+        </section>
+
+        <section>
+            <div>
+                <h2>Switcher</h2>
+                <label for="cheat9" class="cheatlabel">Show/hide code example</label>
+                <input type="checkbox" class="cheat" id="cheat9">
+                <pre class="cheatcode"><code class="html">
+&lt;switcher&gt;
+    &lt;switchbtn icon=&quot;cards&quot; href=&quot;#&quot;&gt;Switch to cards view&lt;/switchbtn&gt;
+    &lt;switchbtn active icon=&quot;list&quot; href=&quot;#&quot;&gt;Switch to list view&lt;/switchbtn&gt;
+    &lt;switchbtn icon=&quot;cards&quot; href=&quot;#&quot;&gt;Switch to cards view&lt;/switchbtn&gt;
+    &lt;switchbtn icon=&quot;list&quot; href=&quot;#&quot;&gt;Switch to list view&lt;/switchbtn&gt;
+&lt;/switcher&gt;
+                </code></pre>
+            </div>
+
+            <switcher>
+                <switchbtn icon="cards" href="#">Switch to cards view</switchbtn>
+                <switchbtn active icon="list" href="#">Switch to list view</switchbtn>
+                <switchbtn icon="cards" href="#">Switch to cards view</switchbtn>
+                <switchbtn icon="list" href="#">Switch to list view</switchbtn>
+            </switcher>
+        </section>
+
+        <section>
+            <div>
+                <h2>Top bar</h2>
+                <label for="cheat10" class="cheatlabel">Show/hide code example</label>
+                <input type="checkbox" class="cheat" id="cheat10">
+                <pre class="cheatcode"><code class="html">
+&lt;div class=&quot;topbar&quot;&gt;
+    &lt;div class=&quot;topbar__text&quot;&gt;
+        &lt;h2 class=&quot;topbar__title&quot;&gt;Pages&lt;/h2&gt;
+        &lt;span class=&quot;topbar__counter&quot;&gt;9&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;switcher&gt;
+        &lt;switchbtn icon=&quot;cards&quot; href=&quot;#&quot;&gt;Switch to cards view&lt;/switchbtn&gt;
+        &lt;switchbtn active icon=&quot;list&quot; href=&quot;#&quot;&gt;Switch to list view&lt;/switchbtn&gt;
+    &lt;/switcher&gt;
+    &lt;searchbox action=&quot;#&quot; placeholder=&quot;Search...&quot; btntext=&quot;Search&quot;&gt;&lt;/searchbox&gt;
+    &lt;btn primary icon=&quot;cog&quot; href=&quot;#&quot;&gt;Create a page&lt;/btn&gt;
+&lt;/div&gt;
+                </code></pre>
+            </div>
+
+            <div class="topbar">
+                <div class="topbar__text">
+                    <h2 class="topbar__title">Pages</h2>
+                    <span class="topbar__counter">9</span>
+                </div>
+                <switcher>
+                    <switchbtn icon="cards" href="#">Switch to cards view</switchbtn>
+                    <switchbtn active icon="list" href="#">Switch to list view</switchbtn>
+                </switcher>
+                <searchbox action="#" placeholder="Search..." btntext="Search"></searchbox>
+                <btn primary icon="cog" href="#">Create a page</btn>
+            </div>
+        </section>
+
+        <section>
+            <div>
+                <h2>Cards</h2>
+                <label for="cheat11" class="cheatlabel">Show/hide code example</label>
+                <input type="checkbox" class="cheat" id="cheat11">
+                <pre class="cheatcode"><code class="html">
+&lt;card edit=&quot;#&quot; view=&quot;#&quot; destroy=&quot;#&quot; icon=&quot;home&quot;&gt;
+    &lt;template slot=&quot;title&quot;&gt;Home&lt;/template&gt;
+    &lt;template slot=&quot;edit&quot;&gt;Edit this page&lt;/template&gt;
+    &lt;template slot=&quot;editedlabel&quot;&gt;Last modified&lt;/template&gt;
+    &lt;template slot=&quot;edited&quot;&gt;15-05-2017 08:53&lt;/template&gt;
+    &lt;template slot=&quot;statuslabel&quot;&gt;Status&lt;/template&gt;
+    &lt;template slot=&quot;status&quot;&gt;Published&lt;/template&gt;
+    &lt;template slot=&quot;description&quot;&gt;Rack mount LCD monitors can save you...&lt;/template&gt;
+    &lt;template slot=&quot;view&quot;&gt;View this page&lt;/template&gt;
+    &lt;template slot=&quot;delete&quot;&gt;Delete this page&lt;/template&gt;
+    &lt;template slot=&quot;confirmdelete&quot;&gt;Delete this page?&lt;/template&gt;
+    &lt;template slot=&quot;yes&quot;&gt;Yes&lt;/template&gt;
+    &lt;template slot=&quot;no&quot;&gt;No&lt;/template&gt;
+&lt;/card&gt;
+                </code></pre>
+            </div>
+
+            <card edit="#" view="#" destroy="#" icon="home">
+                <template slot="title">Home</template>
+                <template slot="edit">Edit this page</template>
+                <template slot="editedlabel">Last modified</template>
+                <template slot="edited">15-05-2017 08:53</template>
+                <template slot="statuslabel">Status</template>
+                <template slot="status">Published</template>
+                <template slot="description">Rack mount LCD monitors can save you a lot of space and help you form a convenient and efficient desktop for your work or home study. The rack mount is set up so&hellip;</template>
+                <template slot="view">View this page</template>
+                <template slot="delete">Delete this page</template>
+                <template slot="confirmdelete">Delete this page?</template>
+                <template slot="yes">Yes</template>
+                <template slot="no">No</template>
+            </card>
+            <card edit="#" view="#" destroy="#" icon="test">
+                <template slot="title">Home</template>
+                <template slot="edit">Edit this page</template>
+                <template slot="editedlabel">Last modified</template>
+                <template slot="edited">15-05-2017 08:53</template>
+                <template slot="statuslabel">Status</template>
+                <template slot="status">Published</template>
+                <template slot="description">Rack mount LCD monitors can save you a lot of space and help you form a convenient and efficient desktop for your work or home study. The rack mount is set up so&hellip;</template>
+                <template slot="view">View this page</template>
+                <template slot="delete">Delete this page</template>
+                <template slot="confirmdelete">Delete this page?</template>
+                <template slot="yes">Yes</template>
+                <template slot="no">No</template>
+            </card>
+            <card edit="#" view="#" destroy="#">
+                <template slot="title">Home</template>
+                <template slot="edit">Edit this page</template>
+                <template slot="editedlabel">Last modified</template>
+                <template slot="edited">15-05-2017 08:53</template>
+                <template slot="statuslabel">Status</template>
+                <template slot="status">Published</template>
+                <template slot="description">Rack mount LCD monitors can save you a lot of space and help you form a convenient and efficient desktop for your work or home study. The rack mount is set up so&hellip;</template>
+                <template slot="view">View this page</template>
+                <template slot="delete">Delete this page</template>
+                <template slot="confirmdelete">Delete this page?</template>
+                <template slot="yes">Yes</template>
+                <template slot="no">No</template>
+            </card>
+        </section>
+
+        <section>
+            <div>
+                <h2>Pagination</h2>
+                <label for="cheat12" class="cheatlabel">Show/hide code example</label>
+                <input type="checkbox" class="cheat" id="cheat12">
+                <pre class="cheatcode"><code class="html">
+&lt;div class=&quot;pagination&quot;&gt;
+    &lt;a href=&quot;#&quot; class=&quot;pagination__previous pagination--disabled&quot;&gt;&lt;span class=&quot;sro&quot;&gt;Previous page&lt;/span&gt;&lt;/a&gt;
+    &lt;a href=&quot;#&quot; class=&quot;pagination__page&quot;&gt;1&lt;/a&gt;
+    &lt;a href=&quot;#&quot; class=&quot;pagination__page pagination__page--active&quot;&gt;2&lt;/a&gt;
+    &lt;a href=&quot;#&quot; class=&quot;pagination__page&quot;&gt;3&lt;/a&gt;
+    &lt;a href=&quot;#&quot; class=&quot;pagination__page&quot;&gt;4&lt;/a&gt;
+    &lt;a href=&quot;#&quot; class=&quot;pagination__page&quot;&gt;&amp;hellip;&lt;/a&gt;
+    &lt;a href=&quot;#&quot; class=&quot;pagination__page&quot;&gt;25&lt;/a&gt;
+    &lt;a href=&quot;#&quot; class=&quot;pagination__next&quot;&gt;&lt;span class=&quot;sro&quot;&gt;Next page&lt;/span&gt;&lt;/a&gt;
+&lt;/div&gt;
+                </code></pre>
+            </div>
+
+            <div class="pagination">
+                <a href="#" class="pagination__previous pagination--disabled"><span class="sro">Previous page</span></a>
+                <a href="#" class="pagination__page">1</a>
+                <a href="#" class="pagination__page pagination__page--active">2</a>
+                <a href="#" class="pagination__page">3</a>
+                <a href="#" class="pagination__page">4</a>
+                <a href="#" class="pagination__page">&hellip;</a>
+                <a href="#" class="pagination__page">25</a>
+                <a href="#" class="pagination__next"><span class="sro">Next page</span></a>
+            </div>
+        </section>
+
+        <section>
+            <div>
+                <h2>Tooltip</h2>
+                <label for="cheat13" class="cheatlabel">Show/hide code example</label>
+                <input type="checkbox" class="cheat" id="cheat13">
+                <pre class="cheatcode"><code class="html">
+&lt;a class=&quot;tooltip&quot; data-tooltip-text=&quot;Some tooltip text&quot;&gt;Hover me!&lt;/a&gt;
+                </code></pre>
+            </div>
+
+            <a class="tooltip" data-tooltip-text="Some tooltip text">Hover me!</a>
+        </section>
+
+        <section>
+            <div><h2>Fields</h2></div>
+
+            <textfield label="Text" name="text" placeholder="A simple text field"></textfield>
+            <label for="cheat14" class="cheatlabel">Show/hide code example</label>
+            <input type="checkbox" class="cheat" id="cheat14">
+            <pre class="cheatcode"><code class="html">
+&lt;textfield label=&quot;Text&quot; name=&quot;text&quot; placeholder=&quot;A simple text field&quot;&gt;&lt;/textfield&gt;
+            </code></pre>
+
+
+            <textfield textarea label="Textarea" name="textarea" placeholder="A large text field"></textfield>
+            <label for="cheat15" class="cheatlabel">Show/hide code example</label>
+            <input type="checkbox" class="cheat" id="cheat15">
+            <pre class="cheatcode"><code class="html">
+&lt;textfield textarea label=&quot;Textarea&quot; name=&quot;textarea&quot; placeholder=&quot;A large text field&quot;&gt;&lt;/textfield&gt;
+            </code></pre>
+
+
+            <textfield limit="25" label="Text limited" name="textlimited" placeholder="A text field with a character limit"></textfield>
+            <label for="cheat16" class="cheatlabel">Show/hide code example</label>
+            <input type="checkbox" class="cheat" id="cheat16">
+            <pre class="cheatcode"><code class="html">
+&lt;textfield limit=&quot;250&quot; label=&quot;Text limited&quot; name=&quot;textlimited&quot; placeholder=&quot;A text field with a character limit&quot;&gt;&lt;/textfield&gt;
+            </code></pre>
+
+            <textfield email label="Email" name="email" placeholder="An email field"></textfield>
+            <label for="cheat17" class="cheatlabel">Show/hide code example</label>
+            <input type="checkbox" class="cheat" id="cheat17">
+            <pre class="cheatcode"><code class="html">
+&lt;textfield email label=&quot;Email&quot; name=&quot;email&quot; placeholder=&quot;An email field&quot;&gt;&lt;/textfield&gt;
+            </code></pre>
+
+            <textfield password label="Password" name="password" placeholder="A password field"></textfield>
+            <label for="cheat18" class="cheatlabel">Show/hide code example</label>
+            <input type="checkbox" class="cheat" id="cheat18">
+            <pre class="cheatcode"><code class="html">
+&lt;textfield password label=&quot;Password&quot; name=&quot;password&quot; placeholder=&quot;A password field&quot;&gt;&lt;/textfield&gt;
+            </code></pre>
+
+            <colorfield name="color" label="Color" placeholder="A color field"></colorfield>
+            <label for="cheat19" class="cheatlabel">Show/hide code example</label>
+            <input type="checkbox" class="cheat" id="cheat19">
+            <pre class="cheatcode"><code class="html">
+&lt;colorfield name=&quot;color&quot; label=&quot;Color&quot; placeholder=&quot;A color field&quot; 
+            :translations=&quot;{ hue: &apos;Hue&apos;, sat: &apos;Saturation&apos;, lum: &apos;Luminosity&apos;, red: &apos;Red&apos;, green: &apos;Green&apos;, blue: &apos;Blue&apos;, cancel: &apos;Cancel&apos;, finish: &apos;Finish&apos; }&quot;&gt;
+&lt;/colorfield&gt;
+            </code></pre>
+            
+
+            <urlfield label="Url" name="url" placeholder="An url field" ajax-url="#"></urlfield>
+            <label for="cheat20" class="cheatlabel">Show/hide code example</label>
+            <input type="checkbox" class="cheat" id="cheat20">
+            <pre class="cheatcode"><code class="html">
+&lt;urlfield label=&quot;Url&quot; name=&quot;url&quot; placeholder=&quot;An url field&quot; ajaxUrl=&quot;#&quot; :translations=&quot;{ external: &apos;External&apos;, internal: &apos;Internal&apos; }&quot;&gt;&lt;/urlfield&gt;
+            </code></pre>
+
+            <filefield label="File" name="file" max-size="100000" :formats="['PDF', 'DOCX', 'PPT']"></filefield>
+            <label for="cheat21" class="cheatlabel">Show/hide code example</label>
+            <input type="checkbox" class="cheat" id="cheat21">
+            <pre class="cheatcode"><code class="html">
+&lt;filefield label=&quot;File&quot; name=&quot;file&quot; max-size=&quot;100000&quot; :formats=&quot;[&apos;PDF&apos;, &apos;DOCX&apos;, &apos;PPT&apos;]&quot;
+           :translations=&quot;{ choose: &apos;Choose a file&apos;, prompt: &apos;Click here to pick a file on your computer, or drag and drop your file into this box directly.&apos;, formats: &apos;Accepted formats&apos;, errors: { notsupported: &apos;This file type is not allowed for this field&apos;, size: &apos;This file exceeds the size limit for this field&apos; } }&quot;&gt;
+&lt;/filefield&gt;
+            </code></pre>
+            
+            <imagefield label="Image" name="image" max-size="10000000" :formats="['PNG', 'JPEG', 'GIF']" min-height="900"
+                        alt-placeholder="Text to show when the image does not display correctly">
+            </imagefield>
+
+            <wysiwyg placeholder="Rich text here" label="Wysiwyg" name="wysiwyg"></wysiwyg>
+            <label for="cheat22" class="cheatlabel">Show/hide code example</label>
+            <input type="checkbox" class="cheat" id="cheat22">
+            <pre class="cheatcode"><code class="html">
+&lt;wysiwyg placeholder=&quot;Rich text here&quot; label=&quot;Wysiwyg&quot; name=&quot;wysiwyg&quot;&gt;&lt;/wysiwyg&gt;
+            </code></pre>
+
+
+            <repeater 
+                label="Repeater" 
+                name="repeater" 
+                :items="[{ title: 'First item', color: '#E84F4F' }, { title: 'Second item', color: '#4F81E8' }, { title: 'Third item', color: '#2DE49E' }]"
+                :structure="{ title: { type: 'text', label: 'Title', rules: { limit: 250 } }, color: { type: 'color', label: 'Color' }, image: { type: 'image', label: 'Image', rules: { maxHeight: 1800, formats: ['JPEG'] } }, email: { type: 'textarea', label: 'Email' }, url: { type: 'url', label: 'Url' }}">
+            </repeater>
+
+
+        </section>
+        <span class="vseparator"></span>
+        <span class="vseparator"></span>
+        <span class="vseparator"></span>
+        <span class="vseparator"></span>
+        <span class="vseparator"></span>
+        <span class="vseparator"></span>
+        <span class="vseparator"></span>
+        <span class="vseparator"></span>
+        <span class="vseparator"></span>
+        <span class="vseparator"></span>
+    </div>
+    <script src="/dist/app.js"></script>
+  </body>
+</html>

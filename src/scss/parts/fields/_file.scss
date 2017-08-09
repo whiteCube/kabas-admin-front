@@ -1,0 +1,85 @@
+.file {
+    .field__element {
+        display: none;
+    }
+
+    .field__container {
+    }
+
+    &--highlighted {
+        > .field__container > .file__label {
+            border-color: $cBlue;
+        }
+    }
+
+    &__label {
+        display: block;
+        text-align: center;
+        border: 1px dashed $cWhite5;
+        padding: s(35);
+        cursor: pointer;
+        position: relative;
+        transition: border-color .3s $ease-out-quad;
+        overflow: hidden;
+
+        .field--error & {
+            border-color: $cAccent;
+        }
+    }
+
+    &__title {
+        display: block;
+        font-size: s($s2);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: s(0.89, $s2);
+        margin-bottom: s(10, $s2);
+
+        &:before {
+            @include icon(github);
+            color: $cAccent;
+            font-size: s(22);
+            margin-right: s(10, 22);
+            vertical-align: s(-3, 22);
+        }
+    }
+
+    &__details {
+        display: block;
+        font-size: s($s1);
+        line-height: s($s5, $s1);
+        max-width: s(370, $s1);
+        margin: auto;
+
+        em {
+            font-weight: 600;
+        }
+    }
+
+    &--expanded {
+        .file__label {
+            padding-left: s(130 + 20);
+        }
+
+        .file__alt {
+            border: 1px dashed $cWhite5;
+            border-top: none;
+            padding: s(20);
+
+            .field__element {
+                display: block;
+            }
+        }
+    }
+
+    &__fig {
+        width: s(130);
+        overflow: hidden;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        background: no-repeat center;
+        background-size: cover;
+    }
+}
