@@ -1,15 +1,3 @@
-<!-- <template>
-    <div class="genericfield">
-        <textfield v-if="type == 'text'" :value="value" :label="label" :name="name"></textfield>
-        <textfield email v-if="type == 'email'" :value="value" :label="label" :name="name"></textfield>
-        <textfield textarea v-if="type == 'textarea'" :value="value" :label="label" :name="name"></textfield>
-        <textfield password v-if="type == 'password'" :value="value" :label="label" :name="name"></textfield>
-        <colorfield v-if="type == 'color'" :value="value" :label="label" :name="name"></colorfield>
-        <imagefield v-if="type == 'image'" :value="value" :label="label" :name="name"></imagefield>
-        <urlfield v-if="type == 'url'" :value="value" :label="label" :name="name"></urlfield>
-    </div>
-</template> -->
-
 <script>
 export default {
     props: ['value', 'structure', 'name'],
