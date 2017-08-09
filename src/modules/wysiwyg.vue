@@ -1,6 +1,6 @@
 <template>
     <div class="field wysiwyg">
-        <label class="field__label" :for="id">{{ label }}</label>
+        <label class="field__label" @click="focus" :for="id">{{ label }}</label>
         <div class="field__container">
             <textarea class="field__element" :id="id" :name="name"></textarea>
         </div>
@@ -17,6 +17,12 @@ export default {
             id: this._uid,
             element: null,
             mde: null
+        }
+    },
+
+    methods: {
+        focus() {
+            this.mde.codemirror.focus();
         }
     },
 
