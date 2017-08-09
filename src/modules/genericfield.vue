@@ -25,7 +25,8 @@ export default {
                 'color': 'colorfield',
                 'image': 'imagefield',
                 'file': 'filefield',
-                'url': 'urlfield'
+                'url': 'urlfield',
+                'wysiwyg': 'wysiwyg'
             }
         }
     },
@@ -52,7 +53,7 @@ export default {
 
         getProps() {
             this.addCommonProps();
-            if(this.is('textfield')) this.addTextProps();
+            if(this.is('textfield', 'wysiwyg')) this.addTextProps();
             if(this.is('imagefield')) this.addImageProps();
             if(this.is('imagefield', 'filefield')) this.addFileProps();
 
@@ -89,8 +90,8 @@ export default {
         addFileProps() {
             if(!this.structure.rules) return;
             this.addRule('formats');
+            this.addRule('maxSize');
         }
-
 
     }, 
 
