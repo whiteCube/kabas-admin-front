@@ -62,7 +62,8 @@ export default {
             this.expanded = false;
         },
 
-        autocomplete() {
+        autocomplete(e) {
+            this.$emit('input', e.target.value);
             if(this.type == 'external' || !this.url.length) return this.expanded = false;
             this.query();
         }

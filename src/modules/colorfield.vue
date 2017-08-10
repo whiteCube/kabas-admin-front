@@ -48,6 +48,7 @@ export default {
 
         update() {
             if(!this.val) return;
+            this.$emit('input', this.val);
             let color = tinycolor(this.val);
             if(this.type == 'rgb') return this.val = color.toRgbString();
             return this.val = color.toHexString().toUpperCase();

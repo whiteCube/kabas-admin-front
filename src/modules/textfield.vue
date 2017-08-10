@@ -8,14 +8,17 @@
                     class="field__element" :id="randomID"
                     :placeholder="placeholder">
             <input  v-if="this.hasProp('email')" 
+                    @input="input" 
                     v-model="val" type="email" 
                     :name="name" class="field__element" 
                     :placeholder="placeholder" :id="randomID">
             <input  v-if="this.hasProp('password')" 
+                    @input="input" 
                     v-model="val" type="password" 
                     :name="name" class="field__element" 
                     :placeholder="placeholder" :id="randomID">
             <textarea   v-if="this.hasProp('textarea')"
+                        @input="input" 
                         class="field__element" :id="randomID"
                         v-model="val" :name="name"
                         :placeholder="placeholder"></textarea>
@@ -41,10 +44,11 @@ export default {
     },
 
     methods: {
-        input() {
+        input(e) {
             if(!this.hasProp('limit')) return;
             if(this.remaining == 0) this.shake();
             if(this.remaining <= 0) this.val = this.val.substring(0, this.limit);
+            this.$emit('input', e.target.value);
         },
 
         shake() {

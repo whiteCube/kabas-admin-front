@@ -81,4 +81,16 @@
         padding: s(20);
     }
 
+    &__preview {
+        &--color {
+            display: inline-block;
+            width: s(16, $s2);
+            height: s(16, $s2);
+            border-radius: s(3, $s2);
+            vertical-align: s(-3, $s2);
+            margin-left: s(4, $s2);
+            margin-right: s(2, $s2);
+        }
+    }
+
 }

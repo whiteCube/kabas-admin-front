@@ -23,7 +23,8 @@ export default {
 
     render(createElement) {
         return createElement(this.component, {
-            props: this.getProps()
+            props: this.getProps(),
+            on: { input: data => this.$emit('input', data) }
         });
     },
 
@@ -46,7 +47,6 @@ export default {
             if(this.is('textfield', 'wysiwyg')) this.addTextProps();
             if(this.is('imagefield')) this.addImageProps();
             if(this.is('imagefield', 'filefield')) this.addFileProps();
-
             return this.properties;
         },
 
@@ -81,6 +81,11 @@ export default {
             if(!this.structure.rules) return;
             this.addRule('formats');
             this.addRule('maxSize');
+        },
+
+        transferInput(e) {
+            console.log('transfering');
+            this.$emit('input', e);
         }
 
     }, 

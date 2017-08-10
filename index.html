@@ -61,7 +61,8 @@
             "subEdit": "Edit this repeater",
             "empty": "Click to add the first element.",
             "delete": "Delete",
-            "edit": "Edit"
+            "edit": "Edit",
+            "nopreview": "No preview available"
         }
     }
 }'>
@@ -519,6 +520,13 @@
             <imagefield label="Image" name="image" max-size="10000000" :formats="['PNG', 'JPEG', 'GIF']" min-height="900"
                         alt-placeholder="Text to show when the image does not display correctly">
             </imagefield>
+            <label for="cheat22" class="cheatlabel">Show/hide code example</label>
+            <input type="checkbox" class="cheat" id="cheat22">
+            <pre class="cheatcode"><code class="html">
+&lt;imagefield label=&quot;Image&quot; name=&quot;image&quot; max-size=&quot;10000000&quot; :formats=&quot;[&apos;PNG&apos;, &apos;JPEG&apos;, &apos;GIF&apos;]&quot; min-height=&quot;900&quot;
+            alt-placeholder=&quot;Text to show when the image does not display correctly&quot;&gt;
+&lt;/imagefield&gt;
+            </code></pre>
 
             <wysiwyg placeholder="Rich text here" label="Wysiwyg" name="wysiwyg"></wysiwyg>
             <label for="cheat22" class="cheatlabel">Show/hide code example</label>
@@ -537,9 +545,21 @@
                 label="Repeater" 
                 name="repeater" 
                 :items="[{ title: 'First item', color: '#E84F4F' }, { title: 'Second item', color: '#4F81E8' }, { title: 'Third item', color: '#2DE49E' }]"
-                :structure="{ title: { type: 'text', label: 'Title', rules: { limit: 250 } }, wysiwyg: { type: 'wysiwyg', label: 'Wysiwyg' }, color: { type: 'color', label: 'Color' }, image: { type: 'image', label: 'Image', rules: { maxHeight: 1800, formats: ['JPEG'] } }, email: { type: 'email', label: 'Email' }, url: { type: 'url', label: 'Url' }}">
+                :structure="{ title: { type: 'text', label: 'Title', rules: { limit: 250 } }, color: { type: 'color', label: 'Color' }}">
             </repeater>
 
+            <span class="vseparator"></span>
+            <span class="vseparator"></span>
+            <span class="vseparator"></span>
+            <span class="vseparator"></span>
+            <span class="vseparator"></span>
+            <span class="vseparator"></span>
+            <span class="vseparator"></span>
+            <span class="vseparator"></span>
+            <span class="vseparator"></span>
+            <span class="vseparator"></span>
+    
+            <genericfield value="#ff0000" :structure="{ type: 'color', label: 'Generic color', name: 'genericcolor' }"></genericfield>
 
         </section>
         <span class="vseparator"></span>
