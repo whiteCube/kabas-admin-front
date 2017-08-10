@@ -2,9 +2,9 @@
     <div class="field repeater" :id="id">
         <label class="field__label">{{ label }}</label>
         <div class="field__container" :style="{ 'min-height': minheight }">
-            <transition mode="out-in" name="slide">
-            <div class="repeater__items" v-if="!current" key="items">
                 <div class="repeater__item" v-for="(item, index) in items">
+            <transition mode="out-in" @after-leave="showfields = true" name="slide">
+            <div class="repeater__items" v-show="!current" key="items">
                     <p class="repeater__title">
                         <em class="repeater__number">#{{ index + 1 }}</em>
                         {{ title(item) }}
@@ -13,8 +13,10 @@
                     <a href="#" @click.prevent="edit(item, index)" class="repeater__control repeater__control--edit">{{ trans('fields.repeater.edit') }}</a>
                 </div>
             </div>
-            <div v-else class="repeater__editable" key="fields">
                 <template v-for="(item, i) in items">
+            </transition>
+            <transition name="slide" @after-leave="current = null">
+            <div v-show="showfields" class="repeater__editable" key="fields">
                     <div v-show="item == current" class="repeater__fields">
                         <template v-for="(field, j) in structure">
                             <genericfield :name="j" :value="items[i][j]" :structure="field"></genericfield>
@@ -46,6 +48,7 @@ export default {
             current: null,
             id: 'a' + this._uid,
             minheight: 0
+            showfields: false,
         }
     },
 
@@ -54,12 +57,13 @@ export default {
             return item.title;
         },
 
-        edit(item, index) {
+        edit(item) {
             this.current = item;
         },
 
-        cancel() {
-            this.current = null;
+        finish() {
+            this.showfields = false;
+        },
         },
 
         updateHeight() {
