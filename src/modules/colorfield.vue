@@ -2,17 +2,19 @@
     <div class="field color color--hex" :class="classes">
         <label class="field__label" :for="randomID">{{ label }}</label>
         <div class="field__container">
-            <transition name="picker" mode="out-in">
-            <div class="color__input" v-if="!expanded">
-                <a href="#" class="color__type" @click.prevent="changeType">{{ type }}</a>
-                <input type="text" class="field__element" :name="name" :id="randomID" :placeholder="placeholder" v-model="val" @blur="update">
-                <a href="#" class="color__expander" @click.prevent="expanded = true">
-                    <span class="color__preview" :style="{ background: val ? val : '#000' }"></span>
-                    <span class="sro">Edit color</span>
-                </a>
+            <div class="color__border">
+                <transition name="picker" mode="out-in">
+                <div class="color__input" v-if="!expanded">
+                    <a href="#" class="color__type" @click.prevent="changeType">{{ type }}</a>
+                    <input type="text" class="field__element" :name="name" :id="randomID" :placeholder="placeholder" v-model="val" @blur="update">
+                    <a href="#" class="color__expander" @click.prevent="expanded = true">
+                        <span class="color__preview" :style="{ background: val ? val : '#000' }"></span>
+                        <span class="sro">Edit color</span>
+                    </a>
+                </div>
+                <colorpicker v-else :value="val" @finish="pickerFinish"></colorpicker>
+                </transition>
             </div>
-            <colorpicker v-else :value="val" @finish="pickerFinish"></colorpicker>
-            </transition>
         </div>
     </div>
 </template>

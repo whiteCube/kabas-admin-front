@@ -9,6 +9,11 @@
         opacity: 0;
     }
 
+    &__border {
+        border-radius: s(3, $s2);
+        border: 1px solid $cWhite5;
+    }
+
     &__type {
         display: inline-block;
         font-size: s($s1);
@@ -27,9 +32,8 @@
     }
 
     .field__element {
-        border: 1px solid $cWhite5;
+        border: none;
         font-size: s($s2);
-        border-radius: s(3, $s2);
         display: block;
         width: 100%;
         padding: s(15, $s2);
@@ -102,7 +106,6 @@
     .color {
         &__picker {
             border-radius: s(3);
-            border: 1px solid $cWhite5;
             padding: s(20);
             padding-bottom: s(18);
         }
