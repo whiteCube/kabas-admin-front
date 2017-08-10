@@ -65,8 +65,16 @@
         }
     }
 
-    .slide-enter, .slide-leave-to {
-        transform: none;
+    &__editable {
+        &.slide-leave-to {
+            transform: translateX(s(15));
+        }
+    }
+
+    &__items {
+        &.slide-enter {
+            transform: translateX(s(-15));
+        }
     }
 
     &__fields {
