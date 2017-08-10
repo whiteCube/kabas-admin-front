@@ -23,11 +23,11 @@ export default {
         },
 
         hasFile(e) {
-            return e.target.files && e.target.files[0];
+            return e.target && e.target.files && e.target.files[0];
         },
 
         hasDroppedFile(e) {
-            return e.dataTransfer.files && e.dataTransfer.files[0];
+            return e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
         },
 
         getType(file) {
