@@ -1,9 +1,9 @@
 <template>
     <div class="field url" :class="classes">
-        <label class="field__label">{{ label }}</label>
+        <label class="field__label" :for="id">{{ label }}</label>
         <div class="field__container">
             <a href="#" class="url__switcher" @click.prevent="switchType">{{ trans('fields.url.' + type) }}</a>
-            <input type="text" class="field__element" v-model="url" :name="name" :placeholder="placeholder" :value="value" @input="autocomplete" @blur="expanded = false">
+            <input type="text" class="field__element" :id="id" v-model="url" :name="name" :placeholder="placeholder" :value="value" @input="autocomplete" @blur="expanded = false">
             <transition name="slideDown">
             <div v-if="expanded" class="url__dropdown">
                 <a href="#" v-for="(item, index) in items" @click.prevent="selectItem(index)" class="url__option">
@@ -24,7 +24,8 @@ export default {
             type: 'external',
             expanded: false,
             url: '',
-            items: []
+            items: [],
+            id: this._uid
         }
     },
 
