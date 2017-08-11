@@ -1,0 +1,11 @@
+.group {
+    > .field__container {
+        border: 1px solid $cWhite5;
+        padding: s(20);
+        border-radius: s(3);
+    }
+
+    .field + .field {
+        margin-top: s(30);
+    }
+}
