@@ -1,5 +1,5 @@
 <template>
-    <div class="field repeater" :id="id">
+    <div class="field repeater" :class="classes" :id="id">
         <label class="field__label">{{ label }}</label>
         <div class="field__container" :style="{ 'min-height': minheight }">
             <transition mode="out-in" @after-leave="showfields = true" name="slide">
@@ -9,8 +9,9 @@
                         <em class="repeater__number">#{{ index + 1 }}</em>
                         <span v-html="preview(index)"></span>
                     </p>
-                    <a href="#" class="repeater__control repeater__control--delete">{{ trans('fields.repeater.delete') }}</a>
-                    <a href="#" @click.prevent="edit(item, index)" class="repeater__control repeater__control--edit">{{ trans('fields.repeater.edit') }}</a>
+                    <a @click.prevent="remove(index)" v-if="!confirmdelete[index]" class="repeater__control repeater__control--delete">{{ trans('fields.repeater.delete') }}</a>
+                    <a v-if="confirmdelete[index]" class="repeater__control repeater__control--delete" @click.prevent="destroy(index)">{{ trans('fields.repeater.confirmdelete') }}</a>
+                    <a @click.prevent="edit(item)" class="repeater__control repeater__control--edit">{{ trans('fields.repeater.edit') }}</a>
                 </div>
             </div>
             </transition>
@@ -26,9 +27,9 @@
             <div class="field__footer">
                 <p class="field__tip">{{ tip }}</p>
                 <div class="field__actions">
-                    <a href="#" v-if="current" @click.prevent="finish" class="field__action btn btn--tiny">{{ trans('fields.repeater.cancel') }}</a>
-                    <a href="#" v-if="current" @click.prevent="finish" class="field__action btn btn--tiny btn--secondary">{{ trans('fields.repeater.finish') }}</a>
-                    <a href="#" v-else @click.prevent="add" class="field__action btn btn--tiny btn--secondary">{{ trans('fields.repeater.add') }}</a>
+                    <a v-if="current" @click.prevent="finish" class="field__action btn btn--tiny">{{ trans('fields.repeater.cancel') }}</a>
+                    <a v-if="current" @click.prevent="finish" class="field__action btn btn--tiny btn--secondary">{{ trans('fields.repeater.finish') }}</a>
+                    <a v-else @click.prevent="add" class="field__action btn btn--tiny btn--secondary">{{ trans('fields.repeater.add') }}</a>
                 </div>
             </div>
         </div>
@@ -55,7 +56,8 @@ export default {
             showfields: false,
             id: this._uid,
             minheight: 0,
-            list: []
+            list: [],
+            confirmdelete: []
         }
     },
 
@@ -67,11 +69,31 @@ export default {
     methods: {
         preview(index) {
             let preview = '';
-            let type = this.structure.type;
-            if(type == 'text' || type == 'textarea' || type == 'url' || type == 'email') preview = this.appendText(preview, this.previews[index]);
-            if(type == 'color') preview = this.appendColor(preview, this.previews[index]);
+            let value = this.previews[index];
+            if(this.structure.type == 'group') {
+                for(let key in value) {
+                    preview = this.addPreviewBit(preview, value[key], this.structure.options[key].type);
+                }
+            } else preview = this.addPreviewBit(preview, value, this.structure.type);
             if(preview == '') preview = this.trans('fields.repeater.nopreview');
             return preview;
+        },
+
+        addPreviewBit(preview, value, type) {
+            if(type == 'text' || type == 'textarea' || type == 'url' || type == 'email') preview = this.appendText(preview, value);
+            if(type == 'color') preview = this.appendColor(preview, value);
+            return preview;
+        },
+
+        remove(index) {
+            this.confirmdelete[index] = true;
+            this.$forceUpdate();
+        },
+
+        destroy(index) {
+            this.$delete(this.list, index);
+            this.$delete(this.previews, index);
+            delete this.confirmdelete[index];
         },
 
         edit(item) {
@@ -107,14 +129,20 @@ export default {
         },
 
         updatePreview(value, item) {
-            if(!this.previews[item]) this.previews[item] = {};
-            this.previews[item] = value;
+            if(typeof value !== 'object') return this.previews[item] = value;
+            return this.previews[item][value.index] = value.value;
         }
     },
 
     computed: {
         tip() {
-            return this.current ? this.trans('fields.repeater.editTip') : this.trans('fields.repeater.tip');
+            return this.current ? this.trans('fields.repeater.editTip') : this.list.length ? this.trans('fields.repeater.tip') : this.trans('fields.repeater.empty');
+        },
+
+        classes() {
+            return {
+                'repeater--empty': !this.list.length
+            }
         }
     }
 }
