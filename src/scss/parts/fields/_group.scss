@@ -8,4 +8,15 @@
     .field + .field {
         margin-top: s(30);
     }
+
+    .repeater & {
+        > .field__label {
+            display: none;
+        }
+
+        .field__container {
+            border: none;
+            padding: 0;
+        }
+    }
 }
