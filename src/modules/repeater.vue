@@ -89,6 +89,7 @@ export default {
 
         add() {
             this.list.push(this.getBlank());
+            this.previews.push(this.getBlank());
             this.edit(this.list[this.list.length - 1]);
         },
 
