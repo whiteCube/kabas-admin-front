@@ -548,7 +548,7 @@
                 label="Repeater (single text field)" 
                 name="repeater" 
                 :items="['one', 'two', 'three']"
-                :structure="{ type: 'text', label: 'Textfield' }">
+                :structure="{ type: 'text', label: 'Textfield', rules: { limit: 250 } }">
             </repeater>
 
             <repeater 

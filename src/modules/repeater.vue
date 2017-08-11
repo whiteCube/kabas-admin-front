@@ -105,8 +105,9 @@ export default {
         },
 
         add() {
-            this.list.push(this.getBlank());
-            this.previews.push(this.getBlank());
+            let blank = this.getBlank();
+            this.list.push(blank);
+            this.previews.push('');
             this.edit(this.list[this.list.length - 1]);
         },
 
