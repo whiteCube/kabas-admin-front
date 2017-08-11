@@ -545,21 +545,12 @@
                 label="Repeater" 
                 name="repeater" 
                 :items="[{ title: 'First item', color: '#E84F4F' }, { title: 'Second item', color: '#4F81E8' }, { title: 'Third item', color: '#2DE49E' }]"
-                :structure="{ title: { type: 'text', label: 'Title', rules: { limit: 250 } }, color: { type: 'color', label: 'Color' }}">
+                :structure="{ type: 'group', label: 'Abc', options: { title: { type: 'text', label: 'Title', rules: { limit: 250 } }, color: { type: 'color', label: 'Color' }}}">
             </repeater>
 
-            <span class="vseparator"></span>
-            <span class="vseparator"></span>
-            <span class="vseparator"></span>
-            <span class="vseparator"></span>
-            <span class="vseparator"></span>
-            <span class="vseparator"></span>
-            <span class="vseparator"></span>
-            <span class="vseparator"></span>
-            <span class="vseparator"></span>
-            <span class="vseparator"></span>
+            <groupfield label="Group field" :options="{ title: { type: 'text', label: 'Title', rules: { limit: 250 } }, color: { type: 'color', label: 'Color' }}" :values="{ title: 'Test title', color: '#ff0000'}"></groupfield>
     
-            <genericfield value="#ff0000" :structure="{ type: 'color', label: 'Generic color', name: 'genericcolor' }"></genericfield>
+            <genericfield :value="['test', 'one', 'two']" :structure="{ type: 'repeater', label: 'Child repeater', options: { type: 'text', label: 'Nested text field' } }"></genericfield>
 
         </section>
         <span class="vseparator"></span>

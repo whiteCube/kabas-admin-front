@@ -18,9 +18,7 @@
             <div v-show="showfields" class="repeater__editable" key="fields">
                 <template v-for="(item, i) in list">
                     <div v-show="item == current" class="repeater__fields">
-                        <template v-for="(field, j) in structure">
-                            <genericfield :name="j" :value="list[i][j]" @input="updatePreview($event, i, j)" :structure="field"></genericfield>
-                        </template>
+                        <genericfield :value="items[i]" @input="updatePreview($event, i)" :structure="structure"></genericfield>
                     </div>
                 </template>
             </div>
@@ -69,12 +67,9 @@ export default {
     methods: {
         preview(index) {
             let preview = '';
-            for(let key in this.structure) {
-                if(!this.structure.hasOwnProperty(key)) continue;
-                let type = this.structure[key].type;
-                if(type == 'text' || type == 'textarea' || type == 'url' || type == 'email') preview = this.appendText(preview, this.previews[index][key]);
-                if(type == 'color') preview = this.appendColor(preview, this.previews[index][key]);
-            }
+            let type = this.structure.type;
+            if(type == 'text' || type == 'textarea' || type == 'url' || type == 'email') preview = this.appendText(preview, this.previews[index]);
+            if(type == 'color') preview = this.appendColor(preview, this.previews[index]);
             if(preview == '') preview = this.trans('fields.repeater.nopreview');
             return preview;
         },
@@ -111,9 +106,9 @@ export default {
             return preview += text;
         },
 
-        updatePreview(value, item, field) {
+        updatePreview(value, item) {
             if(!this.previews[item]) this.previews[item] = {};
-            this.previews[item][field] = value;
+            this.previews[item] = value;
         }
     },
 
