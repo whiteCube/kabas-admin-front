@@ -49,7 +49,8 @@ export default {
             if(this.is('textfield', 'wysiwyg')) this.addTextProps();
             if(this.is('imagefield')) this.addImageProps();
             if(this.is('imagefield', 'filefield')) this.addFileProps();
-            if(this.is('repeater', 'groupfield')) this.addRepeaterProps();
+            if(this.is('repeater')) this.addRepeaterProps();
+            if(this.is('groupfield')) this.addGroupProps();
             return this.properties;
         },
 
@@ -90,6 +91,12 @@ export default {
             if(!this.structure.options) return;
             this.properties['items'] = this.value;
             this.properties['structure'] = this.structure.options;
+        },
+
+        addGroupProps() {
+            if(!this.structure.options) return;
+            this.properties['options'] = this.structure.options;
+            this.properties['values'] = this.value;
         }
 
     }, 
