@@ -45,10 +45,10 @@ export default {
 
     methods: {
         input(e) {
+            this.$emit('input', this.val);
             if(!this.hasProp('limit')) return;
             if(this.remaining == 0) this.shake();
             if(this.remaining <= 0) this.val = this.val.substring(0, this.limit);
-            this.$emit('input', this.val);
         },
 
         shake() {
