@@ -59,8 +59,9 @@
             "finish": "Finish",
             "elements": "%s element|%s elements",
             "subEdit": "Edit this repeater",
-            "empty": "Click to add the first element.",
+            "empty": "Click the add button to get started.",
             "delete": "Delete",
+            "confirmdelete": "I am sure I want to delete this item",
             "edit": "Edit",
             "nopreview": "No preview available"
         }
@@ -544,12 +545,18 @@
             <groupfield label="Group field" :options="{ title: { type: 'text', label: 'Title', rules: { limit: 250 } }, color: { type: 'color', label: 'Color' }}" :values="{ title: 'Test title', color: '#ff0000'}"></groupfield>
 
             <repeater 
-                label="Repeater" 
+                label="Repeater (single text field)" 
+                name="repeater" 
+                :items="['one', 'two', 'three']"
+                :structure="{ type: 'text', label: 'Textfield' }">
+            </repeater>
+
+            <repeater 
+                label="Repeater (group)" 
                 name="repeater" 
                 :items="[{ title: 'First item', color: '#E84F4F' }, { title: 'Second item', color: '#4F81E8' }, { title: 'Third item', color: '#2DE49E' }]"
                 :structure="{ type: 'group', label: 'Abc', options: { title: { type: 'text', label: 'Title', rules: { limit: 250 } }, color: { type: 'color', label: 'Color' }}}">
             </repeater>
-
 
         </section>
         <span class="vseparator"></span>
