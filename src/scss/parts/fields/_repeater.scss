@@ -6,6 +6,10 @@
         transition: min-height .3s $ease-out-quad;
     }
 
+    &--empty .field__footer {
+        border-top: none;
+    }
+
     &__item {
         padding: s(25, $s2) s(20, $s2);
         font-size: s($s2);
@@ -28,6 +32,7 @@
 
     &__control {
         color: $cGray2;
+        user-select: none;
         text-decoration: none;
         transition: color .2s $ease-out-quad;
 
