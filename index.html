@@ -541,6 +541,8 @@
             <radiofield label="Radio" name="radio" value="radioone" checked></radiofield>
             <radiofield label="Radio" name="radio" value="radiotwo" checked></radiofield>
 
+            <groupfield label="Group field" :options="{ title: { type: 'text', label: 'Title', rules: { limit: 250 } }, color: { type: 'color', label: 'Color' }}" :values="{ title: 'Test title', color: '#ff0000'}"></groupfield>
+
             <repeater 
                 label="Repeater" 
                 name="repeater" 
@@ -548,9 +550,6 @@
                 :structure="{ type: 'group', label: 'Abc', options: { title: { type: 'text', label: 'Title', rules: { limit: 250 } }, color: { type: 'color', label: 'Color' }}}">
             </repeater>
 
-            <groupfield label="Group field" :options="{ title: { type: 'text', label: 'Title', rules: { limit: 250 } }, color: { type: 'color', label: 'Color' }}" :values="{ title: 'Test title', color: '#ff0000'}"></groupfield>
-    
-            <genericfield :value="['test', 'one', 'two']" :structure="{ type: 'repeater', label: 'Child repeater', options: { type: 'text', label: 'Nested text field' } }"></genericfield>
 
         </section>
         <span class="vseparator"></span>
