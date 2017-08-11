@@ -14,3 +14,7 @@ body {
 .sro {
     @include hidden();
 }
+
+a {
+    cursor: pointer;
+}
