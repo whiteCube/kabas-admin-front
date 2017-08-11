@@ -16,7 +16,9 @@ export default {
                 'url': 'urlfield',
                 'wysiwyg': 'wysiwyg',
                 'checkbox': 'checkboxfield',
-                'radio': 'radiofield'
+                'radio': 'radiofield',
+                'repeater': 'repeater',
+                'group': 'groupfield'
             }
         }
     },
@@ -47,6 +49,7 @@ export default {
             if(this.is('textfield', 'wysiwyg')) this.addTextProps();
             if(this.is('imagefield')) this.addImageProps();
             if(this.is('imagefield', 'filefield')) this.addFileProps();
+            if(this.is('repeater', 'groupfield')) this.addRepeaterProps();
             return this.properties;
         },
 
@@ -83,9 +86,10 @@ export default {
             this.addRule('maxSize');
         },
 
-        transferInput(e) {
-            console.log('transfering');
-            this.$emit('input', e);
+        addRepeaterProps() {
+            if(!this.structure.options) return;
+            this.properties['items'] = this.value;
+            this.properties['structure'] = this.structure.options;
         }
 
     }, 
