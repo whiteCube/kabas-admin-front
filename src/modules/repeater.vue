@@ -7,7 +7,7 @@
                 <div class="repeater__item" v-for="(item, index) in list">
                     <p class="repeater__title">
                         <em class="repeater__number">#{{ index + 1 }}</em>
-                        <span v-html="preview(item)"></span>
+                        <span v-html="preview(index)"></span>
                     </p>
                     <a href="#" class="repeater__control repeater__control--delete">{{ trans('fields.repeater.delete') }}</a>
                     <a href="#" @click.prevent="edit(item, index)" class="repeater__control repeater__control--edit">{{ trans('fields.repeater.edit') }}</a>
@@ -19,7 +19,7 @@
                 <template v-for="(item, i) in list">
                     <div v-show="item == current" class="repeater__fields">
                         <template v-for="(field, j) in structure">
-                            <genericfield :name="j" :item="i" v-model="list[i][j]" :structure="field"></genericfield>
+                            <genericfield :name="j" :value="list[i][j]" @input="updatePreview($event, i, j)" :structure="field"></genericfield>
                         </template>
                     </div>
                 </template>
@@ -43,7 +43,6 @@ import components from '../mixins/components.js';
 /*
 Todo: 
 Deleting
-Fix 'infinite loop in genericfield' on input
 Drag/drop to change order of items
 Cancel changes
 Calculate proper string preview
@@ -63,17 +62,18 @@ export default {
     },
 
     created() {
-        this.list = this.items;
+        this.list = JSON.parse(JSON.stringify(this.items));
+        this.previews = JSON.parse(JSON.stringify(this.items));
     },
 
     methods: {
-        preview(item) {
+        preview(index) {
             let preview = '';
             for(let key in this.structure) {
                 if(!this.structure.hasOwnProperty(key)) continue;
                 let type = this.structure[key].type;
-                if(type == 'text' || type == 'textarea' || type == 'url') preview = this.appendText(preview, item[key]);
-                if(type == 'color') preview = this.appendColor(preview, item[key]);
+                if(type == 'text' || type == 'textarea' || type == 'url' || type == 'email') preview = this.appendText(preview, this.previews[index][key]);
+                if(type == 'color') preview = this.appendColor(preview, this.previews[index][key]);
             }
             if(preview == '') preview = this.trans('fields.repeater.nopreview');
             return preview;
@@ -108,6 +108,11 @@ export default {
             if(!text) return preview;
             if(preview !== '') preview += ', ';
             return preview += text;
+        },
+
+        updatePreview(value, item, field) {
+            if(!this.previews[item]) this.previews[item] = {};
+            this.previews[item][field] = value;
         }
     },
 
