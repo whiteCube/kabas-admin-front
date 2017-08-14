@@ -15,6 +15,7 @@
         font-size: s($s2);
         border-top: 1px solid $cWhite5;
         position: relative;
+        background: $cWhite;
 
         &:first-child {
             border-top: none;
