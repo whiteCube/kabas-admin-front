@@ -43,7 +43,7 @@ import draggable from 'vuedraggable';
 Todo: 
 Cancel changes
 Cancel delete
-Investigate drag and drop on the last element
+Investigate first drag and drop not registering
 */
 
 export default {
