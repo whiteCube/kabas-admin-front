@@ -74,6 +74,12 @@ export default {
             let remaining = this.limit - this.val.length;
             return remaining > 0 ? remaining : 0;
         }
+    },
+
+    watch: {
+        value(newVal) {
+            this.val = newVal;
+        }
     }
 }
 </script>

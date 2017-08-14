@@ -68,6 +68,12 @@ export default {
             classes['color--' + this.type] = true;
             return classes;
         }
+    },
+
+    watch: {
+        value(newVal) {
+            this.val = newVal;
+        }
     }
 }
 </script>

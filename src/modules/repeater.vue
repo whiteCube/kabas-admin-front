@@ -3,7 +3,7 @@
         <label class="field__label">{{ label }}</label>
         <div class="field__container" :style="{ 'min-height': minheight }">
             <transition mode="out-in" @after-leave="showfields = true" name="slide">
-            <draggable class="repeater__items" :options="{ animation: 300 }" v-show="!current && current !== 0" v-model="list">
+            <draggable class="repeater__items" :options="{ animation: 300 }" v-show="!current && current !== 0" v-model="list" @end="rerender">
                 <div class="repeater__item" v-for="(item, index) in list" :key="index">
                     <p class="repeater__title">
                         <em class="repeater__number">#{{ index + 1 }}</em>
@@ -16,12 +16,12 @@
             </draggable>
             </transition>
             <transition name="slide" @after-leave="current = null">
-            <div v-show="showfields" class="repeater__editable" key="fields">
-                <template v-for="(item, i) in list">
+            <div v-show="showfields" class="repeater__editable">
+                <span v-for="(item, i) in list">
                     <div v-show="i == current" class="repeater__fields">
                         <genericfield :value="list[i]" @input="updatePreview($event, i)" :structure="structure"></genericfield>
                     </div>
-                </template>
+                </span>
             </div>
             </transition>
             <div class="field__footer">
@@ -41,10 +41,9 @@ import draggable from 'vuedraggable';
 
 /*
 Todo: 
-Deleting
-Drag/drop to change order of items
 Cancel changes
-Calculate proper string preview
+Cancel delete
+Investigate drag and drop on the last element
 */
 
 export default {
@@ -135,6 +134,10 @@ export default {
             } else {
                 this.list[index] = e;
             }
+        },
+
+        rerender() {
+            this.$forceUpdate();
         }
     },
 
@@ -147,6 +150,12 @@ export default {
             return {
                 'repeater--empty': !this.list.length
             }
+        }
+    },
+
+    watch: {
+        items(newVal) {
+            this.list = newVal;
         }
     }
 }
