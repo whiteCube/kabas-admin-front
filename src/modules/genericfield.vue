@@ -55,12 +55,10 @@ export default {
         },
 
         addCommonProps() {
-            this.properties = {
-                label: this.label,
-                value: this.value,
-                name: this.name,
-                placeholder: this.placeholder
-            };
+            this.properties.label = this.label;
+            this.properties.value = this.value;
+            this.properties.name = this.name;
+            this.properties.placeholder = this.placeholder;
         },
 
         addTextProps() {
