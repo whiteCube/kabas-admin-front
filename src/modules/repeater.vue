@@ -3,23 +3,23 @@
         <label class="field__label">{{ label }}</label>
         <div class="field__container" :style="{ 'min-height': minheight }">
             <transition mode="out-in" @after-leave="showfields = true" name="slide">
-            <div class="repeater__items" v-show="!current" key="items">
-                <div class="repeater__item" v-for="(item, index) in list">
+            <draggable class="repeater__items" :options="{ animation: 300 }" v-show="!current && current !== 0" v-model="list">
+                <div class="repeater__item" v-for="(item, index) in list" :key="index">
                     <p class="repeater__title">
                         <em class="repeater__number">#{{ index + 1 }}</em>
                         <span v-html="preview(index)"></span>
                     </p>
                     <a @click.prevent="remove(index)" v-if="!confirmdelete[index]" class="repeater__control repeater__control--delete">{{ trans('fields.repeater.delete') }}</a>
                     <a v-if="confirmdelete[index]" class="repeater__control repeater__control--delete" @click.prevent="destroy(index)">{{ trans('fields.repeater.confirmdelete') }}</a>
-                    <a @click.prevent="edit(item)" class="repeater__control repeater__control--edit">{{ trans('fields.repeater.edit') }}</a>
+                    <a @click.prevent="edit(index)" class="repeater__control repeater__control--edit">{{ trans('fields.repeater.edit') }}</a>
                 </div>
-            </div>
+            </draggable>
             </transition>
             <transition name="slide" @after-leave="current = null">
             <div v-show="showfields" class="repeater__editable" key="fields">
                 <template v-for="(item, i) in list">
-                    <div v-show="item == current" class="repeater__fields">
-                        <genericfield :value="items[i]" @input="updatePreview($event, i)" :structure="structure"></genericfield>
+                    <div v-show="i == current" class="repeater__fields">
+                        <genericfield :value="list[i]" @input="updatePreview($event, i)" :structure="structure"></genericfield>
                     </div>
                 </template>
             </div>
@@ -27,8 +27,8 @@
             <div class="field__footer">
                 <p class="field__tip">{{ tip }}</p>
                 <div class="field__actions">
-                    <a v-if="current" @click.prevent="finish" class="field__action btn btn--tiny">{{ trans('fields.repeater.cancel') }}</a>
-                    <a v-if="current" @click.prevent="finish" class="field__action btn btn--tiny btn--secondary">{{ trans('fields.repeater.finish') }}</a>
+                    <a v-if="current || current == 0" @click.prevent="finish" class="field__action btn btn--tiny">{{ trans('fields.repeater.cancel') }}</a>
+                    <a v-if="current || current == 0" @click.prevent="finish" class="field__action btn btn--tiny btn--secondary">{{ trans('fields.repeater.finish') }}</a>
                     <a v-else @click.prevent="add" class="field__action btn btn--tiny btn--secondary">{{ trans('fields.repeater.add') }}</a>
                 </div>
             </div>
@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import components from '../mixins/components.js';
+import draggable from 'vuedraggable';
 
 /*
 Todo: 
@@ -49,6 +49,7 @@ Calculate proper string preview
 
 export default {
     props: ['label', 'name', 'translations', 'items', 'structure'],
+    components: { draggable },
 
     data() {
         return {
@@ -62,14 +63,13 @@ export default {
     },
 
     created() {
-        this.list = JSON.parse(JSON.stringify(this.items));
-        this.previews = JSON.parse(JSON.stringify(this.items));
+        this.list = this.items;
     },
 
     methods: {
         preview(index) {
             let preview = '';
-            let value = this.previews[index];
+            let value = this.list[index];
             if(this.structure.type == 'group') {
                 for(let key in value) {
                     preview = this.addPreviewBit(preview, value[key], this.structure.options[key].type);
@@ -81,7 +81,7 @@ export default {
 
         addPreviewBit(preview, value, type) {
             if(type == 'text' || type == 'textarea' || type == 'url' || type == 'email') preview = this.appendText(preview, value);
-            if(type == 'color') preview = this.appendColor(preview, value);
+            if(type == 'color' && value !== '') preview = this.appendColor(preview, value);
             return preview;
         },
 
@@ -92,12 +92,11 @@ export default {
 
         destroy(index) {
             this.$delete(this.list, index);
-            this.$delete(this.previews, index);
             delete this.confirmdelete[index];
         },
 
-        edit(item) {
-            this.current = item;
+        edit(index) {
+            this.current = index;
         },
 
         finish() {
@@ -105,18 +104,19 @@ export default {
         },
 
         add() {
-            let blank = this.getBlank();
-            this.list.push(blank);
-            this.previews.push('');
-            this.edit(this.list[this.list.length - 1]);
+            let preview = '';
+            if(this.structure.type == 'group') preview = this.getPreviewObject();
+            else preview = '';
+            this.list.push(preview);
+            this.edit(this.list.length - 1);
         },
 
-        getBlank() {
-            let blank = {};
-            Object.keys(this.structure).forEach(item => {
-                blank[item] = '';
-            });
-            return blank;
+        getPreviewObject() {
+            let preview = {};
+            for(let key in this.structure.options) {
+                preview[key] = '';
+            }
+            return preview;
         },
 
         appendColor(preview, color) {
@@ -129,9 +129,12 @@ export default {
             return preview += text;
         },
 
-        updatePreview(value, item) {
-            if(typeof value !== 'object') return this.previews[item] = value;
-            return this.previews[item][value.index] = value.value;
+        updatePreview(e, index) {
+            if(typeof e == 'object') {
+                this.list[index][e.index] = e.value;
+            } else {
+                this.list[index] = e;
+            }
         }
     },
 
