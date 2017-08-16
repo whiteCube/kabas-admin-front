@@ -23,24 +23,48 @@
         color: $cWhite;
     }
 
-    .field__label::before {
-        @include icon(github);
-        color: $cWhite2;
-        text-align: center;
-        line-height: s(20, $s2);
-        display: inline-block;
-        font-size: s($s2, $s3);
-        width: s(20, $s2);
-        height: s(20, $s2);
-        border-radius: s(2, $s2);
-        opacity: 1;
-        margin: 0;
-        background: $cWhite2;
-        border-radius: 50%;
-        border: 1px solid $cWhite6;
-        vertical-align: 0px;
-        margin-right: s(10, $s2);
-        box-sizing: border-box;
-        transition: color .15s $ease-out-quad, background .15s $ease-out-quad, border-color .15s $ease-out-quad;
+    .field__label {
+        position: relative;
+        padding-left: s(30);
+
+        &:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            color: $cWhite2;
+            text-align: center;
+            line-height: s(20, $s2);
+            display: inline-block;
+            font-size: s($s2, $s3);
+            width: s(20, $s2);
+            height: s(20, $s2);
+            border-radius: s(2, $s2);
+            opacity: 1;
+            background: $cWhite2;
+            border-radius: 50%;
+            border: 1px solid $cWhite6;
+            vertical-align: 0px;
+            margin-right: s(10, $s2);
+            box-sizing: border-box;
+            transition: color .15s $ease-out-quad, background .15s $ease-out-quad, border-color .15s $ease-out-quad;
+        }
+
+        &:after {
+            content: '';
+            display: block;
+            width: s(6);
+            height: s(6);
+            position: absolute;
+            border-radius: 50%;
+            background: $cWhite2;
+            left: s(11);
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            margin-left: s(-4);
+        }
     }
 }
