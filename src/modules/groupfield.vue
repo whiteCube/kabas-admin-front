@@ -8,6 +8,15 @@
 </template>
 
 <script>
+
+/*
+Todo:
+Add repeaters
+Add nested groups
+Add flexible
+Add gallery
+*/
+
 export default {
     props: ['label', 'options', 'values'],
 
