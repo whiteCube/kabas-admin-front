@@ -43,11 +43,11 @@
 
 .slide-enter, .slide-leave-to {
     opacity: 0;
-    transform: translateX(-15px);
+    transform: translateY(-15px);
 }
 
 .slide-enter {
-    transform: translateX(15px);
+    transform: translateY(15px);
 }
 
 .picker-enter-active, .picker-leave-active {

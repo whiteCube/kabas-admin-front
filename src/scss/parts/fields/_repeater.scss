@@ -1,4 +1,5 @@
 .repeater {
+    transition: height .2s $ease-out-quad;
 
     > .field__container {
         border-radius: s(3);
@@ -82,13 +83,13 @@
 
     &__editable {
         &.slide-leave-to {
-            transform: translateX(s(15));
+            transform: translateY(s(15));
         }
     }
 
     &__items {
         &.slide-enter {
-            transform: translateX(s(-15));
+            transform: translateY(s(-15));
         }
     }
 
