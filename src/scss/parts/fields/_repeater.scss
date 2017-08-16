@@ -33,9 +33,11 @@
 
     &__control {
         color: $cGray2;
+        position: relative;
+        z-index: 15;
         user-select: none;
         text-decoration: none;
-        transition: color .2s $ease-out-quad;
+        transition: color .3s $ease-out-quad;
 
         & + &:before {
             content: '-';
@@ -53,17 +55,28 @@
         }
 
         &--edit {
+            position: static;
+
+            &:hover:after {
+                background: rgba($cWhite5, .2);
+            }
+
             &:after {
                 text-decoration: none;
                 content: '';
                 display: block;
                 @include cover();
+                transition: background .2s $ease-out-quad;
             }
         }
 
-        &--delete {
-            position: relative;
-            z-index: 15;
+        &--destroy {
+            font-weight: 700;
+            color: $cAccent;
+
+            &:hover {
+                text-decoration: underline;
+            }
         }
     }
 
