@@ -155,8 +155,6 @@ export default {
         },
 
         restore() {
-            console.log('old', this.list);
-            console.log('restore', this.restorepoint);
             this.list = this.restorepoint;
             this.restorepoint = null;
         }
