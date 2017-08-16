@@ -3,14 +3,15 @@
         <label class="field__label">{{ label }}</label>
         <div class="field__container" :style="{ 'min-height': minheight }">
             <transition mode="out-in" @after-leave="showfields = true" name="slide">
-            <draggable class="repeater__items" :options="{ animation: 300 }" v-show="!current && current !== 0" v-model="list" @end="rerender">
+            <draggable class="repeater__items" :options="{ animation: 300 }" v-show="!current && current !== 0" v-model="list" @end="cancel">
                 <div class="repeater__item" v-for="(item, index) in list" :key="index">
                     <p class="repeater__title">
                         <em class="repeater__number">#{{ index + 1 }}</em>
                         <span v-html="preview(index)"></span>
                     </p>
                     <a @click.prevent="remove(index)" v-if="!confirmdelete[index]" class="repeater__control repeater__control--delete">{{ trans('fields.repeater.delete') }}</a>
-                    <a v-if="confirmdelete[index]" class="repeater__control repeater__control--delete" @click.prevent="destroy(index)">{{ trans('fields.repeater.confirmdelete') }}</a>
+                    <a v-if="confirmdelete[index]" class="repeater__control repeater__control--destroy" @click.prevent="destroy(index)">{{ trans('fields.repeater.confirmdelete') }}</a>
+                    <a v-if="confirmdelete[index]" class="repeater__control repeater__control--cancel" @click.prevent="cancel(index)">{{ trans('fields.repeater.cancel') }}</a>
                     <a @click.prevent="edit(index)" class="repeater__control repeater__control--edit">{{ trans('fields.repeater.edit') }}</a>
                 </div>
             </draggable>
@@ -94,6 +95,12 @@ export default {
             delete this.confirmdelete[index];
         },
 
+        cancel(index) {
+            if(typeof index == 'int') delete this.confirmdelete[index];
+            else this.confirmdelete = [];
+            this.$forceUpdate();
+        },
+
         edit(index) {
             this.current = index;
         },
@@ -134,10 +141,6 @@ export default {
             } else {
                 this.list[index] = e;
             }
-        },
-
-        rerender() {
-            this.$forceUpdate();
         }
     },
 
