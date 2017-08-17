@@ -1,0 +1,175 @@
+.date {
+    .field__element {
+        cursor: pointer;
+    }
+
+    &__calendar {
+        right: 0;
+        margin-top: s(15);
+        border-color: $cWhite3;
+        border-radius: s(3);
+        padding: s(15);
+    }
+
+    .up {
+        font-size: s($s2);
+        color: $cAnthracite1;
+        font-weight: 700;
+    }
+
+    .vdp-datepicker__clear-button {
+        position: absolute;
+        z-index: 15;
+        width: 25px;
+        right: 75px;
+        top: 1px;
+        line-height: s(45);
+        height: s(45);
+        color: $cAccent;
+        text-indent: -9999px;
+
+        &:before,
+        &:after {
+            position: absolute;
+            right: 0;
+            top: 22px;
+            content: '';
+            display: inline-block;
+            width: 12px;
+            height: 2px;
+            background: $cAnthracite1;
+            transform-origin: center;
+            transition: background .2s $ease-out-quad;
+        }
+
+        &:before {
+            transform: rotate(45deg);
+        }
+
+        &:after {
+            transform: rotate(-45deg);
+        }
+
+        &:hover:before,
+        &:hover:after {
+            background: $cAccent;
+        }
+    }
+
+    .wrapperClass {
+        &:after {
+            @include icon(github);
+            position: absolute;
+            right: 0;
+            top: 1px;
+            text-align: center;
+            line-height: s(45);
+            width: s(50);
+            height: s(46);
+            border-left: 1px solid $cWhite5;
+        }
+    }
+
+    .cell {
+        border-radius: 3px;
+        height: 30px;
+        line-height: 28px;
+    }
+
+    .cell.day {
+        border-radius: 50%;
+        width: 30px;
+        line-height: 28px;
+        margin: 4px;
+    }
+
+    .cell.month, .cell.year {
+        margin: 10px 0;
+    }
+
+    .cell.selected {
+        background: $cAnthracite1;
+        color: $cWhite;
+    }
+
+    .day {
+        font-weight: 600;
+        font-size: s($s2);
+    }
+
+    .cell {
+        transition: background .2s $ease-out-quad, border-color .2s $ease-out-quad;
+    }
+
+    .day-header {
+        font-weight: 600;
+        font-size: s($s1);
+        color: $cGray;
+    }
+
+    .vdp-datepicker__calendar .cell:not(.blank):not(.disabled).day:hover, .vdp-datepicker__calendar .cell:not(.blank):not(.disabled).month:hover, .vdp-datepicker__calendar .cell:not(.blank):not(.disabled).year:hover {
+        border-color: $cWhite5;
+        background: rgba($cWhite5, .2);
+        color: $cAnthracite1;
+    }
+
+    .vdp-datepicker__calendar header .next:not(.disabled):hover, .vdp-datepicker__calendar header .prev:not(.disabled):hover, .vdp-datepicker__calendar header .up:not(.disabled):hover {
+        background: transparent;
+    }
+
+    header .prev,
+    header .next {
+        &:before,
+        &:after {
+            content: '';
+            display: inline-block;
+            width: s(7);
+            height: s(2);
+            background: $cAnthracite1;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            border-radius: 2px;
+            border: none;
+            transition: background .2s $ease-out-quad;
+        }
+
+        &:before {
+            transform-origin: left;
+            transform: rotate(-45deg);
+            left: s(20);
+        }
+
+        &:after {
+            transform-origin: left;
+            transform: rotate(45deg);
+            left: s(20);
+        }
+
+        &:hover:before,
+        &:hover:after {
+            background: $cAccent;
+        }
+    }
+
+    header .next {
+
+        &:before,
+        &:after {
+            right: s(20);
+            left: auto;
+        }
+
+        &:before {
+            transform-origin: right;
+            transform: rotate(45deg);
+        }
+
+        &:after {
+            transform-origin: right;
+            transform: rotate(-45deg);
+        }
+    }
+
+}

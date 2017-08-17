@@ -1,5 +1,6 @@
 .textfield .field__element,
-.select .field__element {
+.select .field__element,
+.date .field__element {
     border: 1px solid $cWhite5;
     font-size: s($s2);
     border-radius: s(3, $s2);

@@ -22,6 +22,9 @@
             "cancel": "Cancel",
             "finish": "Finish"
         },
+        "date": {
+            "placeholder": "Click to pick a date"
+        },
         "select": {
             "prompt": "Pick one"
         },
@@ -570,8 +573,9 @@
                 :structure="{ type: 'image', label: 'Image' }">
             </gallery>
 
+            <selectfield name="select" label="Select" :items="{ one: 'One', two: 'Two', three: 'Three' }"></selectfield>
 
-            <selectfield name="select" label="Select" :items="{ one: 'One', two: 'Two', three: 'Three' }" value="two"></selectfield>
+            <datefield name="date" label="Date"></datefield>
 
         </section>
         <span class="vseparator"></span>

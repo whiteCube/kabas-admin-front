@@ -6,7 +6,7 @@
                 <option value="">{{ this.trans('fields.select.prompt') }}</option>
                 <option :value="key" v-for="(item, key) in items">{{ item }}</option>
             </select>
-            <p class="field__element" @click="expanded = !expanded">{{ items[selected] }}</p>
+            <p class="field__element" @click="expanded = !expanded">{{ selected ? items[selected] : trans('fields.select.prompt') }}</p>
             <transition name="slideDown">
             <div v-if="expanded" class="select__dropdown">
                 <a v-for="(item, index) in items" @click.prevent="selectItem(index)" class="select__option">
