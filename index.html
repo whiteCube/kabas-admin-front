@@ -22,6 +22,9 @@
             "cancel": "Cancel",
             "finish": "Finish"
         },
+        "select": {
+            "prompt": "Pick one"
+        },
         "url": {
             "external": "External",
             "internal": "Internal"
@@ -519,7 +522,9 @@
             </code></pre>
             
             <imagefield label="Image" name="image" max-size="10000000" :formats="['PNG', 'JPEG', 'GIF']" min-height="900"
-                        alt-placeholder="Text to show when the image does not display correctly">
+                        alt-placeholder="Text to show when the image does not display correctly"
+                        value="http://img.wennermedia.com/social/screen-shot-2017-05-24-at-84511-pm-ac8c692f-ef61-4200-bef2-1f906020d102.png"
+                        alt="Test alt yo">
             </imagefield>
             <label for="cheat22" class="cheatlabel">Show/hide code example</label>
             <input type="checkbox" class="cheat" id="cheat22">
@@ -557,6 +562,16 @@
                 :items="[{ title: 'First item', color: '#E84F4F' }, { title: 'Second item', color: '#4F81E8' }, { title: 'Third item', color: '#2DE49E' }]"
                 :structure="{ type: 'group', label: 'Abc', options: { title: { type: 'text', label: 'Title', rules: { limit: 250 } }, color: { type: 'color', label: 'Color' }}}">
             </repeater>
+
+            <gallery 
+                label="Gallery" 
+                name="gallery" 
+                :items="[{ value: 'http://img.wennermedia.com/social/screen-shot-2017-05-24-at-84511-pm-ac8c692f-ef61-4200-bef2-1f906020d102.png', alt: 'Test yo' }]"
+                :structure="{ type: 'image', label: 'Image' }">
+            </gallery>
+
+
+            <selectfield name="select" label="Select" :items="{ one: 'One', two: 'Two', three: 'Three' }" value="two"></selectfield>
 
         </section>
         <span class="vseparator"></span>

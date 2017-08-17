@@ -14,40 +14,12 @@
         border-left: 1px solid $cWhite5;
     }
 
+    .field__element {
+        position: static;
+    }
+
     &--expanded .field__element {
         border-radius: s(3) s(3) 0 0;
-    }
-
-    &__dropdown {
-        background: $cWhite;
-        border: 1px solid $cWhite5;
-        border-top: none;
-        border-radius: 0 0 s(3) s(3);
-        position: absolute;
-        z-index: 5;
-        width: 100%;
-
-        &.slideDown-enter-active, &.slideDown-leave-active {
-            transition: opacity .2s $ease-out-quad, transform .2s $ease-out-quad;
-        }
-
-        &.slideDown-enter, &.slideDown-leave-to {
-            opacity: 0;
-            transform: translateY(-5px);
-        }
-    }
-
-    &__option {
-        font-size: s($s2);
-        display: block;
-        text-decoration: none;
-        color: $cAnthracite1;
-        padding: s(17, $s2) s(15, $s2);
-        border-bottom: 1px solid $cWhite5;
-
-        &:last-child {
-            border-bottom: none;
-        }
     }
 
     &__route {
