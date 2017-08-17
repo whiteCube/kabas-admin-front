@@ -4,8 +4,8 @@
         <div class="field__container">
             <input type="file" :id="id" class="field__element" :name="name" @change="update">
             <label :for="id" class="file__label" @dragenter.prevent="highlight = true" @dragover.prevent="highlight = true" @dragleave="highlight = false" @drop.prevent="update">
-                <span class="file__title">
-                    <template v-if="file && file.name">{{ file.name }}</template>
+                <span class="file__title" :title="file.name">
+                    <template v-if="file && file.name">{{ filename }}</template>
                     <template v-else>{{ trans('fields.image.choose') }}</template>
                 </span>
                 <div class="file__details">
@@ -40,7 +40,7 @@
                 <div v-if="file" class="file__alt textfield">
                     <label class="field__label" :for="id + '_alt'">{{ trans('fields.image.alt') }}</label>
                     <div class="field__container">
-                        <input type="text" :id="id + '_alt'" :name="name + '_alt'" class="field__element" :placeholder="altPlaceholder">
+                        <input type="text" :id="id + '_alt'" v-model="altText" @input="updateAlt" :name="name + '_alt'" class="field__element" :placeholder="altPlaceholder">
                     </div>
                 </div>
             </transition>
@@ -57,14 +57,20 @@ import FileMethods from '../mixins/file.js';
 export default {
     mixins: [FileMethods],
 
-    props: ['minWidth', 'minHeight', 'maxWidth', 'maxHeight', 'width', 'height', 'altPlaceholder'],
+    props: ['minWidth', 'minHeight', 'maxWidth', 'maxHeight', 'width', 'height', 'altPlaceholder', 'value', 'alt', 'filedata'],
 
     data() {
         return {
             id: this._uid,
             encoded: '',
+            altText: this.alt,
             highlight: false
         }
+    },
+
+    created() {
+        this.encoded = 'url(' + this.value + ')';
+        this.file = this.filedata ? this.filedata : { name: this.value };
     },
 
     methods: {
@@ -100,11 +106,18 @@ export default {
             if(!file) return '';
             var reader = new FileReader();
             reader.readAsDataURL(file);
-            reader.addEventListener('load', () => this.encoded = 'url(' + reader.result + ')');
+            reader.addEventListener('load', () => { 
+                this.encoded = 'url(' + reader.result + ')';
+                this.$emit('input', { value: this.encoded, alt: this.altText, file });
+            });
         },
 
         isLastConstraint(index, constraints) {
             return index < Object.keys(constraints).length - 1;
+        },
+
+        updateAlt(value) {
+            this.$emit('input', { value: this.encoded, alt: this.altText, file: this.file });
         }
     },
 
@@ -143,8 +156,21 @@ export default {
             if(this.hasProp('height')) constraints[''] = this.height;
             if(this.hasProp('maxHeight')) constraints[this.trans('fields.image.max')] = this.maxHeight;
             return constraints;
-        }
+        },
 
+        filename() {
+            return this.file.name.length > 70 ? this.file.name.substring(0, 70) + '...' : this.file.name;
+        }
+    },
+
+    watch: {
+        value(newVal) {
+            this.encoded = newVal; 
+        },
+
+        alt(newVal) {
+            this.altText = newVal;
+        }
     }
 }
 </script>

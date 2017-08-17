@@ -70,6 +70,12 @@ export default {
         },
 
         addImageProps() {
+            console.log(this.value)
+            if(this.value) {
+                this.properties.value = this.value.value;
+                this.properties.filedata = this.value.file;
+                this.properties.alt = this.value.alt;
+            }
             if(!this.structure.rules) return;
             this.addRule('minHeight');
             this.addRule('height');

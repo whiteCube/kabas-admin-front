@@ -21,3 +21,4 @@ Vue.component('genericfield', require('../modules/genericfield.vue'));
 Vue.component('checkboxfield', require('../modules/checkboxfield.vue'));
 Vue.component('radiofield', require('../modules/radiofield.vue'));
 Vue.component('groupfield', require('../modules/groupfield.vue'));
+Vue.component('gallery', require('../modules/gallery.vue'));

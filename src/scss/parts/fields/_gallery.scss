@@ -1,0 +1,16 @@
+.gallery {
+    &__fig {
+        display: block;
+        width: s(43);
+        height: s(43);
+        background: $cWhite5 no-repeat center;
+        background-size: cover;
+        float: left;
+        margin-right: s(20);
+        margin-top: s(-3);
+    }
+
+    .repeater__title {
+        font-size: s($s3, $s2);
+    }
+}
