@@ -558,7 +558,60 @@
             <radiofield label="Radio" name="radio" value="radioone" checked></radiofield>
             <radiofield label="Radio" name="radio" value="radiotwo" checked></radiofield>
 
-            <groupfield label="Group field" :options="{ title: { type: 'text', label: 'Title', rules: { limit: 250 } }, color: { type: 'color', label: 'Color' }, group: { type: 'group', label: 'Nested group', options: { name: { type: 'text', label: 'Name' }, content: { type: 'wysiwyg', label: 'Content' }, inception: { type: 'group', label: 'Inception', options: { email: { type: 'email', label: 'Email' }, image: { type: 'image', label: 'Image', rules: { type: ['PNG'] } } } } } } }" :values="{ title: 'Test title', color: '#ff0000' }"></groupfield>
+            <groupfield label="Group field" :options="{
+    title: {
+        type: 'text',
+        label: 'Title',
+        rules: {
+            limit: 250
+        }
+    },
+    color: {
+        type: 'color',
+        label: 'Color'
+    },
+    group: {
+        type: 'group',
+        label: 'Nested group',
+        options: {
+            name: {
+                type: 'text',
+                label: 'Name'
+            },
+            content: {
+                type: 'wysiwyg',
+                label: 'Content'
+            },
+            inception: {
+                type: 'group',
+                label: 'Inception',
+                options: {
+                    email: {
+                        type: 'email',
+                        label: 'Email'
+                    },
+                    image: {
+                        type: 'image',
+                        label: 'Image',
+                        rules: {
+                            type: ['PNG']
+                        }
+                    }
+                }
+            },
+            inceptiontwo: {
+                type: 'group',
+                label: 'Inception two',
+                options: {
+                    textarea: {
+                        type: 'textarea',
+                        label: 'Text area'
+                    }
+                }
+            }
+        }
+    }
+}" :values="{ title: 'Test title', color: '#ff0000' }"></groupfield>
 
             <repeater 
                 label="Repeater (single text field)" 
