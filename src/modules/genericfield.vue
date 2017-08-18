@@ -18,7 +18,10 @@ export default {
                 'checkbox': 'checkboxfield',
                 'radio': 'radiofield',
                 'repeater': 'repeater',
-                'group': 'groupfield'
+                'group': 'groupfield',
+                'date': 'datefield',
+                'select': 'selectfield',
+                'gallery': 'gallery'
             }
         }
     },
@@ -51,6 +54,7 @@ export default {
             if(this.is('imagefield', 'filefield')) this.addFileProps();
             if(this.is('repeater')) this.addRepeaterProps();
             if(this.is('groupfield')) this.addGroupProps();
+            if(this.is('selectfield')) this.addSelectProps();
             return this.properties;
         },
 
@@ -70,7 +74,6 @@ export default {
         },
 
         addImageProps() {
-            console.log(this.value)
             if(this.value) {
                 this.properties.value = this.value.value;
                 this.properties.filedata = this.value.file;
@@ -101,6 +104,11 @@ export default {
             if(!this.structure.options) return;
             this.properties['options'] = this.structure.options;
             this.properties['values'] = this.value;
+        },
+
+        addSelectProps() {
+            if(!this.structure.options) return;
+            this.addProp('options', this.structure.options);
         }
 
     }, 
