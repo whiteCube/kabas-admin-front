@@ -31,7 +31,6 @@
     transform: translateX(-5px);
 }
 
-
 .slide-container {
     display: block;
     position: relative;
@@ -48,6 +47,15 @@
 
 .slide-enter {
     transform: translateY(15px);
+}
+
+.slideLeft-enter-active, .slideLeft-leave-active {
+    transition: opacity .2s $ease-out-quad, transform .2s $ease-out-quad;
+}
+
+.slideLeft-enter, .slideLeft-leave-to {
+    opacity: 0;
+    transform: translateX(-15px);
 }
 
 .picker-enter-active, .picker-leave-active {
