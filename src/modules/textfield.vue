@@ -40,7 +40,7 @@ export default {
     },
 
     created() {
-        if(typeof this.value !== 'undefined') this.val = this.value;
+        if(this.value && typeof this.value !== 'undefined') this.val = this.value;
     },
 
     methods: {
