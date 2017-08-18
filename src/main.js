@@ -8,13 +8,13 @@ Vue.mixin({
             return typeof this[prop] !== 'undefined';
         },
 
-        trans(accessor) {
+        trans(accessor, value) {
             let parts = accessor.split('.');
             let result = this.$root.translations;
             parts.forEach(part => {
                 result = result[part];
             });
-            return result;
+            return result.replace('%s', value);
         }
     }
 });
