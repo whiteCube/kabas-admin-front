@@ -28,7 +28,7 @@
         &:after {
             transform-origin: bottom;
             transform: rotate(45deg);
-            right: s(26);
+            right: s(25);
         }
 
         &:hover:before,
@@ -43,7 +43,7 @@
         border-top: none;
         border-radius: 0 0 s(3) s(3);
         position: absolute;
-        z-index: 5;
+        z-index: 20;
         width: 100%;
 
         &.slideDown-enter-active, &.slideDown-leave-active {
