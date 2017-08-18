@@ -1,6 +1,6 @@
 <template>
     <div class="field group" :class="classes">
-        <label class="field__label">
+        <label class="field__label" v-if="level == 0">
             <template v-for="(crumb, index) in crumbs">
                 <transition name="slideLeft">
                 <a v-if="index <= lastcrumb" @click="navigateSub(crumb.level)" class="group__crumb"><span v-if="index > 0 && index <= lastcrumb" class="group__crumbseparator"></span>{{ crumb.label }}</a>
@@ -11,7 +11,24 @@
             <a v-show="showsub" class="group__backlink" @click.prevent="hideSubfield">{{ trans('fields.group.backlink', label) }}</a>
             <template v-for="(field, index) in options">
 
-                <div class="group__nested" v-if="condition(field, 'group')" >
+                <template v-if="field.type == 'group'">
+                    <div class="group__nested" v-show="shouldDisplay(field, 'group')" >
+                        <a class="group__peek" v-show="!showsub" @click.prevent="showSubfield(field, level + 1)">
+                            <label class="field__label">{{ field.label }}
+                                <span class="group__subcount">{{ trans('fields.group.subgroupitems', Object.keys(field.options).length) }}</span>
+                            </label>
+                            <span class="group__action">{{ trans('fields.group.editgroup') }}</span>
+                        </a>
+                        <transition name="slide">
+                        <div class="group__sub" v-show="showsub == field">
+                            <groupfield ref="sub" :label="field.label" :options="field.options" :nestinglevel="level + 1"></groupfield>
+                        </div>
+                        </transition>
+                    </div>
+                </template>
+
+                <template v-if="field.type == 'repeater'">
+                <div class="group__nested" v-show="shouldDisplay(field, 'repeater')" >
                     <a class="group__peek" v-show="!showsub" @click.prevent="showSubfield(field, level + 1)">
                         <label class="field__label">{{ field.label }}
                             <span class="group__subcount">{{ trans('fields.group.subgroupitems', Object.keys(field.options).length) }}</span>
@@ -20,22 +37,13 @@
                     </a>
                     <transition name="slide">
                     <div class="group__sub" v-show="showsub == field">
-                        <groupfield ref="sub" :label="field.label" :options="field.options" :nestinglevel="level + 1"></groupfield>
+                        <repeater ref="sub" :label="field.label" :items="[]" :structure="field.options" :nestinglevel="level + 1"></repeater>
                     </div>
                     </transition>
                 </div>
+                </template>
 
-                <div class="group__nested" v-if="condition(field, 'repeater')">
-                    <label class="field__label">{{ field.label }}</label>
-                    <a class="group__action" @click.prevent="showSubfield(field)">{{ trans('fields.group.editrepeater') }}</a>
-                    <transition name="slide">
-                    <div class="group__sub" v-show="showsub == field">
-                        <repeater label="test" :items="[]" :structure="field.options"></repeater>
-                    </div>
-                    </transition>
-                </div>
-
-                <div class="group__nested" v-if="condition(field, 'gallery')">
+                <div class="group__nested" v-if="shouldDisplay(field, 'gallery')">
                     <label class="field__label">{{ field.label }}</label>
                     <a class="group__action" @click.prevent="showSubfield(field)">{{ trans('fields.group.editgallery') }}</a>
                     <transition name="slide">
@@ -45,7 +53,7 @@
                     </transition>
                 </div>
 
-                <div class="group__nested" v-if="condition(field, 'flexible')">
+                <div class="group__nested" v-if="shouldDisplay(field, 'flexible')">
                     <label class="field__label">{{ field.label }}</label>
                     <a class="group__action" @click.prevent="showSubfield(field)">{{ trans('fields.group.editflexible') }}</a>
                     <transition name="slide">
@@ -55,7 +63,7 @@
                     </transition>
                 </div>
                 <transition name="slide">
-                <genericfield v-if="!is(field, 'group', 'repeater', 'gallery', 'flexible') && !showsub" :value="values ? values[index] : null" :structure="field" @input="transferInput($event, index)" :key="index"></genericfield>
+                <genericfield v-if="!isNestable(field) && !showsub" :value="values ? values[index] : null" :structure="field" @input="transferInput($event, index)" :key="index"></genericfield>
                 </transition>
             </template>
         </div>
@@ -67,7 +75,6 @@
 /*
 Todo:
 Add repeaters
-Add nested groups
 Add flexible
 Add gallery
 */
@@ -77,6 +84,7 @@ export default {
 
     data() {
         return {
+            nestable: ['group', 'flexible', 'repeater', 'gallery'],
             showsub: false,
             crumbs: [],
             lastcrumb: 0,
@@ -86,7 +94,7 @@ export default {
 
     created() {
         for(let key in this.options) {
-            if(this.is(this.options[key], 'group', 'flexible', 'repeater', 'gallery')) {
+            if(this.isNestable(this.options[key])) {
                 this.options[key].showsub = false;
             }
         }
@@ -95,13 +103,13 @@ export default {
         this.crumbs.push({label: this.label, level: this.level});
 
         this.$on('showsub', data => {
-            this.$parent.$emit('showsub', data);
+            if(this.level > 0) return this.$parent.$emit('showsub', data);
             this.lastcrumb = data.level;
-            this.crumbs.push(data);
+            this.crumbs[data.level] = data;
         });
 
         this.$on('hidesub', level => {
-            this.$parent.$emit('hidesub', level);
+            if(this.level > 0) return this.$parent.$emit('hidesub', level);
             this.lastcrumb = level;
         });
     },
@@ -111,12 +119,16 @@ export default {
             this.$emit('input', {value, index});
         },
 
-        condition(field, type) {
-            return (this.is(field, type) && this.showsub == field) || (this.is(field, type) && !this.showsub)
-        },
-
         is(field, ...types) {
             return types.indexOf(field.type) > -1;
+        },
+
+        isNestable(field) {
+            return this.nestable.indexOf(field.type) > -1;
+        },
+
+        shouldDisplay(field, type) {
+            return (this.is(field, type) && this.showsub == field) || (this.is(field, type) && !this.showsub)
         },
 
         showSubfield(field, level) {
