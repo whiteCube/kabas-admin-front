@@ -125,6 +125,10 @@
         display: none;
     }
 
+    .repeater .slide-leave-active {
+        display: block;
+    }
+
     &__subcount {
         font-style: italic;
         color: $cGray;
