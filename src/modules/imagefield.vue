@@ -26,7 +26,7 @@
                             </template>
                         </div>
                     </p>
-                    <p v-if="formats && formats.length">{{ trans('fields.image.formats') }}: 
+                    <p v-if="formats && formats.length">{{ transchoice('fields.file.formats', formats.length) }}: 
                         <em v-for="(format, index) in formats">
                             {{ format }}<template v-if="index < formats.length - 1">, </template>
                         </em>.

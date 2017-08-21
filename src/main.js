@@ -11,10 +11,17 @@ Vue.mixin({
         trans(accessor, value) {
             let parts = accessor.split('.');
             let result = this.$root.translations;
-            parts.forEach(part => {
-                result = result[part];
-            });
+            parts.forEach(part => result = result[part]);
             return result.replace('%s', value);
+        },
+
+        transchoice(accessor, count, value = false) {
+            let parts = accessor.split('.');
+            let result = this.$root.translations;
+            parts.forEach(part => result = result[part]);
+            if(value) result = result.split('%s').join(value);
+            let choices = result.split('|');
+            return count == 1 ? choices[0] : choices[1];
         }
     }
 });

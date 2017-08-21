@@ -10,7 +10,7 @@
                 </span>
                 <div class="file__details">
                     <p>{{ trans('fields.file.prompt') }}</p>
-                    <p v-if="formats && formats.length">{{ trans('fields.file.formats') }}: 
+                    <p v-if="formats && formats.length">{{ transchoice('fields.file.formats', formats.length) }}: 
                         <em v-for="(format, index) in formats">
                             {{ format }}<template v-if="index < formats.length - 1">, </template>
                         </em>.
