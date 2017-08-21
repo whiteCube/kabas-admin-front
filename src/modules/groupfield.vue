@@ -144,7 +144,7 @@ export default {
 
         hideRecursivelyUntil(level) {
             if(this.level >= level) this.showsub = false;
-            if(!this.$refs.sub) return;
+            if(!this.$refs.sub || this.$refs.sub.type !== 'group') return;
             this.$refs.sub[0].hideRecursivelyUntil(level);
         },
 
