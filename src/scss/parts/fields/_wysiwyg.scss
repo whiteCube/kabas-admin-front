@@ -19,4 +19,23 @@
         }
     }
 
+    .editor-toolbar {
+        opacity: 1;
+
+        a {
+            color: $cAnthracite1 !important;
+            transition: border-color .2s $ease-out-quad, background .2s $ease-out-quad;
+
+            &:hover,
+            &.active {
+                border-color: $cWhite5;
+                background: rgba($cWhite5, .2);
+            }
+
+            &:focus {
+                outline: none;
+            }
+        }
+    }
+
 }
