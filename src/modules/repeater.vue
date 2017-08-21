@@ -6,23 +6,24 @@
             <draggable class="repeater__items" :options="{ animation: 300 }" v-show="!current && current !== 0" v-model="list" @end="cancelDelete">
                 <div class="repeater__item" v-for="(item, index) in list" :key="index">
                     <p class="repeater__title">
-                        <em class="repeater__number">#{{ index + 1 }}</em>
-                        <template v-if="isComplex()">
+                        <em class="repeater__number">#{{ index + 1 }}</em><!--
+                     --><template v-if="isComplex()">
                             <template v-for="(field, i) in structure.options">
-                                <span class="repeater__preview">
-                                    <span class="field__label">{{ field.label }}</span>
-                                    <span v-if="field.type == 'color'" class="repeater__preview--color repeater__preview" :style="{background: list[index][i]}"></span>
+                                <span v-if="list[index][i]" class="repeater__preview">
+                                 <span class="field__label">{{ field.label }}</span>
+                                 <span v-if="field.type == 'color'" class="repeater__preview--color repeater__preview" :style="{background: list[index][i]}"></span>
                                     {{ list[index][i] }}
                                 </span>
                             </template>
-                        </template>
-                        <template v-else>
-                            <span class="repeater__preview">
+                        </template><!--
+                     --><template v-else>
+                            <span v-if="list[index]" class="repeater__preview">
                                 <span class="field__label">{{ structure.label }}</span>
                                 <span v-if="structure.type == 'color'" class="repeater__preview--color repeater__preview" :style="{background: list[index]}"></span>
                                 {{ list[index] }}
                             </span>
                         </template>
+                        <span v-if="isEmpty(list[index])" class="repeater__preview">{{ trans('fields.repeater.nopreview') }}</span>
                     </p>
                     <a @click.prevent="remove(index)" v-if="!confirmdelete[index]" class="repeater__control repeater__control--delete">{{ trans('fields.repeater.delete') }}</a>
                     <a v-if="confirmdelete[index]" class="repeater__control repeater__control--destroy" @click.prevent="destroy(index)">{{ trans('fields.repeater.confirmdelete') }}</a>
@@ -150,6 +151,12 @@ export default {
 
         isComplex() {
             return this.complexFields.indexOf(this.structure.type) > -1;
+        },
+
+        isEmpty(data) {
+            if(!data) return true;
+            for(let key in data) { if(data[key]) return false; }
+            return true;
         }
     },
 
