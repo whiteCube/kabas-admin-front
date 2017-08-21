@@ -45,6 +45,10 @@
             border-color: $cGray;
         }
 
+        &::placeholder {
+            color: $cGray;
+        }
+
         .field--error & {
             border-color: $cAccent;
         }
