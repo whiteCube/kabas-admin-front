@@ -570,6 +570,14 @@
         type: 'color',
         label: 'Color'
     },
+    repeater: {
+        type: 'repeater',
+        label: 'Nested repeater',
+        options: {
+            type: 'text',
+            label: 'Textfield'
+        }
+    },
     group: {
         type: 'group',
         label: 'Nested group',
@@ -611,7 +619,7 @@
             }
         }
     }
-}" :values="{ title: 'Test title', color: '#ff0000' }"></groupfield>
+}" :values="{ title: 'Test title', color: '#ff0000', repeater: ['one', 'two', 'three'], group: { name: 'Test name', content: '# Some test content' } }"></groupfield>
 
             <repeater 
                 label="Repeater (single text field)" 

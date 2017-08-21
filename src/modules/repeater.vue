@@ -61,6 +61,7 @@ export default {
     },
 
     created() {
+        if(!this.list) this.list = [];
         this.snapshot();
         this.restore();
     },

@@ -21,7 +21,7 @@
                         </a>
                         <transition name="slide">
                         <div class="group__sub" v-show="showsub == field">
-                            <groupfield ref="sub" :label="field.label" :options="field.options" :nestinglevel="level + 1"></groupfield>
+                            <groupfield ref="sub" :label="field.label" :values="values[index]" :options="field.options" :nestinglevel="level + 1"></groupfield>
                         </div>
                         </transition>
                     </div>
@@ -37,7 +37,7 @@
                     </a>
                     <transition name="slide">
                     <div class="group__sub" v-show="showsub == field">
-                        <repeater ref="sub" :label="field.label" :items="[]" :structure="field.options" :nestinglevel="level + 1"></repeater>
+                        <repeater ref="sub" :label="field.label" :items="values[index]" :structure="field.options" :nestinglevel="level + 1"></repeater>
                     </div>
                     </transition>
                 </div>
