@@ -39,6 +39,10 @@
             content: '-';
             margin-right: s(5, $s2);
         }
+
+        .field__label {
+            margin-bottom: 0;
+        }
     }
 
     &__number {
