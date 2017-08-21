@@ -31,6 +31,7 @@ export default {
         this.mde = new SimpleMDE({ 
             element: this.element,
             placeholder: this.placeholder,
+            spellChecker: false,
             status: false
         });
     }
