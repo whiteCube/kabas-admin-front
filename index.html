@@ -572,10 +572,30 @@
     },
     repeater: {
         type: 'repeater',
-        label: 'Nested repeater',
+        label: 'Articles',
         options: {
-            type: 'text',
-            label: 'Textfield'
+            type: 'group',
+            label: 'Nested repeater fields',
+            options: {
+                title: {
+                    type: 'text',
+                    label: 'Title',
+                    placeholder: 'Your title here',
+                    rules: {
+                        limit: 60
+                    }
+                },
+                excerpt: {
+                    type: 'textarea',
+                    label: 'Excerpt',
+                    placeholder: 'Your excerpt here'
+                },
+                content: {
+                    type: 'wysiwyg',
+                    label: 'Main content',
+                    placeholder: 'The main content of your article'
+                }
+            }
         }
     },
     group: {
@@ -619,7 +639,7 @@
             }
         }
     }
-}" :values="{ title: 'Test title', color: '#ff0000', repeater: ['one', 'two', 'three'], group: { name: 'Test name', content: '# Some test content' } }"></groupfield>
+}" :values="{ title: 'Test title', color: '#ff0000', group: { name: 'Test name', content: '# Some test content' } }"></groupfield>
 
             <repeater 
                 label="Repeater (single text field)" 

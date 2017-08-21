@@ -7,7 +7,22 @@
                 <div class="repeater__item" v-for="(item, index) in list" :key="index">
                     <p class="repeater__title">
                         <em class="repeater__number">#{{ index + 1 }}</em>
-                        <span v-html="preview(index)"></span>
+                        <template v-if="isComplex()">
+                            <template v-for="(field, i) in structure.options">
+                                <span class="repeater__preview">
+                                    <span class="field__label">{{ field.label }}</span>
+                                    <span v-if="field.type == 'color'" class="repeater__preview--color repeater__preview" :style="{background: list[index][i]}"></span>
+                                    {{ list[index][i] }}
+                                </span>
+                            </template>
+                        </template>
+                        <template v-else>
+                            <span class="repeater__preview">
+                                <span class="field__label">{{ structure.label }}</span>
+                                <span v-if="structure.type == 'color'" class="repeater__preview--color repeater__preview" :style="{background: list[index]}"></span>
+                                {{ list[index] }}
+                            </span>
+                        </template>
                     </p>
                     <a @click.prevent="remove(index)" v-if="!confirmdelete[index]" class="repeater__control repeater__control--delete">{{ trans('fields.repeater.delete') }}</a>
                     <a v-if="confirmdelete[index]" class="repeater__control repeater__control--destroy" @click.prevent="destroy(index)">{{ trans('fields.repeater.confirmdelete') }}</a>
@@ -56,6 +71,7 @@ export default {
             id: this._uid,
             list: this.items,
             confirmdelete: [],
+            complexFields: ['group', 'flexible', 'gallery', 'repeater'],
             restorepoint: null
         }
     },
@@ -67,24 +83,6 @@ export default {
     },
 
     methods: {
-        preview(index) {
-            let preview = '';
-            let value = this.list[index];
-            if(this.structure.type == 'group') {
-                for(let key in value) {
-                    preview = this.addPreviewBit(preview, value[key], this.structure.options[key].type);
-                }
-            } else preview = this.addPreviewBit(preview, value, this.structure.type);
-            if(preview == '') preview = this.trans('fields.repeater.nopreview');
-            return preview;
-        },
-
-        addPreviewBit(preview, value, type) {
-            if(type == 'text' || type == 'textarea' || type == 'url' || type == 'email') preview = this.appendText(preview, value);
-            if(type == 'color' && value !== '') preview = this.appendColor(preview, value);
-            return preview;
-        },
-
         remove(index) {
             this.confirmdelete[index] = true;
             this.$forceUpdate();
@@ -133,16 +131,6 @@ export default {
             return preview;
         },
 
-        appendColor(preview, color) {
-            return this.appendText(preview, '<span class="repeater__preview--color repeater__preview" style="background: ' + color + '"></span>' + color);
-        },
-
-        appendText(preview, text) {
-            if(!text) return preview;
-            if(preview !== '') preview += ', ';
-            return preview += text;
-        },
-
         updatePreview(e, index) {
             if(typeof e == 'object') {
                 this.list[index][e.index] = e.value;
@@ -158,6 +146,10 @@ export default {
         restore() {
             this.list = this.restorepoint;
             this.restorepoint = null;
+        },
+
+        isComplex() {
+            return this.complexFields.indexOf(this.structure.type) > -1;
         }
     },
 

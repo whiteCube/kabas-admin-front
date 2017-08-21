@@ -21,6 +21,24 @@
         &:first-child {
             border-top: none;
         }
+
+        .field__label {
+            font-size: 1em;
+
+            &:after {
+                content: ':';
+            }
+        }
+    }
+
+    &__preview {
+        display: inline-block;
+        margin-right: s(5, $s2);
+
+        & + .repeater__preview:before {
+            content: '-';
+            margin-right: s(5, $s2);
+        }
     }
 
     &__number {
@@ -30,6 +48,20 @@
 
     &__title {
         margin-bottom: s(5, $s2);
+        white-space: nowrap;
+        overflow: hidden;
+        max-width: 100%;
+
+        &:after {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            width: s(150);
+            background: linear-gradient(to right, transparent, rgba(white, .8), white);
+        }
     }
 
     &__control {

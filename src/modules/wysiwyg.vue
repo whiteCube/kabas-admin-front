@@ -2,7 +2,7 @@
     <div class="field wysiwyg">
         <label class="field__label" @click="focus" :for="id">{{ label }}</label>
         <div class="field__container">
-            <textarea class="field__element" :id="id" :name="name"></textarea>
+            <textarea class="field__element" :id="id" v-model="val" :name="name"></textarea>
         </div>
     </div>
 </template>
@@ -11,12 +11,13 @@
 import SimpleMDE from 'SimpleMDE';
 
 export default {
-    props: ['label', 'name', 'limit', 'placeholder'],
+    props: ['label', 'name', 'limit', 'placeholder', 'value'],
     data() {
         return {
             id: this._uid,
             element: null,
-            mde: null
+            mde: null,
+            val: this.value
         }
     },
 
@@ -34,6 +35,10 @@ export default {
             spellChecker: false,
             status: false
         });
+        this.mde.codemirror.on('change', () => {
+            this.val = this.mde.value();
+            this.$emit('input', this.val);
+        })
     }
 }
 </script>
