@@ -74,7 +74,6 @@
 
 /*
 Todo:
-Add repeaters
 Add flexible
 Add gallery
 */
