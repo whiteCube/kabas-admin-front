@@ -28,6 +28,11 @@
 
 <script>
 
+/*
+Todo:
+Investigate why limit does not work as expected in groups/nested groups
+*/
+
 export default {
     props: ['label', 'placeholder', 'name', 'limit', 'password', 'email', 'textarea', 'value'],
 
