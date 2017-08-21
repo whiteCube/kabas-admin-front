@@ -2,4 +2,21 @@
     .editor-toolbar, .CodeMirror {
         border-color: $cWhite5;
     }
+
+    .CodeMirror-placeholder {
+        opacity: 1;
+        color: $cGray;
+    }
+    
+    .CodeMirror {
+        font-size: s($s2);
+        line-height: s($s6, $s2);
+        color: $cAnthracite1;
+
+        .cm-spell-error:not(.cm-url):not(.cm-comment):not(.cm-tag):not(.cm-word) {
+            background: transparent;
+            border-bottom: 1px dotted $cAccent;
+        }
+    }
+
 }
