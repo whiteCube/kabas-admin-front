@@ -3,7 +3,7 @@
         <label class="field__label" v-if="level == 0">
             <template v-for="(crumb, index) in crumbs">
                 <transition name="slideLeft">
-                <a v-if="index <= lastcrumb" @click="navigateSub(crumb.level)" class="group__crumb"><span v-if="index > 0 && index <= lastcrumb" class="group__crumbseparator"></span>{{ crumb.label }}</a>
+                <a v-if="index <= lastcrumb" @click="navigateSub(crumb)" class="group__crumb"><span v-if="index > 0 && index <= lastcrumb" class="group__crumbseparator"></span>{{ crumb.label }}</a>
                 </transition>
             </template>
         </label>
@@ -13,7 +13,7 @@
 
                 <template v-if="field.type == 'group'">
                     <div class="group__nested" v-show="shouldDisplay(field, 'group')" >
-                        <a class="group__peek" v-show="!showsub" @click.prevent="showSubfield(field, level + 1)">
+                        <a class="group__peek" v-show="!showsub" @click.prevent="showSubfield(field, level + 1, index)">
                             <label class="field__label">{{ field.label }}
                                 <span class="group__subcount">{{ trans('fields.group.subgroupitems', Object.keys(field.options).length) }}</span>
                             </label>
@@ -21,7 +21,7 @@
                         </a>
                         <transition name="slide">
                         <div class="group__sub" v-show="showsub == field">
-                            <groupfield ref="sub" :label="field.label" :values="values[index]" :options="field.options" :nestinglevel="level + 1"></groupfield>
+                            <groupfield :ref="index" :label="field.label" :values="values[index]" :options="field.options" :nestinglevel="level + 1"></groupfield>
                         </div>
                         </transition>
                     </div>
@@ -29,7 +29,7 @@
 
                 <template v-if="field.type == 'repeater'">
                 <div class="group__nested" v-show="shouldDisplay(field, 'repeater')" >
-                    <a class="group__peek" v-show="!showsub" @click.prevent="showSubfield(field, level + 1)">
+                    <a class="group__peek" v-show="!showsub" @click.prevent="showSubfield(field, level + 1, index)">
                         <label class="field__label">{{ field.label }}
                             <span class="group__subcount">{{ trans('fields.group.subrepeateritems', values[index].length) }}</span>
                         </label>
@@ -37,7 +37,7 @@
                     </a>
                     <transition name="slide">
                     <div class="group__sub" v-show="showsub == field">
-                        <repeater ref="sub" :label="field.label" :items="values[index]" :structure="field.options" :nestinglevel="level + 1"></repeater>
+                        <repeater :ref="index" :label="field.label" :items="values[index]" :structure="field.options" :nestinglevel="level + 1"></repeater>
                     </div>
                     </transition>
                 </div>
@@ -130,27 +130,27 @@ export default {
             return (this.is(field, type) && this.showsub == field) || (this.is(field, type) && !this.showsub)
         },
 
-        showSubfield(field, level) {
+        showSubfield(field, level, index) {
             this.showsub = field;
-            this.$emit('showsub', {label: field.label, level});
+            this.$emit('showsub', {label: field.label, level, index});
             this.lastcrumb = level;
             this.$forceUpdate();
         },
 
-        navigateSub(level) {
-            this.$emit('hidesub', level);
-            this.hideRecursivelyUntil(level);
+        navigateSub(crumb, index) {
+            this.$emit('hidesub', crumb.level);
+            this.hideRecursivelyUntil(crumb.level, crumb.index);
         },
 
-        hideRecursivelyUntil(level) {
+        hideRecursivelyUntil(level, index) {
             if(this.level >= level) this.showsub = false;
-            if(!this.$refs.sub || this.$refs.sub.type !== 'group') return;
-            this.$refs.sub[0].hideRecursivelyUntil(level);
+            if(!this.$refs[index]) return;
+            this.$refs[index][0].hideRecursivelyUntil(level);
         },
 
         hideSubfield() {
             this.$emit('hidesub', this.level);
-            this.$refs.sub[0].showsub = false;
+            for(let key in this.$refs) { this.$refs[key][0].showsub = false; }
             this.showsub = false;
         },
 
