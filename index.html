@@ -28,7 +28,8 @@
             "editflexible": "Edit flexible",
             "editgallery": "Edit gallery",
             "backlink": "Back to «&nbsp;%s&nbsp;»",
-            "subgroupitems": "%s sub fields"
+            "subgroupitems": "%s sub fields",
+            "subrepeateritems": "%s items"
         },
         "date": {
             "placeholder": "Click to pick a date"
@@ -639,7 +640,7 @@
             }
         }
     }
-}" :values="{ title: 'Test title', color: '#ff0000', group: { name: 'Test name', content: '# Some test content' } }"></groupfield>
+}" :values="{ title: 'Test title', color: '#ff0000', repeater: [{title: 'Test title', content: 'Test content'}], group: { name: 'Test name', content: '# Some test content' } }"></groupfield>
 
             <repeater 
                 label="Repeater (single text field)" 
