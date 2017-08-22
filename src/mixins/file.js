@@ -46,6 +46,7 @@ export default {
 
     computed: {
         supported() {
+            if(!this.formats) return true;
             return this.formats.map(value => value.toLowerCase());
         },
 

@@ -52,10 +52,6 @@
 </template>
 
 <script>
-/*
-Todo:
-Investigate 'Error during evaluation' for supported (visible from vue console)
-*/
 import FileMethods from '../mixins/file.js';
 
 export default {
