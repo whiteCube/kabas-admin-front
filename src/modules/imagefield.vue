@@ -54,7 +54,7 @@
 <script>
 /*
 Todo:
-Investigate issue with gallery drag/drop
+Investigate 'Error during evaluation' for supported (visible from vue console)
 */
 import FileMethods from '../mixins/file.js';
 
@@ -169,11 +169,16 @@ export default {
 
     watch: {
         value(newVal) {
-            this.encoded = newVal; 
+            this.encoded = newVal.indexOf('url(') > -1 ? newVal : 'url(' + newVal + ')'; 
         },
 
         alt(newVal) {
             this.altText = newVal;
+        },
+
+        filedata(newVal) {
+            if(!newVal || !newVal.name) newVal = { name: 'undefined file name' };
+            this.file = newVal;
         }
     }
 }

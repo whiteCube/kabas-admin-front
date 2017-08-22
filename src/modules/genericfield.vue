@@ -76,7 +76,7 @@ export default {
         addImageProps() {
             if(this.value) {
                 this.properties.value = this.value.value;
-                this.properties.filedata = this.value.file;
+                this.properties.filedata = this.value.file || {name: this.value.value};
                 this.properties.alt = this.value.alt;
             }
             if(!this.structure.rules) return;
