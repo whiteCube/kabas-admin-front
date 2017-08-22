@@ -15,11 +15,11 @@ Vue.mixin({
             return result.replace('%s', value);
         },
 
-        transchoice(accessor, count, value = false) {
+        transchoice(accessor, count) {
             let parts = accessor.split('.');
             let result = this.$root.translations;
             parts.forEach(part => result = result[part]);
-            if(value !== false) result = result.split('%s').join(value);
+            result = result.split('%s').join(count);
             let choices = result.split('|');
             return count == 1 ? choices[0] : choices[1];
         }

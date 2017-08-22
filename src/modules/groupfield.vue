@@ -15,7 +15,7 @@
                     <div class="group__nested" v-show="shouldDisplay(field, 'group')" >
                         <a class="group__peek" v-show="!showsub" @click.prevent="showSubfield(field, level + 1, index)">
                             <label class="field__label">{{ field.label }}
-                                <span class="group__subcount">{{ transchoice('fields.group.subgroupitems', Object.keys(field.options).length, Object.keys(field.options).length) }}</span>
+                                <span class="group__subcount">{{ transchoice('fields.group.subgroupitems', Object.keys(field.options).length) }}</span>
                             </label>
                             <span class="group__action">{{ trans('fields.group.editgroup') }}</span>
                         </a>
@@ -31,7 +31,7 @@
                 <div class="group__nested" v-show="shouldDisplay(field, 'repeater')" >
                     <a class="group__peek" v-show="!showsub" @click.prevent="showSubfield(field, level + 1, index)">
                         <label class="field__label">{{ field.label }}
-                            <span class="group__subcount">{{ transchoice('fields.group.subrepeateritems', values[index].length, values[index].length) }}</span>
+                            <span class="group__subcount">{{ transchoice('fields.group.subrepeateritems', values[index].length) }}</span>
                         </label>
                         <span class="group__action">{{ trans('fields.group.editrepeater') }}</span>
                     </a>
@@ -47,7 +47,7 @@
                 <div class="group__nested" v-show="shouldDisplay(field, 'gallery')" >
                     <a class="group__peek" v-show="!showsub" @click.prevent="showSubfield(field, level + 1, index)">
                         <label class="field__label">{{ field.label }}
-                            <span class="group__subcount">{{ transchoice('fields.group.subgalleryitems', values[index].length, values[index].length) }}</span>
+                            <span class="group__subcount">{{ transchoice('fields.group.subgalleryitems', values[index].length) }}</span>
                         </label>
                         <span class="group__action">{{ trans('fields.group.editgallery') }}</span>
                     </a>
