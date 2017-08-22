@@ -49,7 +49,7 @@
         &:after {
             margin-left: s(6, 10);
             @include icon(arrow_right);
-            font-size: s(10)
+            font-size: s(10);
         }
 
         &:hover {
