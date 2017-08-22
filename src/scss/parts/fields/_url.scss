@@ -12,6 +12,11 @@
         font-weight: 700;
         line-height: s(45, $s1);
         border-left: 1px solid $cWhite5;
+        transition: background .2s $ease-out-quad;
+
+        &:hover {
+            background: rgba($cWhite5, .2);
+        }
     }
 
     .field__element {

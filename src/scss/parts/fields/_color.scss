@@ -62,6 +62,7 @@
         width: s(77);
         border-left: 1px solid $cWhite5;
         text-decoration: none;
+        transition: background .2s $ease-out-quad;
 
         &:before,
         &:after {
@@ -87,6 +88,10 @@
             transform-origin: bottom left;
             transform: rotate(45deg);
             left: s(15);
+        }
+
+        &:hover {
+            background: rgba($cWhite5, .2);
         }
     }
 
