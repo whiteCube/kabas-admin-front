@@ -59,6 +59,7 @@ import draggable from 'vuedraggable';
 /*
 Todo: 
 Investigate reference issues with this.list to avoid having to do a snapshot on created()
+Maybe make a banner to tell when in edit mode
 */
 
 export default {
