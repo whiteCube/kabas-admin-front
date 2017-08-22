@@ -74,13 +74,16 @@
 .textfield--email .field__container {
     &:before {
         content: '@';
+        width: s(50);
     }
 }
 
 .textfield--password .field__container {
     &:before {
-        @include icon(github);
-        line-height: s(45);
+        @include icon(key);
+        font-size: s(9);
+        width: s(50, 9);
+        line-height: s(45, 9);
     }
 }
 
