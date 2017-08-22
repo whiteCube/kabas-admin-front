@@ -33,7 +33,7 @@
                         <label class="field__label">{{ field.label }}
                             <span class="group__subcount">{{ transchoice('fields.group.subrepeateritems', values[index].length, values[index].length) }}</span>
                         </label>
-                        <span class="group__action">{{ trans('fields.group.editgroup') }}</span>
+                        <span class="group__action">{{ trans('fields.group.editrepeater') }}</span>
                     </a>
                     <transition name="slide">
                     <div class="group__sub" v-show="showsub == field">
