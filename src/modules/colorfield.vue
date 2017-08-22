@@ -20,6 +20,9 @@
 </template>
 
 <script>
+/*
+Check initial value not capitalized
+*/
 import colorpicker from './colorpicker.vue';
 import tinycolor from 'tinycolor2';
 

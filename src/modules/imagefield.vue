@@ -52,6 +52,10 @@
 </template>
 
 <script>
+/*
+Todo:
+Investigate issue with gallery drag/drop
+*/
 import FileMethods from '../mixins/file.js';
 
 export default {

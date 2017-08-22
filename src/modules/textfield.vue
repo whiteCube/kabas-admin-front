@@ -27,6 +27,10 @@
 </template>
 
 <script>
+/*
+Todo:
+Check limit on textarea and wysiwyg
+*/
 
 export default {
     props: ['label', 'placeholder', 'name', 'limit', 'password', 'email', 'textarea', 'value'],
