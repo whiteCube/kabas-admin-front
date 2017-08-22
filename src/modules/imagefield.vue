@@ -52,6 +52,10 @@
 </template>
 
 <script>
+/*
+Todo:
+Investigate why image fields are always expanded (at least in nested fields) see below
+*/
 import FileMethods from '../mixins/file.js';
 
 export default {
@@ -70,7 +74,7 @@ export default {
 
     created() {
         this.encoded = 'url(' + this.value + ')';
-        this.file = this.filedata ? this.filedata : { name: this.value };
+        this.file = this.filedata ? this.filedata : { name: this.value }; // TODO: fix this so the field is not always expanded
     },
 
     methods: {
