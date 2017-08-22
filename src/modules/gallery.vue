@@ -41,8 +41,7 @@
 import draggable from 'vuedraggable';
 
 /*
-Todo: 
-Fix file not updating after drag/drop
+Todo:
 Investigate reference issues with this.list to avoid having to do a snapshot on created()
 */
 
@@ -62,6 +61,7 @@ export default {
     },
 
     created() {
+        if(!this.list) this.list = [];
         this.snapshot();
         this.restore();
     },

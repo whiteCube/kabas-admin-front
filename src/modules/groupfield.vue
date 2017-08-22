@@ -43,15 +43,21 @@
                 </div>
                 </template>
 
-                <div class="group__nested" v-if="shouldDisplay(field, 'gallery')">
-                    <label class="field__label">{{ field.label }}</label>
-                    <a class="group__action" @click.prevent="showSubfield(field)">{{ trans('fields.group.editgallery') }}</a>
+                <template v-if="field.type == 'gallery'">
+                <div class="group__nested" v-show="shouldDisplay(field, 'gallery')" >
+                    <a class="group__peek" v-show="!showsub" @click.prevent="showSubfield(field, level + 1, index)">
+                        <label class="field__label">{{ field.label }}
+                            <span class="group__subcount">{{ transchoice('fields.group.subgalleryitems', values[index].length, values[index].length) }}</span>
+                        </label>
+                        <span class="group__action">{{ trans('fields.group.editgallery') }}</span>
+                    </a>
                     <transition name="slide">
                     <div class="group__sub" v-show="showsub == field">
-                        <groupfield label="" :options="field.options"></groupfield>
+                        <gallery :ref="index" :label="field.label" :items="values[index]" :structure="field.options" :nestinglevel="level + 1"></gallery>
                     </div>
                     </transition>
                 </div>
+                </template>
 
                 <div class="group__nested" v-if="shouldDisplay(field, 'flexible')">
                     <label class="field__label">{{ field.label }}</label>
@@ -74,6 +80,7 @@
 
 /*
 Todo:
+Investigate why we have an error if we dont give an initial value to a nested field
 Add flexible
 Add gallery
 */

@@ -29,7 +29,8 @@
             "editgallery": "Edit gallery",
             "backlink": "Back to «&nbsp;%s&nbsp;»",
             "subgroupitems": "%s field|%s fields",
-            "subrepeateritems": "%s item|%s items"
+            "subrepeateritems": "%s item|%s items",
+            "subgalleryitems": "%s image|%s images"
         },
         "date": {
             "placeholder": "Click to pick a date"
@@ -78,6 +79,10 @@
             "confirmdelete": "I am sure I want to delete this item",
             "edit": "Edit",
             "nopreview": "No preview available"
+        },
+        "gallery": {
+            "image": "Image",
+            "alt": "Describe your image"
         }
     }
 }'>
@@ -598,6 +603,14 @@
             }
         }
     },
+    gallery: {
+        type: 'gallery',
+        label: 'Gallery',
+        options: {
+            type: 'image',
+            label: 'Image'
+        }
+    },
     group: {
         type: 'group',
         label: 'Nested group',
@@ -639,7 +652,7 @@
             }
         }
     }
-}" :values="{ title: 'Test title', color: '#ff0000', repeater: [{title: 'Test title', content: 'Test content'}], group: { name: 'Test name', content: '# Some test content' } }"></groupfield>
+}" :values="{ title: 'Test title', color: '#ff0000', gallery: [], repeater: [{title: 'Test title', content: 'Test content'}], group: { name: 'Test name', content: '# Some test content' } }"></groupfield>
 
             <repeater 
                 label="Repeater (single text field)" 
