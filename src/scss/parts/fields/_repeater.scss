@@ -17,6 +17,7 @@
         border-top: 1px solid $cWhite5;
         position: relative;
         background: $cWhite;
+        overflow: hidden;
 
         &:first-child {
             border-top: none;
@@ -53,7 +54,6 @@
     &__title {
         margin-bottom: s(5, $s2);
         white-space: nowrap;
-        overflow: hidden;
         max-width: 100%;
 
         &:after {
