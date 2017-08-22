@@ -19,7 +19,7 @@ Vue.mixin({
             let parts = accessor.split('.');
             let result = this.$root.translations;
             parts.forEach(part => result = result[part]);
-            if(value) result = result.split('%s').join(value);
+            if(value !== false) result = result.split('%s').join(value);
             let choices = result.split('|');
             return count == 1 ? choices[0] : choices[1];
         }
