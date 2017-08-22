@@ -28,11 +28,6 @@
 
 <script>
 
-/*
-Todo:
-Investigate why limit does not work as expected in groups/nested groups
-*/
-
 export default {
     props: ['label', 'placeholder', 'name', 'limit', 'password', 'email', 'textarea', 'value'],
 
@@ -51,9 +46,9 @@ export default {
     methods: {
         input(e) {
             this.$emit('input', this.val);
-            if(!this.hasProp('limit')) return;
-            if(this.remaining == 0) this.shake();
-            if(this.remaining <= 0) this.val = this.val.substring(0, this.limit);
+            if(!this.hasProp('limit') || this.remaining != 0) return;
+            this.shake();
+            this.val = this.val.substring(0, this.limit);
         },
 
         shake() {
@@ -83,7 +78,7 @@ export default {
 
     watch: {
         value(newVal) {
-            this.val = newVal;
+            this.val = this.val.substring(0, this.limit);
         }
     }
 }
