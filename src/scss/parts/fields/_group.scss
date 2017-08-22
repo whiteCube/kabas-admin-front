@@ -28,13 +28,7 @@
             margin-top: 0;
         }
 
-        &:before {
-            @include icon(nested);
-            color: $cWhite5;
-            float: left;
-            font-size: s(35);
-            margin-right: s(15, 35);
-        }
+        
 
         .group > .field__container {
             position: static;
@@ -69,6 +63,20 @@
 
         &:hover .group__action {
             color: $cAccent;
+        }
+
+        &:before {
+            @include icon(nested);
+            color: $cWhite5;
+            float: left;
+            font-size: s(35);
+            margin-right: s(15, 35);
+            transition: color .2s $ease-out-quad, margin-left .2s $ease-out-quad;
+        }
+
+        &:hover:before {
+            color: $cWhite6;
+            margin-left: s(2);
         }
     }
 
@@ -111,11 +119,22 @@
         left: 0;
         background: $cWhite;
         padding: s(25, $s2) s(20, $s2);
+        transition: background .2s $ease-out-quad;
 
         &:before {
             @include icon(arrow_left);
             font-size: s(10, $s2);
-            margin-right: s(5, 10);
+            display: inline-block;
+            margin-right: s(10, 10);
+            transition: transform .2s $ease-out-quad;
+        }
+
+        &:hover {
+            background: $cWhite7;
+
+            &:before {
+                transform: translateX(-3px);
+            }
         }
     }
 

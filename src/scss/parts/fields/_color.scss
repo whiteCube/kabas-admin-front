@@ -64,30 +64,16 @@
         text-decoration: none;
         transition: background .2s $ease-out-quad;
 
-        &:before,
         &:after {
-            content: '';
-            display: inline-block;
-            width: s(7);
-            height: s(2);
-            background: $cAnthracite1;
+            @include icon(arrow_down);
+            color: $cAnthracite1;
             position: absolute;
-            top: s(-5);
+            top: 0;
+            height: s(8, 10);
             bottom: 0;
             margin: auto;
-            border-radius: 2px;
-        }
-
-        &:before {
-            transform-origin: bottom right;
-            transform: rotate(-45deg);
-            left: s(18);
-        }
-
-        &:after {
-            transform-origin: bottom left;
-            transform: rotate(45deg);
-            left: s(15);
+            left: s(13, 10);
+            font-size: s(10);
         }
 
         &:hover {

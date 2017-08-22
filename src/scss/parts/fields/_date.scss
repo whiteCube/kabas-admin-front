@@ -121,56 +121,40 @@
 
     header .prev,
     header .next {
-        &:before,
-        &:after {
-            content: '';
-            display: inline-block;
-            width: s(7);
-            height: s(2);
-            background: $cAnthracite1;
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            margin: auto;
-            border-radius: 2px;
-            border: none;
-            transition: background .2s $ease-out-quad;
+
+        &:hover:before {
+            color: $cAccent;
         }
 
         &:before {
-            transform-origin: left;
-            transform: rotate(-45deg);
-            left: s(20);
+            color: $cAnthracite1;
+            font-size: s(12);
+            height: s(12, 12);
+            position: absolute;
+            text-indent: 0;
+            top: 0;
+            right: 0;
+            left: 0;
+            width: s(5, 12);
+            bottom: 0;
+            margin: auto;
+            transition: color .2s $ease-out-quad;
         }
 
         &:after {
-            transform-origin: left;
-            transform: rotate(45deg);
-            left: s(20);
+            display: none;
         }
+    }
 
-        &:hover:before,
-        &:hover:after {
-            background: $cAccent;
+    header .prev {
+        &:before {
+            @include icon(arrow_left);
         }
     }
 
     header .next {
-
-        &:before,
-        &:after {
-            right: s(20);
-            left: auto;
-        }
-
         &:before {
-            transform-origin: right;
-            transform: rotate(45deg);
-        }
-
-        &:after {
-            transform-origin: right;
-            transform: rotate(-45deg);
+            @include icon(arrow_right);
         }
     }
 
