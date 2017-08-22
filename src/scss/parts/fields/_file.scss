@@ -36,11 +36,11 @@
         margin-bottom: s(10, $s2);
 
         &:before {
-            @include icon(github);
+            @include icon(upload);
             color: $cAccent;
-            font-size: s(22);
-            margin-right: s(10, 22);
-            vertical-align: s(-3, 22);
+            font-size: s(20);
+            margin-right: s(12, 20);
+            vertical-align: s(-2, 20);
         }
     }
 

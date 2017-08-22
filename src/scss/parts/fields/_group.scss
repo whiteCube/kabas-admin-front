@@ -29,7 +29,7 @@
         }
 
         &:before {
-            @include icon(github);
+            @include icon(nested);
             color: $cWhite5;
             float: left;
             font-size: s(35);
@@ -47,9 +47,9 @@
         transition: color .2s $ease-out-quad;
 
         &:after {
-            margin-left: s(6);
-            vertical-align: -1px;
-            @include icon(github);
+            margin-left: s(6, 10);
+            @include icon(arrow_right);
+            font-size: s(10)
         }
 
         &:hover {
@@ -113,8 +113,9 @@
         padding: s(25, $s2) s(20, $s2);
 
         &:before {
-            @include icon(github);
-            margin-right: s(5, $s2);
+            @include icon(arrow_left);
+            font-size: s(10, $s2);
+            margin-right: s(5, 10);
         }
     }
 

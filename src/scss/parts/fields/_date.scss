@@ -58,14 +58,15 @@
 
     .wrapperClass {
         &:after {
-            @include icon(github);
+            @include icon(calendar);
             position: absolute;
             right: 0;
             top: 1px;
             text-align: center;
-            line-height: s(45);
-            width: s(50);
-            height: s(46);
+            line-height: s(45, 20);
+            font-size: s(20);
+            width: s(50, 20);
+            height: s(46, 20);
             border-left: 1px solid $cWhite5;
             pointer-events: none;
         }

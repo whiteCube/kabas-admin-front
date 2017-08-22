@@ -88,9 +88,10 @@
     position: relative;
 
     &:after {
-        @include icon(github);
-        width: s(16);
-        height: s(16);
+        @include icon(resize);
+        font-size: s(11);
+        width: s(16, 11);
+        height: s(16, 11);
         background: $cWhite;
         position: absolute;
         bottom: 1px;
