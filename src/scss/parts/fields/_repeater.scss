@@ -96,14 +96,19 @@
 
             &:hover:after {
                 background: rgba($cWhite5, .2);
+                color: $cGray;
             }
 
             &:after {
                 text-decoration: none;
-                content: '';
-                display: block;
                 @include cover();
-                transition: background .2s $ease-out-quad;
+                transition: background .2s $ease-out-quad, color .2s $ease-out-quad;
+                @include icon(draggable);
+                color: $cWhite6;
+                line-height: s(95, 18);
+                text-align: right;
+                font-size: s(18);
+                padding-right: s(10, 18);
             }
         }
 
