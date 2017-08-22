@@ -3,38 +3,24 @@
     .field__element {
         cursor: pointer;
         position: relative;
-        
-        &:before,
+
         &:after {
-            content: '';
-            display: inline-block;
-            width: s(7);
-            height: s(2);
-            background: $cAnthracite1;
+            @include icon(arrow_down);
+            color: $cAnthracite1;
+            font-size: s(10, $s2);
             position: absolute;
+            right: s(20, 10);
+            height: s(8, 10);
             top: 0;
             bottom: 0;
             margin: auto;
-            border-radius: 2px;
-            transition: background .2s $ease-out-quad;
+            transition: color .2s $ease-out-quad, transform .2s $ease-out-quad;
         }
 
-        &:before {
-            transform-origin: bottom;
-            transform: rotate(-45deg);
-            right: s(20);
-        }
-
-        &:after {
-            transform-origin: bottom;
-            transform: rotate(45deg);
-            right: s(25);
-        }
-
-        &:hover:before,
         &:hover:after {
-            background: $cAccent;
+            color: $cAccent;
         }
+    
     }
 
     &__dropdown {
@@ -58,6 +44,10 @@
 
     &--expanded .field__element {
         border-radius: s(3) s(3) 0 0;
+
+        &:after {
+            transform: rotate(180deg);
+        }
     }
 
     &__option {
