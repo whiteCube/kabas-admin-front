@@ -25,7 +25,7 @@
                 </div>
                 <div class="color__line">
                     <span class="color__label">Hex:</span>
-                    <input type="text" class="color__value" v-model="hex" @blur="update(hex)">
+                    <input type="text" class="color__value color__value--hex" v-model="hex" @blur="update(hex)">
                 </div>
             </div>
             <a href="#" class="btn btn--tiny" @click.prevent="cancel">{{ trans('fields.color.cancel') }}</a>

@@ -189,8 +189,12 @@
                 padding: 0;
                 border-bottom: 1px dotted $cWhite5;
                 margin-right: s(15, $s2);
-                max-width: s(80, $s2);
+                max-width: s(30, $s2);
                 transition: border-color .2s $ease-out-quad;
+
+                &--hex {
+                    max-width: s(70, $s2);
+                }
 
                 &:focus {
                     outline: none;
