@@ -24,3 +24,4 @@ Vue.component('groupfield', require('../modules/groupfield.vue'));
 Vue.component('gallery', require('../modules/gallery.vue'));
 Vue.component('selectfield', require('../modules/selectfield.vue'));
 Vue.component('datefield', require('../modules/datefield.vue'));
+Vue.component('submit', require('../modules/submit.vue'));

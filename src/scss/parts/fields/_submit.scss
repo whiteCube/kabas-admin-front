@@ -1,0 +1,28 @@
+.submit {
+    padding: s(30) col(1, 13);
+    border: 1px solid $cWhite5;
+    margin-top: s(60);
+
+    .btn {
+        width: col(6, 13);
+        vertical-align: middle;
+    }
+
+    &__tip {
+        right: col(1, 13);
+        width: col(5, 13);
+        font-size: s($s2);
+        color: $cAnthracite1;
+        line-height: s($s6, $s2);
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: col(1, 13);
+
+        &:before {
+            content: '';
+            display: inline-block;
+            height: 100%;
+            vertical-align: middle;
+        }
+    }
+}

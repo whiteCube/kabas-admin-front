@@ -83,6 +83,10 @@
         "gallery": {
             "image": "Image",
             "alt": "Describe your image"
+        },
+        "submit": {
+            "submit": "Save changes",
+            "tip": "There are no automatic saves. Do not forget to save manually."
         }
     }
 }'>
@@ -678,8 +682,11 @@
             <selectfield name="select" label="Select" :options="{ one: 'One', two: 'Two', three: 'Three' }"></selectfield>
 
             <datefield name="date" label="Date"></datefield>
+            
+            <submit></submit>
 
         </section>
+
         <span class="vseparator"></span>
         <span class="vseparator"></span>
         <span class="vseparator"></span>
