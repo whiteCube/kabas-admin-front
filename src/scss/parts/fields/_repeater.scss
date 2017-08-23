@@ -136,6 +136,13 @@
 
     &__fields {
         padding: s(20);
+
+        .group__backlink {
+            position: static;
+            margin-top: s(-20, $s2);
+            margin-right: s(-20, $s2);
+            margin-left: s(-20, $s2);
+        }
     }
 
     &__preview {
@@ -148,6 +155,10 @@
             margin-left: s(4, $s2);
             margin-right: s(2, $s2);
         }
+    }
+
+    .group__nested .repeater .field__footer {
+        margin-bottom: s(-105);
     }
 
 }

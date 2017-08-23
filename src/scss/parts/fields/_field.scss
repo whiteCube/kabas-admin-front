@@ -67,6 +67,7 @@
 
     &__footer {
         padding: s(20);
+        background: $cWhite;
         border-top: 1px solid $cWhite5;
         @include clearfix();
     }
