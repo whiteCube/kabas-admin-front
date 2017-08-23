@@ -46,7 +46,7 @@
         border-radius: s(3) s(3) 0 0;
 
         &:after {
-            transform: rotate(180deg);
+            transform: scaleY(-1);
         }
     }
 
