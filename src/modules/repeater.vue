@@ -12,7 +12,8 @@
                                 <span v-if="list[index][i]" class="repeater__preview">
                                  <span class="field__label">{{ field.label }}</span>
                                  <span v-if="field.type == 'color'" class="repeater__preview--color repeater__preview" :style="{background: list[index][i]}"></span>
-                                    {{ list[index][i] }}
+                                    <template v-if="field.type == 'repeater'">{{ transchoice('fields.group.subrepeateritems', list[index][i].length) }}</template>
+                                    <template v-else>{{ list[index][i] }}</template>
                                 </span>
                             </template>
                         </template><!--
