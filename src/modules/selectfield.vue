@@ -39,6 +39,7 @@ export default {
         selectItem(index) {
             this.selected = index;
             this.expanded = false;
+            this.$emit('input', this.options[this.selected]);
         }
     },
 
