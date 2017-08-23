@@ -105,9 +105,9 @@
                 transition: background .2s $ease-out-quad, color .2s $ease-out-quad;
                 @include icon(draggable);
                 color: $cWhite6;
-                line-height: s(95, 18);
+                line-height: s(85, 18);
                 text-align: right;
-                font-size: s(18);
+                font-size: s(18, $s2);
                 padding-right: s(10, 18);
             }
         }
