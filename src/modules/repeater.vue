@@ -34,11 +34,11 @@
             </transition>
             <transition name="slide" @after-leave="current = null">
             <div v-show="showfields" class="repeater__editable">
-                <span v-for="(item, i) in list">
+                <div v-for="(item, i) in list">
                     <div v-show="i == current" class="repeater__fields">
                         <genericfield :value="list[i]" @input="updatePreview($event, i)" :structure="structure"></genericfield>
                     </div>
-                </span>
+                </div>
             </div>
             </transition>
             <div class="field__footer">
