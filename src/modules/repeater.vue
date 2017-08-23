@@ -12,8 +12,7 @@
                                 <span v-if="list[index][i]" class="repeater__preview">
                                  <span class="field__label">{{ field.label }}</span>
                                  <span v-if="field.type == 'color'" class="repeater__preview--color repeater__preview" :style="{background: list[index][i]}"></span>
-                                    <template v-if="field.type == 'repeater'">{{ transchoice('fields.group.subrepeateritems', list[index][i].length) }}</template>
-                                    <template v-else>{{ list[index][i] }}</template>
+                                    {{ getPreview(field.type, list[index][i]) }}
                                 </span>
                             </template>
                         </template><!--
@@ -37,7 +36,7 @@
             <div v-show="showfields" class="repeater__editable">
                 <div v-for="(item, i) in list">
                     <div v-show="i == current" class="repeater__fields">
-                        <genericfield :value="list[i]" @input="updatePreview($event, i)" :structure="structure"></genericfield>
+                        <genericfield :value="list[i]" @input="updateItem($event, i)" :structure="structure"></genericfield>
                     </div>
                 </div>
             </div>
@@ -142,7 +141,7 @@ export default {
             return blank;
         },
 
-        updatePreview(e, index) {
+        updateItem(e, index) {
             if(typeof e == 'object') {
                 this.list[index][e.index] = e.value;
             } else {
@@ -167,6 +166,12 @@ export default {
             if(!data) return true;
             for(let key in data) { if(data[key]) return false; }
             return true;
+        },
+
+        getPreview(type, value) {
+            if(type == 'repeater') return this.transchoice('fields.group.subrepeateritems', value.length);
+            if(type == 'image') return value.alt;
+            return value;
         }
     },
 
