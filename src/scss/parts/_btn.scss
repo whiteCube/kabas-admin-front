@@ -83,6 +83,10 @@
         @include iconInclude(cog);
     }
 
+    &--checked:after {
+        @include iconInclude(checked);
+    }
+
     &--jupit:after {
         font-size: s(23, $s1);
         line-height: s(48, 23);
