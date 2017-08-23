@@ -129,15 +129,17 @@ export default {
             if(this.structure.type == 'group') blank = this.getBlank();
             else blank = '';
             this.list.push(blank);
+            this.$emit('input', this.list);
             this.current = this.list.length - 1;
         },
 
         getBlank() {
-            let preview = {};
+            let blank = {};
             for(let key in this.structure.options) {
-                preview[key] = '';
+                if(this.structure.options[key].type == 'repeater') blank[key] = [];
+                else blank[key] = '';
             }
-            return preview;
+            return blank;
         },
 
         updatePreview(e, index) {

@@ -37,7 +37,7 @@
                     </a>
                     <transition name="slide">
                     <div class="group__sub" v-show="showsub == field">
-                        <repeater :ref="index" :label="field.label" :items="values[index]" :structure="field.options" :nestinglevel="level + 1"></repeater>
+                        <repeater :ref="index" @input="values[index] = $event" :label="field.label" :items="values[index]" :structure="field.options" :nestinglevel="level + 1"></repeater>
                     </div>
                     </transition>
                 </div>
