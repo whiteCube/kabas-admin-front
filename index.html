@@ -668,8 +668,100 @@
             <repeater 
                 label="Repeater (group)" 
                 name="repeater" 
-                :items="[{ title: 'First item', color: '#E84F4F' }, { title: 'Second item', color: '#4F81E8' }, { title: 'Third item', color: '#2DE49E' }]"
-                :structure="{ type: 'group', label: 'Abc', options: { title: { type: 'text', label: 'Title', rules: { limit: 250 } }, color: { type: 'color', label: 'Color' }}}">
+                :items="[{ title: 'First item', color: '#E84F4F', repeater: [] }, { title: 'Second item', color: '#4F81E8', repeater: [] }, { title: 'Third item', color: '#2DE49E', repeater: [] }]"
+                :structure="{ type: 'group', label: 'Abc', options: { title: { type: 'text', label: 'Title', rules: { limit: 250 } }, color: { type: 'color', label: 'Color' }, group: {
+                    type: 'group',
+                    label: 'Nested group',
+                    options: {
+                        firstname: {
+                            type: 'text',
+                            label: 'First name'
+                        },
+                        lastname: {
+                            type: 'text',
+                            label: 'Last name'
+                        }
+                    }
+                },
+                repeater: {
+                    type: 'repeater',
+                    label: 'Nested repeater',
+                    options: {
+                        type: 'group',
+                        label: 'Nested repeater items',
+                        options: {
+                            title: {
+                                type: 'text',
+                                label: 'Title'
+                            },
+                            color: {
+                                type: 'color',
+                                label: 'Color'
+                            }
+                        }
+                    }
+                }
+                }}">
+            </repeater>
+
+            <repeater
+                label="Membres de l'équipe"
+                name="persons"
+                :items="[]"
+                :structure="{
+                    type: 'group',
+                    label: 'Membre',
+                    options: {
+                        name: {
+                            type: 'text',
+                            label: 'Nom et prénom'
+                        },
+                        job: {
+                            type: 'text',
+                            label: 'Intitulé du poste occupé'
+                        },
+                        mail: {
+                            label: 'Adresse e-mail',
+                            type: 'email'
+                        },
+                        phone: {
+                            type: 'text',
+                            label: 'Téléphone'
+                        },
+                        photo: {
+                            label: 'Photo',
+                            type: 'image'
+                        },
+                        social: {
+                            type: 'repeater',
+                            label: 'Adresse sur les réseaux sociaux',
+                            options: {
+                                type: 'group',
+                                label: 'item',
+                                options: {
+                                    socialType: {
+                                        label: 'Type',
+                                        type: 'select',
+                                        options: {
+                                            facebook: 'Facebook',
+                                            twitter: 'Twitter',
+                                            linkedin: 'LinkedIn'
+                                        }
+                                    },
+                                    url: {
+                                        type: 'url',
+                                        label: 'Url'
+                                    },
+                                    label: {
+                                        type: 'text',
+                                        label: 'Texte (invisible)'
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }"
+                > 
             </repeater>
 
             <gallery 
