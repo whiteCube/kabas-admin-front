@@ -77,6 +77,7 @@
 </template>
 
 <script>
+import crumbNavigation from '../mixins/crumbNavigation.js';
 
 /*
 Todo:
@@ -86,14 +87,11 @@ Add flexible
 
 export default {
     props: ['label', 'options', 'values', 'nestinglevel'],
+    mixins: [crumbNavigation],
 
     data() {
         return {
             nestable: ['group', 'flexible', 'repeater', 'gallery'],
-            showsub: false,
-            crumbs: [],
-            lastcrumb: 0,
-            level: 0
         }
     },
 
@@ -152,20 +150,7 @@ export default {
         navigateSub(crumb, index) {
             this.$emit('hidesub', crumb.level);
             this.hideRecursivelyUntil(crumb.level, crumb.index);
-        },
-
-        hideRecursivelyUntil(level, index) {
-            if(this.level >= level) this.showsub = false;
-            if(!this.$refs[index]) return;
-            this.$refs[index][0].hideRecursivelyUntil(level);
-        },
-
-        hideSubfield() {
-            this.$emit('hidesub', this.level);
-            for(let key in this.$refs) { this.$refs[key][0].showsub = false; }
-            this.showsub = false;
-        },
-
+        }
     },
 
     computed: {

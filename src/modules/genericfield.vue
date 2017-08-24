@@ -1,6 +1,6 @@
 <script>
 export default {
-    props: ['value', 'structure', 'name'],
+    props: ['value', 'structure', 'name', 'nestinglevel'],
 
     data() {
         return {
@@ -29,7 +29,8 @@ export default {
     render(createElement) {
         return createElement(this.component, {
             props: this.getProps(),
-            on: { input: data => this.$emit('input', data) }
+            on: { input: data => this.$emit('input', data) },
+            ref: 'field'
         });
     },
 
@@ -63,6 +64,7 @@ export default {
             this.properties.value = this.value;
             this.properties.name = this.name;
             this.properties.placeholder = this.placeholder;
+            this.properties.nestinglevel = this.nestinglevel;
         },
 
         addTextProps() {
