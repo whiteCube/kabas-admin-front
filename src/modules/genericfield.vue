@@ -98,14 +98,15 @@ export default {
 
         addRepeaterProps() {
             if(!this.structure.options) return;
-            this.properties['items'] = this.value;
-            this.properties['structure'] = this.structure.options;
+            this.properties.items = this.value;
+            this.properties.primary = this.structure.primary;
+            this.properties.structure = this.structure.options;
         },
 
         addGroupProps() {
             if(!this.structure.options) return;
-            this.properties['options'] = this.structure.options;
-            this.properties['values'] = this.value;
+            this.properties.options = this.structure.options;
+            this.properties.values = this.value;
         },
 
         addSelectProps() {

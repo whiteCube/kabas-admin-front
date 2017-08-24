@@ -1,8 +1,5 @@
 <template>
     <div class="field repeater" :class="classes" :id="id">
-        <!-- <label class="field__label">{{ label }}</label> -->
-
-        
         <label class="field__label" v-if="level == 0">
             <template v-for="(crumb, index) in crumbs">
                 <transition name="slideLeft">
@@ -10,7 +7,6 @@
                 </transition>
             </template>
         </label>
-
 
         <div class="field__container">
             <transition mode="out-in" @after-leave="showfields = true" name="slide">
@@ -20,7 +16,7 @@
                         <em class="repeater__number">#{{ index + 1 }}</em><!--
                      --><template v-if="isComplex()">
                             <template v-for="(field, i) in structure.options">
-                                <span v-if="list[index][i] && list[index][i].length" class="repeater__preview">
+                                <span v-if="primaryCheck(i) && list[index][i] && list[index][i].length" class="repeater__preview">
                                  <span class="field__label">{{ field.label }}</span>
                                  <span v-if="field.type == 'color'" class="repeater__preview--color repeater__preview" :style="{background: list[index][i]}"></span>
                                     {{ getPreview(field.type, list[index][i]) }}
@@ -72,10 +68,12 @@ import crumbNavigation from '../mixins/crumbNavigation.js';
 Todo: 
 Investigate reference issues with this.list to avoid having to do a snapshot on created()
 Maybe make a banner to tell when in edit mode
+Make a better interface for when repeater is empty, current one is confusing when nested
+Rework the crumb system to make it more solid and work in every possible case
 */
 
 export default {
-    props: ['label', 'name', 'translations', 'items', 'structure'],
+    props: ['label', 'name', 'translations', 'items', 'structure', 'primary'],
     mixins: [crumbNavigation],
     components: { draggable },
 
@@ -127,7 +125,7 @@ export default {
             this.showSub({
                 level: this.level + 1,
                 index: index,
-                label: this.structure.label 
+                label: this.primary ? this.list[index][this.primary] : this.structure.label 
             });
 
             // This fixes the issue with codemirror (wysiwyg) where the initial value does not appear right away.
@@ -174,6 +172,9 @@ export default {
 
         updateItem(e, index) {
             if(typeof e == 'object') {
+                if(e.index == this.primary) {
+                    this.crumbs[this.lastcrumb].label = e.value;
+                }
                 this.list[index][e.index] = e.value;
             } else {
                 this.list[index] = e;
@@ -211,6 +212,10 @@ export default {
             this.hideRecursivelyUntil(crumb.level, crumb.index);
             if(!this.$refs.fields[this.current]) return;
             this.$refs.fields[this.current].$refs.field.navigateSub(crumb, index);
+        },
+
+        primaryCheck(name) {
+            return (!this.hasProp('primary') ||(this.hasProp('primary') && this.primary == name));
         }
     },
 
