@@ -1,0 +1,20 @@
+#palmes {
+    animation: boff 30s cubic-bezier(.25,.50,.75,.50) infinite;
+    transform-origin: 50% 50%;
+}
+
+.tex {
+    max-width: s(300);
+}
+
+@keyframes boff {
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
+
+
+.cls-1{fill:#f1f1f1;}.cls-2{fill:#a8afaf;}.cls-3{fill:#4f4f4f;}.cls-4{fill:#cc9c9b;}.cls-5{fill:#e0726a;}.cls-6{fill:#717777;}.cls-7{fill:#bcc1c1;}
