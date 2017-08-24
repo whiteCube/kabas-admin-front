@@ -401,7 +401,7 @@
                 <template slot="yes">Yes</template>
                 <template slot="no">No</template>
             </card>
-            <card edit="#" view="#" destroy="#" icon="test">
+            <card edit="#" view="#" destroy="#" icon="slider">
                 <template slot="title">Home</template>
                 <template slot="edit">Edit this page</template>
                 <template slot="editedlabel">Last modified</template>
@@ -415,7 +415,7 @@
                 <template slot="yes">Yes</template>
                 <template slot="no">No</template>
             </card>
-            <card edit="#" view="#" destroy="#">
+            <card edit="#" view="#" destroy="#" icon="video">
                 <template slot="title">Home</template>
                 <template slot="edit">Edit this page</template>
                 <template slot="editedlabel">Last modified</template>
@@ -659,14 +659,7 @@
 }" :values="{ title: 'Test title', color: '#ff0000', gallery: [], repeater: [{title: 'Test title', content: 'Test content'}], group: { name: 'Test name', content: '# Some test content' } }"></groupfield>
 
             <repeater 
-                label="Repeater (single text field)" 
-                name="repeater" 
-                :items="['one', 'two', 'three']"
-                :structure="{ type: 'text', label: 'Textfield', rules: { limit: 250 } }">
-            </repeater>
-
-            <repeater 
-                label="Repeater (group)" 
+                label="Repeater" 
                 name="repeater" 
                 
                 :structure="{ type: 'group', label: 'Abc', options: { title: { type: 'text', label: 'Title', rules: { limit: 250 } }, color: { type: 'color', label: 'Color' }, group: {

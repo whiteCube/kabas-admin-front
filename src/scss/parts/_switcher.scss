@@ -50,11 +50,13 @@
         }
 
         &--cards:before {
-            @include iconInclude(github);
+            @include iconInclude(squares);
         }
 
         &--list:before {
-            @include iconInclude(twitter);
+            font-size: s(19);
+            line-height: s(44, 19);
+            @include iconInclude(li);
         }
     }
 }

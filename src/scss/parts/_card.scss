@@ -61,6 +61,14 @@
         height: s(160 - 22);
         border-bottom: 1px solid $cWhite2;
         margin-bottom: s(20);
+
+        &:before {
+            @include iconBase();
+            font-size: s(68);
+            position: absolute;
+            right: s(25, 68);
+            top: s(68, 68);
+        }
     }
 
     .meta__title {
@@ -126,7 +134,7 @@
         line-height: s(55);
 
         &:after {
-            @include icon(github);
+            @include icon(delete);
             font-size: s(18);
             vertical-align: -2px;
             transition: color .2s $ease-out-quad;
@@ -206,9 +214,9 @@
             box-shadow: 0 0 60px rgba($cAnthracite1, 0.2);
 
             &:before {
-                @include icon(github);
+                @include icon(delete);
                 color: $cAccent;
-                font-size: s(18);
+                font-size: s(18, $s2);
                 margin-right: s(10, 18);
                 vertical-align: s(-2, 18);
             }
@@ -240,6 +248,12 @@
         &__confirm {
             color: $cAccent;
             border-right: 1px solid $cWhite2;
+        }
+    }
+
+    @each $icon in $ws_icon-list {
+        &--#{nth($icon, 1)} .card__header:before {
+            @include iconInclude(#{nth($icon, 1)});
         }
     }
 }

@@ -54,10 +54,11 @@
         }
 
         &:before {
-            @include icon(github);
+            @include icon(search);
             color: $cWhite2;
-            font-size: s(17, $s2);
-            line-height: s(25, 17);
+            font-weight: bold;
+            font-size: s(14, $s2);
+            line-height: s(25, 14);
         }
 
         &:hover {
