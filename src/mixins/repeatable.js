@@ -1,0 +1,24 @@
+export default {
+    props: ['nestinglevel'],
+
+    data() {
+        return {
+            level: 0
+        }
+    },
+
+    created() {
+        this.level = this.hasProp('nestinglevel') ? this.nestinglevel : 0;
+    },
+
+    methods: {
+        hideRecursivelyUntil(level, index) {
+            if(this.level >= level) {
+                this.showsub = false;
+                this.$emit('hidesub', level);
+            } 
+            if(!this.$refs[index]) return;
+            this.$refs[index][0].hideRecursivelyUntil(level);
+        }
+    }
+}

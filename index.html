@@ -583,9 +583,10 @@
     repeater: {
         type: 'repeater',
         label: 'Articles',
+        primary: 'title',
         options: {
             type: 'group',
-            label: 'Nested repeater fields',
+            label: 'Article',
             options: {
                 title: {
                     type: 'text',
@@ -680,9 +681,10 @@
                 repeater: {
                     type: 'repeater',
                     label: 'Nested repeater',
+                    primary: 'title',
                     options: {
                         type: 'group',
-                        label: 'Nested repeater items',
+                        label: 'Nested repeater item',
                         options: {
                             title: {
                                 type: 'text',
@@ -729,9 +731,10 @@
                         social: {
                             type: 'repeater',
                             label: 'Adresse sur les réseaux sociaux',
+                            primary: 'url',
                             options: {
                                 type: 'group',
-                                label: 'item',
+                                label: 'Lien',
                                 options: {
                                     socialType: {
                                         label: 'Type',

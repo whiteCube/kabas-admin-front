@@ -26,3 +26,4 @@ Vue.component('selectfield', require('../modules/selectfield.vue'));
 Vue.component('datefield', require('../modules/datefield.vue'));
 Vue.component('submit', require('../modules/submit.vue'));
 Vue.component('illu', require('../modules/illu.vue'));
+Vue.component('breadcrumbs', require('../modules/breadcrumbs.vue'));

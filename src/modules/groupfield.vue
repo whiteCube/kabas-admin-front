@@ -1,12 +1,7 @@
 <template>
     <div class="field group" :class="classes">
-        <label class="field__label" v-if="level == 0">
-            <template v-for="(crumb, index) in crumbs">
-                <transition name="slideLeft">
-                <a v-if="index <= lastcrumb" @click="navigateSub(crumb)" class="group__crumb"><span v-if="index > 0 && index <= lastcrumb" class="group__crumbseparator"></span>{{ crumb.label }}</a>
-                </transition>
-            </template>
-        </label>
+        <breadcrumbs :parent="id" ref="crumbs" v-if="level == 0" :items="[{label, level}]"></breadcrumbs>
+        
         <div class="field__container">
             <a v-show="showsub" class="group__backlink" @click.prevent="hideSubfield">{{ trans('fields.group.backlink', label) }}</a>
             <template v-for="(field, index) in options">
@@ -37,7 +32,7 @@
                     </a>
                     <transition name="slide">
                     <div class="group__sub" v-show="showsub == field">
-                        <repeater :ref="index" @input="values[index] = $event" :label="field.label" :items="values[index]" :structure="field.options" :nestinglevel="level + 1"></repeater>
+                        <repeater :primary="field.primary" :ref="index" @input="updateItem(index, $event)" :label="field.label" :items="values[index]" :structure="field.options" :nestinglevel="level + 1"></repeater>
                     </div>
                     </transition>
                 </div>
@@ -77,7 +72,8 @@
 </template>
 
 <script>
-import crumbNavigation from '../mixins/crumbNavigation.js';
+import EventBus from '../mixins/event-bus.js';
+import repeatable from '../mixins/repeatable.js';
 
 /*
 Todo:
@@ -86,11 +82,13 @@ Add flexible
 */
 
 export default {
-    props: ['label', 'options', 'values', 'nestinglevel'],
-    mixins: [crumbNavigation],
+    props: ['label', 'options', 'values'],
+    mixins: [ repeatable ],
 
     data() {
         return {
+            id: this._uid,
+            showsub: false,
             nestable: ['group', 'flexible', 'repeater', 'gallery'],
         }
     },
@@ -103,18 +101,8 @@ export default {
         }
 
         this.level = this.hasProp('nestinglevel') ? this.nestinglevel : 0;
-        this.crumbs.push({label: this.label, level: this.level});
 
-        this.$on('showsub', data => {
-            if(this.level > 0) return this.$parent.$emit('showsub', data);
-            this.lastcrumb = data.level;
-            this.crumbs[data.level] = data;
-        });
-
-        this.$on('hidesub', level => {
-            if(this.level > 0) return this.$parent.$emit('hidesub', level);
-            this.lastcrumb = level;
-        });
+        EventBus.$on('navigateCrumb', this.navigateSub);
     },
 
     methods: {
@@ -137,7 +125,12 @@ export default {
         showSubfield(field, level, index) {
             this.showsub = field;
             this.$emit('showsub', {label: field.label, level, index});
-            this.lastcrumb = level;
+            EventBus.$emit('addCrumb', {
+                parent: this.getAbsoluteParent(),
+                level: this.level + 1,
+                index: index,
+                label: field.label
+            })
             this.$forceUpdate();
 
             // This fixes the issue with codemirror (wysiwyg) where the initial value does not appear right away.
@@ -147,9 +140,21 @@ export default {
             }, 1);
         },
 
-        navigateSub(crumb, index) {
+        hideSubfield() {
+            this.$emit('hidesub', this.level);
+            this.$parent.$emit('hidesub', this.level);
+            EventBus.$emit('removeCrumbsUntil', this.level);
+            this.showsub = false;
+        },
+
+        navigateSub(crumb) {
             this.$emit('hidesub', crumb.level);
+            EventBus.$emit('removeCrumbsUntil', crumb.level);
             this.hideRecursivelyUntil(crumb.level, crumb.index);
+        },
+
+        updateItem(index, event) {
+            this.values[index] = event;
         }
     },
 

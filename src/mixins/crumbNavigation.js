@@ -24,7 +24,10 @@ export default {
         },
 
         hideRecursivelyUntil(level, index) {
-            if(this.level >= level) this.showsub = false;
+            if(this.level >= level) {
+                this.showsub = false;
+                this.$emit('hidesub', level);
+            } 
             if(!this.$refs[index]) return;
             this.$refs[index][0].hideRecursivelyUntil(level);
         },

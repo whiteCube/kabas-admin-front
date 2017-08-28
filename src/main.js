@@ -8,6 +8,11 @@ Vue.mixin({
             return typeof this[prop] !== 'undefined';
         },
 
+        getAbsoluteParent() {
+            if(this.level == 0) return this.id;
+            return this.$parent.getAbsoluteParent();
+        },
+
         trans(accessor, value) {
             let parts = accessor.split('.');
             let result = this.$root.translations;

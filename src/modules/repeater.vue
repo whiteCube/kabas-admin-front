@@ -1,12 +1,6 @@
 <template>
     <div class="field repeater" :class="classes" :id="id">
-        <label class="field__label" v-if="level == 0">
-            <template v-for="(crumb, index) in crumbs">
-                <transition name="slideLeft">
-                <a v-if="crumb && index <= lastcrumb" @click="navigateSub(crumb)" class="group__crumb"><span v-if="index > 0 && index <= lastcrumb" class="group__crumbseparator"></span>{{ crumb.label }}</a>
-                </transition>
-            </template>
-        </label>
+        <breadcrumbs :parent="id" ref="crumbs" v-if="level == 0" :items="[{label, level}]"></breadcrumbs>
 
         <div class="field__container">
             <transition mode="out-in" @after-leave="showfields = true" name="slide">
@@ -43,7 +37,7 @@
             <div v-show="showfields" class="repeater__editable">
                 <div v-for="(item, i) in list">
                     <div v-show="i == current" class="repeater__fields">
-                        <genericfield ref="fields" @hidesub="hideSub" @showsub="showSub" :nestinglevel="level + 1" :value="list[i]" @input="updateItem($event, i)" :structure="structure"></genericfield>
+                        <genericfield ref="fields" :nestinglevel="level + 1" :value="list[i]" @input="updateItem($event, i)" :structure="structure"></genericfield>
                     </div>
                 </div>
             </div>
@@ -62,7 +56,8 @@
 
 <script>
 import draggable from 'vuedraggable';
-import crumbNavigation from '../mixins/crumbNavigation.js';
+import EventBus from '../mixins/event-bus.js';
+import repeatable from '../mixins/repeatable.js';
 
 /*
 Todo: 
@@ -74,8 +69,8 @@ Rework the crumb system to make it more solid and work in every possible case
 
 export default {
     props: ['label', 'name', 'translations', 'items', 'structure', 'primary'],
-    mixins: [crumbNavigation],
     components: { draggable },
+    mixins: [ repeatable ],
 
     data() {
         return {
@@ -93,12 +88,12 @@ export default {
         if(!this.list) this.list = [];
         this.snapshot();
         this.restore();
-
         this.level = this.hasProp('nestinglevel') ? this.nestinglevel : 0;
-        this.crumbs.push({label: this.label, level: this.level});
-
+        EventBus.$on('navigateCrumb', this.navigateSub);
         this.$on('showsub', this.showSub);
-        this.$on('hidesub', this.hideSub);
+        this.$on('hidesub', (data) => {
+            this.finish(); 
+        });
     },
 
     methods: {
@@ -122,10 +117,11 @@ export default {
         edit(index) {
             this.snapshot();
             this.current = index;
-            this.showSub({
+            EventBus.$emit('addCrumb', {
+                parent: this.getAbsoluteParent(),
                 level: this.level + 1,
                 index: index,
-                label: this.primary ? this.list[index][this.primary] : this.structure.label 
+                label: this.primary ? this.list[index][this.primary] : this.structure.label
             });
 
             // This fixes the issue with codemirror (wysiwyg) where the initial value does not appear right away.
@@ -139,12 +135,13 @@ export default {
             this.restore();
             this.current = null;
             this.showfields = false;
-            this.hideSub(0);
+            this.$emit('input', this.list);
+            EventBus.$emit('removeCrumbsUntil', this.level);
         },
 
         finish() {
             this.showfields = false;
-            this.hideSub(0);
+            EventBus.$emit('removeCrumbsUntil', this.level);
         },
 
         add() {
@@ -154,7 +151,9 @@ export default {
             this.list.push(blank);
             this.$emit('input', this.list);
             this.current = this.list.length - 1;
-            this.showSub({
+
+            EventBus.$emit('addCrumb', {
+                parent: this.getAbsoluteParent(),
                 level: this.level + 1,
                 index: this.list.length - 1,
                 label: this.structure.label 
@@ -173,12 +172,14 @@ export default {
         updateItem(e, index) {
             if(typeof e == 'object') {
                 if(e.index == this.primary) {
-                    this.crumbs[this.lastcrumb].label = e.value;
+                    EventBus.$emit('updateCrumb', this.getAbsoluteParent(), this.level + 1, e.value);
                 }
                 this.list[index][e.index] = e.value;
             } else {
                 this.list[index] = e;
             }
+            this.$parent.$emit('input', e);
+            this.$forceUpdate();
         },
 
         snapshot() {
@@ -206,12 +207,8 @@ export default {
             return value;
         },
 
-        navigateSub(crumb, index) {
+        navigateSub(crumb) {
             if(crumb.level == this.level) this.finish();
-            this.$emit('hidesub', crumb.level);
-            this.hideRecursivelyUntil(crumb.level, crumb.index);
-            if(!this.$refs.fields[this.current]) return;
-            this.$refs.fields[this.current].$refs.field.navigateSub(crumb, index);
         },
 
         primaryCheck(name) {
