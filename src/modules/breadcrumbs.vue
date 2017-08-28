@@ -22,11 +22,13 @@ export default {
 
     created() {
         this.crumbs = this.crumbs.concat(this.items);
-
+        /* 
+         Since one breadcrumbs instance manages navigation for an
+         infinite amount of sub fields, it is easier to manage
+         state changes by listening to global events.
+        */ 
         EventBus.$on('addCrumb', this.addCrumb);
-
         EventBus.$on('removeCrumbsUntil', this.removeCrumbsUntil);
-
         EventBus.$on('updateCrumb', this.updateCrumb);
     },
 
