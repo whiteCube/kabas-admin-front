@@ -71,8 +71,7 @@ export default {
         preview(index) {
             let preview = '';
             let value = this.list[index];
-            preview = value.alt;
-            if(preview == '') preview = this.trans('fields.repeater.nopreview');
+            preview = value.alt || value.file && value.file.name || this.trans('fields.repeater.nopreview');
             return preview;
         },
 
