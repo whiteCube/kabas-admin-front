@@ -23,22 +23,30 @@ export default {
     created() {
         this.crumbs = this.crumbs.concat(this.items);
 
-        EventBus.$on('addCrumb', crumb => {
+        EventBus.$on('addCrumb', this.addCrumb);
+
+        EventBus.$on('removeCrumbsUntil', this.removeCrumbsUntil);
+
+        EventBus.$on('updateCrumb', this.updateCrumb);
+    },
+
+    methods: {
+        addCrumb(crumb) {
             if (crumb.parent != this.parent) return;
             crumb.default = crumb.label;
             this.crumbs.push(crumb);
-        });
+        },
 
-        EventBus.$on('removeCrumbsUntil', level => {
+        removeCrumbsUntil(level) {
             if(this.getAbsoluteParent() != this.parent) return;
             for(let i = 0; i < this.crumbs.length; i++) {
                 this.crumbs = this.crumbs.filter(item => {
                     return item.level <= level;
                 });
             }
-        });
+        },
 
-        EventBus.$on('updateCrumb', (parent, level, value) => {
+        updateCrumb(parent, level, value) {
             if(parent != this.parent) return;
             for(let i = 0; i < this.crumbs.length; i++) {
                 let crumb = this.crumbs[i];
@@ -46,10 +54,8 @@ export default {
                 crumb.label = value;
                 if(crumb.label == '') crumb.label = crumb.default;
             }
-        });
-    },
+        },
 
-    methods: {
         navigate(crumb) {
             EventBus.$emit('navigateCrumb', crumb);
         }
