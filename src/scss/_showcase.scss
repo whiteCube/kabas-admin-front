@@ -99,3 +99,10 @@ div.field {
 .field + .cheatlabel ~ .field {
     margin-top: 35px;
 }
+
+
+.tex {
+    max-width: s(300);
+    margin-top: s(30);
+    margin-bottom: s(30);
+}

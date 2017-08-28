@@ -19,7 +19,11 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
+        test: /\.svg$/,
+        loader: 'vue-svg-loader', // `vue-svg` for webpack 1.x 
+      },
+      {
+        test: /\.(ttf|otf|eot|woff(2)?)(\?[a-z0-9]+)?$/,
         use: 'file-loader?name=fonts/[name].[ext]'
       },
       {
@@ -50,7 +54,7 @@ module.exports = {
         exclude: /node_modules/
       },
       {
-        test: /\.(png|jpg|gif|svg)$/,
+        test: /\.(png|jpg|gif)$/,
         loader: 'file-loader',
         options: {
           name: '[name].[ext]?[hash]'
