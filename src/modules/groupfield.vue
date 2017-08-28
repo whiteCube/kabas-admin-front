@@ -77,7 +77,6 @@ import repeatable from '../mixins/repeatable.js';
 
 /*
 Todo:
-Investigate why we have an error if we dont give an initial value to a nested field
 Add flexible
 */
 
