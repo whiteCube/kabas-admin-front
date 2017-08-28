@@ -113,14 +113,6 @@ export default {
             this.current = this.list.length - 1;
         },
 
-        getBlank() {
-            let preview = {};
-            for(let key in this.structure.options) {
-                preview[key] = '';
-            }
-            return preview;
-        },
-
         appendText(preview, text) {
             if(!text) return preview;
             if(preview !== '') preview += ', ';

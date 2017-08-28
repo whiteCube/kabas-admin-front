@@ -4,8 +4,8 @@
         <div class="field__container">
             <input type="file" :id="id" class="field__element" :name="name" @change="update">
             <label :for="id" class="file__label" @dragenter.prevent="highlight = true" @dragover.prevent="highlight = true" @dragleave="highlight = false" @drop.prevent="update">
-                <span class="file__title" :title="file.name">
-                    <template v-if="file && file.name">{{ filename }}</template>
+                <span class="file__title">
+                    <span :title="file.name" v-if="file && file.name">{{ filename }}</span>
                     <template v-else>{{ trans('fields.image.choose') }}</template>
                 </span>
                 <div class="file__details">
@@ -52,10 +52,6 @@
 </template>
 
 <script>
-/*
-Todo:
-Investigate why image fields are always expanded (at least in nested fields) see below
-*/
 import FileMethods from '../mixins/file.js';
 
 export default {
@@ -74,7 +70,8 @@ export default {
 
     created() {
         this.encoded = 'url(' + this.value + ')';
-        this.file = this.filedata ? this.filedata : { name: this.value }; // TODO: fix this so the field is not always expanded
+        if(this.value) this.file = {name: this.value};
+        if(this.filedata) this.file = this.filedata;
     },
 
     methods: {
