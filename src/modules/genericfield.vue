@@ -1,6 +1,6 @@
 <script>
 export default {
-    props: ['value', 'structure', 'name', 'nestinglevel'],
+    props: ['value', 'structure', 'name', 'nestinglevel', 'primary'],
 
     data() {
         return {
@@ -99,12 +99,13 @@ export default {
         addRepeaterProps() {
             if(!this.structure.options) return;
             this.properties.items = this.value;
-            this.properties.primary = this.structure.primary;
+            this.properties.primary = this.primary;
             this.properties.structure = this.structure.options;
         },
 
         addGroupProps() {
             if(!this.structure.options) return;
+            this.properties.primary = this.primary;
             this.properties.options = this.structure.options;
             this.properties.values = this.value;
         },

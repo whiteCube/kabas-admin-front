@@ -1,11 +1,11 @@
 <template>
     <div class="field group" :class="classes">
-        <breadcrumbs :parent="id" ref="crumbs" v-if="level == 0" :items="[{label, level}]"></breadcrumbs>
-        
+        <breadcrumbs :parent="id" ref="crumbs" v-if="level == 0" :items="[{label, level, parent: id}]"></breadcrumbs>
         <div class="field__container">
-            <a v-show="showsub" class="group__backlink" @click.prevent="hideSubfield">{{ trans('fields.group.backlink', label) }}</a>
+            <a v-show="showsub" class="group__backlink" @click.prevent="hideSubfield">
+                {{ trans('fields.group.backlink', this.hasProp('primary') && values[primary] ? values[primary] : label) }}
+            </a>
             <template v-for="(field, index) in options">
-
                 <template v-if="field.type == 'group'">
                     <div class="group__nested" v-show="shouldDisplay(field, 'group')" >
                         <a class="group__peek" v-show="!showsub" @click.prevent="showSubfield(field, level + 1, index)">
@@ -82,7 +82,7 @@ Add flexible
 */
 
 export default {
-    props: ['label', 'options', 'values'],
+    props: ['label', 'options', 'values', 'primary'],
     mixins: [ repeatable ],
 
     data() {
@@ -99,9 +99,7 @@ export default {
                 this.options[key].showsub = false;
             }
         }
-
         this.level = this.hasProp('nestinglevel') ? this.nestinglevel : 0;
-
         EventBus.$on('navigateCrumb', this.navigateSub);
     },
 
@@ -124,7 +122,6 @@ export default {
 
         showSubfield(field, level, index) {
             this.showsub = field;
-            this.$emit('showsub', {label: field.label, level, index});
             EventBus.$emit('addCrumb', {
                 parent: this.getAbsoluteParent(),
                 level: this.level + 1,
@@ -143,13 +140,14 @@ export default {
         hideSubfield() {
             this.$emit('hidesub', this.level);
             this.$parent.$emit('hidesub', this.level);
-            EventBus.$emit('removeCrumbsUntil', this.level);
+            EventBus.$emit('removeCrumbsUntil', this.getAbsoluteParent(), this.level);
             this.showsub = false;
         },
 
         navigateSub(crumb) {
+            if(crumb.parent != this.getAbsoluteParent()) return;
             this.$emit('hidesub', crumb.level);
-            EventBus.$emit('removeCrumbsUntil', crumb.level);
+            EventBus.$emit('removeCrumbsUntil', this.getAbsoluteParent(), crumb.level);
             this.hideRecursivelyUntil(crumb.level, crumb.index);
         },
 

@@ -1,10 +1,10 @@
 <template>
     <label class="field__label">
+        <transition-group name="slideLeft">
         <template v-for="(crumb, index) in crumbs">
-            <transition name="slideLeft">
-            <a @click.prevent="navigate(crumb)" class="group__crumb"><span v-if="index > 0" class="group__crumbseparator"></span>{{ crumb.label }}</a>
-            </transition>
+            <a :key="index" @click.prevent="navigate(crumb)" class="group__crumb"><span v-if="index > 0" class="group__crumbseparator"></span>{{ crumb.label }}</a>
         </template>
+        </transition-group>
     </label>
 </template>
 
@@ -39,8 +39,8 @@ export default {
             this.crumbs.push(crumb);
         },
 
-        removeCrumbsUntil(level) {
-            if(this.getAbsoluteParent() != this.parent) return;
+        removeCrumbsUntil(parent, level) {
+            if(parent != this.parent) return;
             for(let i = 0; i < this.crumbs.length; i++) {
                 this.crumbs = this.crumbs.filter(item => {
                     return item.level <= level;
@@ -59,6 +59,7 @@ export default {
         },
 
         navigate(crumb) {
+            if(crumb == this.crumbs[this.crumbs.length - 1]) return;
             EventBus.$emit('navigateCrumb', crumb);
         }
     }
