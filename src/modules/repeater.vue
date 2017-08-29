@@ -204,7 +204,7 @@ export default {
 
         navigateSub(crumb) {
             if(crumb.parent != this.getAbsoluteParent()) return;
-            if(crumb.level == this.level) this.finish();
+            if(crumb.level <= this.level) this.finish();
         },
 
         primaryCheck(name) {
