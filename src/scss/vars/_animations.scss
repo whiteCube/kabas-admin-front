@@ -37,16 +37,16 @@
 }
 
 .slide-enter-active, .slide-leave-active {
-    transition: opacity .15s $ease-out-quad, transform .15s $ease-out-quad;
+    transition: opacity .22s $ease-out-sine, transform .22s $ease-out-sine;
 }
 
 .slide-enter, .slide-leave-to {
     opacity: 0;
-    transform: translateY(-15px);
+    transform: translateX(-15px);
 }
 
 .slide-enter {
-    transform: translateY(15px);
+    transform: translateX(15px);
 }
 
 .slideLeft-enter-active, .slideLeft-leave-active {

@@ -1,14 +1,42 @@
 .repeater {
-    transition: height .2s $ease-out-quad;
+    background: $cWhite;
 
     > .field__container {
         border-radius: s(3);
         border: 1px solid $cWhite5;
-        transition: min-height .3s $ease-out-quad;
+        transition: height .2s $ease-out-cubic, border-color .2s;
+        overflow: hidden;
+
+        &:before {
+            content: '';
+            display: block;
+            position: absolute;
+            top: s(10);
+            bottom: s(10);
+            left: s(-10);
+            right: s(10);
+            border: 1px solid $cWhite5;
+            border-radius: 3px;
+            z-index: -1;
+            opacity: 0;
+            transform: translateX(5px);
+            transition: transform .25s $ease-out-quad, opacity .25s $ease-out-quad;
+        }
     }
 
     &--empty .field__footer {
         border-top: none;
+    }
+
+    &--nested {
+        > .field__container {
+            border-color: $cAccent;
+
+            &:before {
+                opacity: 1;
+                transform: none;
+            }
+        }
     }
 
     &__item {
@@ -124,13 +152,13 @@
 
     &__editable {
         &.slide-leave-to {
-            transform: translateY(s(15));
+            transform: translateX(s(15));
         }
     }
 
     &__items {
         &.slide-enter {
-            transform: translateY(s(-15));
+            transform: translateX(s(-15));
         }
     }
 

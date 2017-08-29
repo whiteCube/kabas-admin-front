@@ -2,8 +2,8 @@
     <div class="field repeater" :class="classes" :id="id">
         <breadcrumbs :parent="id" ref="crumbs" v-if="level == 0" :items="[{label, level, parent: id}]"></breadcrumbs>
 
-        <div class="field__container">
-            <transition mode="out-in" @after-leave="showfields = true" name="slide">
+        <div class="field__container" :style="{'height': calculatedHeight}">
+            <transition @after-leave="showfields = true" @before-leave="beforeAnimate" @enter="calcHeight" name="slide">
             <draggable class="repeater__items" :options="{ animation: 300 }" v-show="!current && current !== 0" v-model="list" @end="cancelDelete">
                 <div class="repeater__item" v-for="(item, index) in list" :key="index">
                     <p class="repeater__title">
@@ -33,7 +33,7 @@
                 </div>
             </draggable>
             </transition>
-            <transition name="slide" @after-leave="current = null">
+            <transition name="slide" @enter="calcHeight" @before-leave="beforeAnimate" @after-leave="current = null">
             <div v-show="showfields" class="repeater__editable">
                 <div v-for="(item, i) in list">
                     <div v-show="i == current" class="repeater__fields">
@@ -91,6 +91,10 @@ export default {
         EventBus.$on('navigateCrumb', this.navigateSub);
     },
 
+    mounted() {
+        this.calcHeight();
+    },
+
     methods: {
 
         remove(index) {
@@ -101,6 +105,7 @@ export default {
         destroy(index) {
             this.$delete(this.list, index);
             delete this.confirmdelete[index];
+            this.calcHeight();
         },
 
         cancelDelete(index) {
@@ -209,6 +214,14 @@ export default {
 
         primaryCheck(name) {
             return (!this.hasProp('primary') || (this.hasProp('primary') && this.primary == name));
+        },
+
+        calcHeight() {
+            EventBus.$emit('resize', this.getAbsoluteParent());
+        },
+
+        beforeAnimate(el) {
+            EventBus.$emit('initialsize', this.getAbsoluteParent(), el.clientHeight);
         }
     },
 
@@ -221,8 +234,14 @@ export default {
 
         classes() {
             return {
-                'repeater--empty': !this.list.length
+                'repeater--empty': !this.list.length,
+                'repeater--nested': this.showfields
             }
+        },
+
+        calculatedHeight() {
+            if(!this.animating) return '';
+            return this.height;
         }
     },
 

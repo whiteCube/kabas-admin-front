@@ -121,6 +121,7 @@ export default {
 
         showSubfield(field, level, index) {
             this.showsub = field;
+            EventBus.$emit('resize', this.getAbsoluteParent());
             EventBus.$emit('addCrumb', {
                 parent: this.getAbsoluteParent(),
                 level: this.level + 1,
@@ -158,7 +159,8 @@ export default {
     computed: {
         classes() {
             return {
-                'group--showsub': this.showsub
+                'group--showsub': this.showsub,
+                'group--nested': this.showsub && this.level == 0
             }
         }
     }
