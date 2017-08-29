@@ -5,6 +5,7 @@
         <div class="field__container" :style="{'height': calculatedHeight}">
             <transition @after-leave="showfields = true" @before-leave="beforeAnimate" @enter="calcHeight" name="slide">
             <draggable class="repeater__items" :options="{ animation: 300 }" v-show="!current && current !== 0" v-model="list" @end="cancelDelete">
+                <transition-group name="squish">
                 <div class="repeater__item" v-for="(item, index) in list" :key="index">
                     <p class="repeater__title">
                         <em class="repeater__number">#{{ index + 1 }}</em><!--
@@ -31,6 +32,7 @@
                     <a v-if="confirmdelete[index]" class="repeater__control repeater__control--cancel" @click.prevent="cancelDelete(index)">{{ trans('fields.repeater.cancel') }}</a>
                     <a @click.prevent="edit(index)" class="repeater__control repeater__control--edit">{{ trans('fields.repeater.edit') }}</a>
                 </div>
+                </transition-group>
             </draggable>
             </transition>
             <transition name="slide" @enter="calcHeight" @before-leave="beforeAnimate" @after-leave="current = null">
@@ -222,7 +224,7 @@ export default {
 
         beforeAnimate(el) {
             EventBus.$emit('initialsize', this.getAbsoluteParent(), el.clientHeight);
-        }
+        },
     },
 
     computed: {
@@ -237,11 +239,6 @@ export default {
                 'repeater--empty': !this.list.length,
                 'repeater--nested': this.showfields
             }
-        },
-
-        calculatedHeight() {
-            if(!this.animating) return '';
-            return this.height;
         }
     },
 

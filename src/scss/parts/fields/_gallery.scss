@@ -10,6 +10,10 @@
         margin-top: s(-3);
     }
 
+    > .field__container {
+        transition: height .2s $ease-out-cubic, border-color .2s;
+    }
+
     .repeater__title {
         font-size: s($s3, $s2);
     }

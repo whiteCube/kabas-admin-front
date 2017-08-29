@@ -1,8 +1,8 @@
 <template>
     <div class="field gallery repeater" :class="classes" :id="id">
         <label class="field__label">{{ label }}</label>
-        <div class="field__container">
-            <transition mode="out-in" @after-leave="showfields = true" name="slide">
+        <div class="field__container" :style="{'height': calculatedHeight}">
+            <transition mode="out-in" @before-leave="beforeAnimate" @enter="calcHeight" @after-leave="showfields = true" name="slide">
             <draggable class="repeater__items" :options="{ animation: 300 }" v-show="!current && current !== 0" v-model="list" @end="cancelDelete">
                 <div class="repeater__item" v-for="(item, index) in list" :key="index">
                     <figure class="gallery__fig" :style="{ 'background-image': background(item.value) }"></figure>
@@ -16,7 +16,7 @@
                 </div>
             </draggable>
             </transition>
-            <transition name="slide" @after-leave="current = null">
+            <transition name="slide" @enter="calcHeight" @before-leave="beforeAnimate" @after-leave="current = null">
             <div v-show="showfields" class="repeater__editable">
                 <span v-for="(item, i) in list">
                     <div v-show="i == current" class="repeater__fields">
@@ -39,6 +39,8 @@
 
 <script>
 import draggable from 'vuedraggable';
+import repeatable from '../mixins/repeatable.js';
+import EventBus from '../mixins/event-bus.js';
 
 /*
 Todo:
@@ -50,6 +52,7 @@ Investigate why filename disappears on cancel
 export default {
     props: ['label', 'name', 'translations', 'items', 'structure'],
     components: { draggable },
+    mixins: [ repeatable ],
 
     data() {
         return {
@@ -136,6 +139,14 @@ export default {
             if(!data) return false;
             if(data.substr(0, 4) == 'http') return 'url(' + data + ')';
             return data;
+        },
+
+        calcHeight() {
+            EventBus.$emit('resize', this.getAbsoluteParent());
+        },
+
+        beforeAnimate(el) {
+            EventBus.$emit('initialsize', this.getAbsoluteParent(), el.clientHeight);
         }
     },
 
@@ -148,7 +159,8 @@ export default {
 
         classes() {
             return {
-                'repeater--empty': !this.list.length
+                'repeater--empty': !this.list.length,
+                'repeater--nested': this.showfields
             }
         }
     },

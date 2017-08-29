@@ -60,5 +60,12 @@ export default {
             return (this.showfields && el.className == 'repeater__items') ||
                    (!this.showfields && el.className == 'repeater__editable');
         }
+    },
+
+    computed: {
+        calculatedHeight() {
+            if(!this.animating) return '';
+            return this.height;
+        }
     }
 }

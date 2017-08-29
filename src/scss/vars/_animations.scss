@@ -76,3 +76,13 @@
 .fade-enter, .fade-leave-to {
     opacity: 0;
 }
+
+.squish-enter-active, .squish-leave-active {
+    transition: padding-top .2s $ease-out-quad, padding-bottom .2s $ease-out-quad, max-height .2s $ease-out-quad;
+}
+
+.squish-enter, .squish-leave-to {
+    max-height: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
