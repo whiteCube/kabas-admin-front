@@ -52,6 +52,10 @@
 </template>
 
 <script>
+/*
+Todo:
+Investigate why image preview does not display anything after navigating through nested fields
+*/
 import FileMethods from '../mixins/file.js';
 
 export default {
