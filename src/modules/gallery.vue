@@ -44,6 +44,7 @@ import draggable from 'vuedraggable';
 Todo:
 Investigate reference issues with this.list to avoid having to do a snapshot on created()
 Make structure optional (we should not have to pass the type, but we should be able to change the label, types, and sizes)
+Investigate why filename disappears on cancel
 */
 
 export default {
