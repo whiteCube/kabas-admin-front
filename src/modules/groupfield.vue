@@ -6,63 +6,23 @@
                 {{ trans('fields.group.backlink', this.hasProp('primary') && values[primary] ? values[primary] : label) }}
             </a>
             <template v-for="(field, index) in options">
-                <template v-if="field.type == 'group'">
-                    <div class="group__nested" v-show="shouldDisplay(field, 'group')" >
-                        <a class="group__peek" v-show="!showsub" @click.prevent="showSubfield(field, level + 1, index)">
-                            <label class="field__label">{{ field.label }}
-                                <span class="group__subcount">{{ transchoice('fields.group.subgroupitems', Object.keys(field.options).length) }}</span>
-                            </label>
-                            <span class="group__action">{{ trans('fields.group.editgroup') }}</span>
-                        </a>
-                        <transition name="slide">
-                        <div class="group__sub" v-show="showsub == field">
-                            <groupfield :ref="index" :label="field.label" :values="values[index]" :options="field.options" :nestinglevel="level + 1"></groupfield>
-                        </div>
-                        </transition>
-                    </div>
-                </template>
-
-                <template v-if="field.type == 'repeater'">
-                <div class="group__nested" v-show="shouldDisplay(field, 'repeater')" >
-                    <a class="group__peek" v-show="!showsub" @click.prevent="showSubfield(field, level + 1, index)">
+                
+                <template v-for="type in nestable">
+                <div class="group__nested" v-if="field.type == type" v-show="shouldDisplay(field, type)">
+                    <a class="group__peek" v-show="!showsub" @click="showSubfield(field, level + 1, index)">
                         <label class="field__label">{{ field.label }}
-                            <span class="group__subcount">{{ transchoice('fields.group.subrepeateritems', values[index].length) }}</span>
+                            <span class="group__subcount">{{ transchoice('fields.group.sub.' + type, Object.keys(field.options).length) }}</span>
                         </label>
-                        <span class="group__action">{{ trans('fields.group.editrepeater') }}</span>
+                        <span class="group__action">{{ trans('fields.group.edit.' + type) }}</span>
                     </a>
                     <transition name="slide">
                     <div class="group__sub" v-show="showsub == field">
-                        <repeater :primary="field.primary" :ref="index" @input="updateItem(index, $event)" :label="field.label" :items="values[index]" :structure="field.options" :nestinglevel="level + 1"></repeater>
+                        <genericfield :ref="index" :structure="field" :nestinglevel="level + 1" :value="values[index]"></genericfield>
                     </div>
                     </transition>
                 </div>
                 </template>
 
-                <template v-if="field.type == 'gallery'">
-                <div class="group__nested" v-show="shouldDisplay(field, 'gallery')" >
-                    <a class="group__peek" v-show="!showsub" @click.prevent="showSubfield(field, level + 1, index)">
-                        <label class="field__label">{{ field.label }}
-                            <span class="group__subcount">{{ transchoice('fields.group.subgalleryitems', values[index].length) }}</span>
-                        </label>
-                        <span class="group__action">{{ trans('fields.group.editgallery') }}</span>
-                    </a>
-                    <transition name="slide">
-                    <div class="group__sub" v-show="showsub == field">
-                        <gallery :ref="index" :label="field.label" :items="values[index]" :structure="field.options" :nestinglevel="level + 1"></gallery>
-                    </div>
-                    </transition>
-                </div>
-                </template>
-
-                <div class="group__nested" v-if="shouldDisplay(field, 'flexible')">
-                    <label class="field__label">{{ field.label }}</label>
-                    <a class="group__action" @click.prevent="showSubfield(field)">{{ trans('fields.group.editflexible') }}</a>
-                    <transition name="slide">
-                    <div class="group__sub" v-show="showsub == field">
-                        <groupfield label="" :options="field.options"></groupfield>
-                    </div>
-                    </transition>
-                </div>
                 <transition name="slide">
                 <genericfield v-if="!isNestable(field) && !showsub" :value="values ? values[index] : null" :structure="field" @input="transferInput($event, index)" :key="index"></genericfield>
                 </transition>
