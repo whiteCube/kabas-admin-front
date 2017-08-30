@@ -186,7 +186,9 @@
     }
 
     &__crumb {
+        line-height: s(20, $s2);
         display: inline-block;
+        margin-right: s(8, $s2);
         transition: color .3s $ease-out-quad, opacity .2s $ease-out-quad, transform .2s $ease-out-quad;
 
         &:hover {
@@ -201,33 +203,13 @@
 
     &__crumbseparator {
         position: relative;
-        width: s(25);
+        width: s(6, $s2);
+        margin-right: s(10, $s2);
         display: inline-block;
 
-        &:before,
-        &:after {
-            content: '';
-            display: inline-block;
-            width: s(7);
-            height: s(1);
-            background: $cAnthracite1;
-            position: absolute;
-            top: -5px;
-            right: 0;
-            left: 0;
-            margin: auto;
-            border-radius: 2px;
-            border: none;
-            transition: background .2s $ease-out-quad;
-            transform-origin: right;
-        }
-
         &:before {
-            transform: rotate(-45deg);
-        }
-
-        &:after {
-            transform: rotate(45deg);
+            @include icon(arrow_right);
+            font-size: s(10, $s2);
         }
     }
 }
