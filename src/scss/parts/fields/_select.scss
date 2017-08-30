@@ -20,17 +20,84 @@
         &:hover:after {
             color: $cAccent;
         }
-    
+    }
+
+    &__option {
+        font-size: s($s2);
+        display: block;
+        text-decoration: none;
+        color: $cAnthracite1;
+        padding: s(17, $s2) s(15, $s2);
+        border-bottom: 1px solid $cWhite5;
+        border-color: $cWhite5 !important;
+        transition: all .2s $ease-out-quad;
+
+        &:last-child {
+            border-bottom: none;
+        }
+
+        &:hover,
+        &:focus {
+            outline: none;
+            background: rgba($cWhite5, .2);
+            padding-left: s(20);
+        }
+
+        &:after {
+            content: attr(data-focus);
+            font-weight: 700;
+            float: right;
+            opacity: 0;
+            transition: opacity .2s $ease-out-quad;
+        }
+    }
+
+    &__option:focus,
+    &__option--focus {
+        &:after {
+            opacity: 1;
+        }
+    }
+
+    &__nomatches {
+        border-bottom: none;
+    }
+
+    &__searchbox {
+        border-bottom: 1px solid $cWhite5;
+        position: relative;
+    }
+
+    &__clear:before {
+        @include icon(delete);
+        position: absolute;
+        right: s(20);
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        height: 1em;
+    }
+
+    &__search {
+        width: 100%;
+        border: none;
+
+        &:focus {
+            outline: none;
+            background: rgba($cWhite5, .2);
+        }
     }
 
     &__dropdown {
         background: $cWhite;
         border: 1px solid $cWhite5;
+        box-shadow: 0 10px 10px rgba($cAnthracite1, 0.1);
         border-top: none;
         border-radius: 0 0 s(3) s(3);
         position: absolute;
         z-index: 20;
         width: 100%;
+        overflow: hidden;
 
         &.slideDown-enter-active, &.slideDown-leave-active {
             transition: opacity .2s $ease-out-quad, transform .2s $ease-out-quad;
@@ -42,6 +109,13 @@
         }
     }
 
+    &__results:hover {
+        *:focus:after,
+        .select__option--focus:after {
+            opacity: 0;
+        }
+    }
+
     &--expanded .field__element {
         border-radius: s(3) s(3) 0 0;
 
@@ -50,21 +124,5 @@
         }
     }
 
-    &__option {
-        font-size: s($s2);
-        display: block;
-        text-decoration: none;
-        color: $cAnthracite1;
-        padding: s(17, $s2) s(15, $s2);
-        border-bottom: 1px solid $cWhite5;
-        transition: background .2s $ease-out-quad;
-
-        &:last-child {
-            border-bottom: none;
-        }
-
-        &:hover {
-            background: rgba($cWhite5, .2);
-        }
-    }
+    
 }

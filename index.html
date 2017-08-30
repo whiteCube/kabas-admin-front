@@ -40,7 +40,11 @@
             "placeholder": "Click to pick a date"
         },
         "select": {
-            "prompt": "Pick one"
+            "prompt": "Pick one",
+            "search": "Type here to search...",
+            "clearsearch": "Clear search field",
+            "noresults": "No matches",
+            "focus": "[ENTER]"
         },
         "url": {
             "external": "External",
@@ -772,7 +776,7 @@
                 :structure="{ type: 'image', label: 'Image' }">
             </gallery>
 
-            <selectfield name="select" label="Select" :options="{ one: 'One', two: 'Two', three: 'Three' }"></selectfield>
+            <selectfield show-search="2" name="select" label="Select" :options="{ one: 'One', two: 'Two', three: 'Three' }"></selectfield>
 
             <datefield name="date" label="Date"></datefield>
             

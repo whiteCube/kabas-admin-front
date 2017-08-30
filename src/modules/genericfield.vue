@@ -112,6 +112,7 @@ export default {
 
         addSelectProps() {
             if(!this.structure.options) return;
+            this.addProp('showSearch', this.structure.showSearch);
             this.addProp('options', this.structure.options);
         }
 
