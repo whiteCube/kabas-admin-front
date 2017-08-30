@@ -24,8 +24,29 @@
         cursor: auto;
     }
 
-    &--expanded .field__element {
-        border-radius: s(3) s(3) 0 0;
+    &--internal {
+        .url__switcher:before {
+            @include icon(arrow_down);
+            pointer-events: none;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            font-size: s(10, $s1);
+            height: 1em;
+            left: s(-30, 10);
+            transition: transform .2s $ease-out-quad;
+        }
+    }
+
+    &--expanded {
+        .url__switcher:before {
+            transform: scaleY(-1);
+        }
+
+        .field__element {
+            border-radius: s(3) s(3) 0 0;
+        }
     }
 
     &__route {
