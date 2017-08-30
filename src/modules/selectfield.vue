@@ -59,7 +59,7 @@ export default {
         optionClasses(index) {
             let pos = Object.keys(this.filtered).indexOf(index);
             return {
-                'select__option--focus': this.search && pos == 0 && this.isTyping
+                'select__option--focus': pos == 0 && this.isTyping
             }
         }
     },
