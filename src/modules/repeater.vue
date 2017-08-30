@@ -66,6 +66,7 @@ Todo:
 Investigate reference issues with this.list to avoid having to do a snapshot on created()
 Maybe make a banner to tell when in edit mode
 Make a better interface for when repeater is empty, current one is confusing when nested
+Investigate why preview is sometimes empty
 */
 
 export default {
