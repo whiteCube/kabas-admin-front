@@ -9,6 +9,7 @@
 
 <script>
 import SimpleMDE from 'SimpleMDE';
+import EventBus from '../mixins/event-bus.js';
 
 export default {
     props: ['label', 'name', 'limit', 'placeholder', 'value'],
@@ -43,9 +44,7 @@ export default {
 
         // This fixes the issue with codemirror (wysiwyg) where the initial value does not appear right away.
         // Can be removed safely the day we stop using simplemde.
-        document.addEventListener('update', () => {
-            this.mde.codemirror.refresh();
-        })
+        EventBus.$on('updateWysiwyg', () => this.mde.codemirror.refresh());
     }
 }
 </script>

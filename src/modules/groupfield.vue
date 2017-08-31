@@ -93,8 +93,8 @@ export default {
             // This fixes the issue with codemirror (wysiwyg) where the initial value does not appear right away.
             // Can be removed safely the day we stop using simplemde.
             setTimeout(() => {
-                document.dispatchEvent(new Event('update'));
-            }, 1);
+                EventBus.$emit('updateWysiwyg');
+            }, 300);
         },
 
         hideSubfield() {
