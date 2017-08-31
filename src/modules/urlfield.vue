@@ -3,13 +3,15 @@
         <label class="field__label" :for="id">{{ label }}</label>
         <div class="field__container">
             <a class="url__switcher" @click.prevent="switchType">{{ trans('fields.url.' + type) }}</a>
-            <input type="text" class="field__element" :id="id" v-model="url" :name="name" :placeholder="placeholder" :value="value" @focus="autocomplete" @input="autocomplete" @blur="expanded = false">
+            <input type="text" @keyup.esc="expanded = false" class="field__element" :id="id" v-model="url" :name="name" :placeholder="placeholder" :value="value" @focus="autocomplete" @input="autocomplete" >
             <transition name="slideDown">
             <div v-if="expanded" class="select__dropdown">
-                <a v-for="(item, index) in items" @click.prevent="selectItem(index)" class="select__option">
+                <transition-group class="select__results" name="slide">
+                <a :key="index" v-for="(item, index) in items" tabindex="0" :data-focus="trans('fields.select.focus')"  @keyup.esc="expanded = false" @keyup.enter="selectItem(index)" @click.prevent="selectItem(index)" class="select__option">
                     {{ item.name }}
                     <span class="url__route">{{ item.url }}</span>
                 </a>
+                </transition-group>
             </div>
             </transition>
         </div>
@@ -17,6 +19,8 @@
 </template>
 
 <script>
+import Axios from 'axios';
+
 export default {
     props: ['label', 'name', 'placeholder', 'value', 'translations', 'ajaxUrl'],
     data() {
@@ -29,6 +33,10 @@ export default {
         }
     },
 
+    created() {
+        Axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+    },
+
     methods: {
         switchType() {
             this.type = this.type == 'internal' ? 'external' : 'internal';
@@ -37,24 +45,12 @@ export default {
         },
 
         query() {
-            // TODO: ask the server if pages match the current input. Hardcoded for now
-            // The AJAX url is available as this.ajaxUrl
-            this.items = [
-                {
-                    url: '/code-examples',
-                    name: 'Code examples'
-                },
-                {
-                    url: '/contact',
-                    name: 'Contact'
-                },
-                {
-                    url: '/contests',
-                    name: 'Contests'
-                }
-            ];
-            
-            this.expanded = !!this.items.length;
+            Axios.get(this.ajaxUrl)
+            .then(response => {
+                this.items = response.data.results;
+                this.expanded = !!this.items.length;
+            })
+            .catch(error => console.error(error));
         },
 
         selectItem(index) {
