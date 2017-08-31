@@ -1,9 +1,10 @@
 <template>
     <div class="field repeater" :class="classes" :id="id">
         <breadcrumbs :parent="id" ref="crumbs" v-if="level == 0" :items="[{label, level, parent: id}]"></breadcrumbs>
-
-        <div class="field__container" :style="{'height': calculatedHeight}">
-            <transition @after-leave="showfields = true" @before-leave="beforeAnimate" @enter="calcHeight" name="slide">
+        
+        
+        <div class="field__container">
+            <auto-expand @after-leave="showfields = true">
             <draggable class="repeater__items" :options="{ animation: 300 }" v-show="!current && current !== 0" v-model="list" @end="cancelDelete">
                 <transition-group name="squish">
                 <div class="repeater__item" v-for="(item, index) in list" :key="index">
@@ -34,8 +35,8 @@
                 </div>
                 </transition-group>
             </draggable>
-            </transition>
-            <transition name="slide" @enter="calcHeight" @before-leave="beforeAnimate" @after-leave="current = null">
+            </auto-expand>
+            <auto-expand @after-leave="current = null">
             <div v-show="showfields" class="repeater__editable">
                 <div v-for="(item, i) in list">
                     <div v-show="i == current" class="repeater__fields">
@@ -43,7 +44,7 @@
                     </div>
                 </div>
             </div>
-            </transition>
+            </auto-expand>
             <div class="field__footer">
                 <p class="field__tip">{{ tip }}</p>
                 <div class="field__actions">
@@ -94,10 +95,6 @@ export default {
         EventBus.$on('navigateCrumb', this.navigateSub);
     },
 
-    mounted() {
-        this.calcHeight();
-    },
-
     methods: {
 
         remove(index) {
@@ -108,7 +105,6 @@ export default {
         destroy(index) {
             this.$delete(this.list, index);
             delete this.confirmdelete[index];
-            this.calcHeight();
         },
 
         cancelDelete(index) {
@@ -136,7 +132,6 @@ export default {
 
         cancel() {
             this.restore();
-            this.current = null;
             this.showfields = false;
             this.$emit('input', this.list);
             EventBus.$emit('removeCrumbsUntil', this.getAbsoluteParent(), this.level);
@@ -217,15 +212,7 @@ export default {
 
         primaryCheck(name) {
             return (!this.hasProp('primary') || (this.hasProp('primary') && this.primary == name));
-        },
-
-        calcHeight() {
-            EventBus.$emit('resize', this.getAbsoluteParent());
-        },
-
-        beforeAnimate(el) {
-            EventBus.$emit('initialsize', this.getAbsoluteParent(), el.clientHeight);
-        },
+        }
     },
 
     computed: {

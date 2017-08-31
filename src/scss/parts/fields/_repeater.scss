@@ -149,12 +149,16 @@
     }
 
     &__editable {
+        overflow: hidden;
+        
         &.slide-leave-to {
             transform: translateX(s(15));
         }
     }
 
     &__items {
+        overflow: hidden;
+
         &.slide-enter {
             transform: translateX(s(-15));
         }
