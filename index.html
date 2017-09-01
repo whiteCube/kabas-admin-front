@@ -769,6 +769,34 @@
                 > 
             </repeater>
 
+            <flexible 
+                label="Flexible" 
+                name="flexible"
+                :options="{
+                    one: {
+                        type: 'text',
+                        option: 'one',
+                        label: 'Text field within flexible'
+                    },
+                    two: {
+                        type: 'group',
+                        option: 'two',
+                        label: 'Group field within flexible',
+                        options: {
+                            text: {
+                                type: 'text',
+                                label: 'Hello'
+                            },
+                            color: {
+                                type: 'color',
+                                label: 'World'
+                            }
+                        }
+                    }
+                }"
+                >    
+            </flexible>
+
             <gallery 
                 label="Gallery" 
                 name="gallery" 

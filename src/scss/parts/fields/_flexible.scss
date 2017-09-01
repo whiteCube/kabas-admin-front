@@ -1,0 +1,22 @@
+.flexible {
+
+    &__popup {
+        position: absolute;
+        // width: s(200);
+        border: 1px solid $cWhite5;
+        border-radius: 3px;
+        right: 0;
+        top: calc(100% + 15px);
+        background: $cWhite;
+        padding: s(25) s(20);
+        text-align: left;
+        z-index: 999;
+    }
+
+    &__option {
+        display: block;
+        padding: s(10, $s2) 0;
+        font-size: s($s2);
+    }
+
+}

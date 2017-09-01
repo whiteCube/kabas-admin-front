@@ -1,5 +1,5 @@
 <template>
-    <div class="field repeater" :class="classes" :id="id">
+    <div class="field repeater flexible" :class="classes" :id="id">
         <breadcrumbs :parent="id" ref="crumbs" v-if="level == 0" :items="[{label, level, parent: id}]"></breadcrumbs>
         <div class="field__container">
             <auto-expand @after-leave="showfields = true">
@@ -8,20 +8,21 @@
                 <div class="repeater__item" v-for="(item, index) in list" :key="index">
                     <p class="repeater__title">
                         <em class="repeater__number">#{{ index + 1 }}</em><!--
-                     --><template v-if="isComplex()">
-                            <template v-for="(field, i) in structure.options">
-                                <span v-if="primaryCheck(i) && list[index][i] && list[index][i].length" class="repeater__preview">
-                                 <span class="field__label">{{ field.label }}</span>
-                                 <span v-if="field.type == 'color'" class="repeater__preview--color repeater__preview" :style="{background: list[index][i]}"></span>
-                                    {{ getPreview(field.type, list[index][i]) }}
+                     --><template v-if="isComplex(item)">
+                            <template v-for="(field, i) in options[item.option].options">
+                                <span v-if="primaryCheck(i) && list[index].value[i] && list[index].value[i].length" class="repeater__preview">
+                                <span class="field__label">{{ field.label }}</span>
+                                <span v-if="field.type == 'color'" class="repeater__preview--color repeater__preview" :style="{background: list[index].value[i]}"></span>
+                                    {{ getPreview(field.type, list[index].value[i]) }}
                                 </span>
                             </template>
                         </template><!--
                      --><template v-else>
                             <span v-if="list[index]" class="repeater__preview">
-                                <span class="field__label">{{ structure.label }}</span>
-                                <span v-if="structure.type == 'color'" class="repeater__preview--color repeater__preview" :style="{background: list[index]}"></span>
-                                {{ list[index] }}
+
+                                <span class="field__label">{{ options[item.option].label }}</span>
+                                <span v-if="item.type == 'color'" class="repeater__preview--color repeater__preview" :style="{background: list[index]}"></span>
+                                {{ list[index].value }}
                             </span>
                         </template>
                         <span v-if="isEmpty(list[index])" class="repeater__preview">{{ trans('fields.repeater.nopreview') }}</span>
@@ -38,7 +39,7 @@
             <div v-show="showfields" class="repeater__editable">
                 <div v-for="(item, i) in list">
                     <div v-show="i == current" class="repeater__fields">
-                        <genericfield :primary="primary" ref="fields" :nestinglevel="level + 1" :value="list[i]" @input="updateItem($event, i)" :structure="structure"></genericfield>
+                        <genericfield :primary="primary" ref="fields" :nestinglevel="level + 1" :value="list[i].value" @input="updateItem($event, i)" :structure="options[item.option]"></genericfield>
                     </div>
                 </div>
             </div>
@@ -48,7 +49,10 @@
                 <div class="field__actions">
                     <a v-if="current || current == 0" @click.prevent="cancel" class="field__action btn btn--tiny">{{ trans('fields.repeater.cancel') }}</a>
                     <a v-if="current || current == 0" @click.prevent="finish" class="field__action btn btn--tiny btn--secondary">{{ trans('fields.repeater.finish') }}</a>
-                    <a v-else @click.prevent="add" class="field__action btn btn--tiny btn--secondary">{{ trans('fields.repeater.add') }}</a>
+                    <a v-else @click.prevent="showPopup = !showPopup" class="field__action btn btn--tiny btn--secondary">{{ trans('fields.repeater.add') }}</a>
+                    <div class="flexible__popup" v-if="showPopup">
+                        <a @click="add(option)" class="flexible__option" v-for="(option, index) in options">{{ option.label }}</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -69,12 +73,15 @@ Investigate why preview is sometimes empty
 */
 
 export default {
-    props: ['label', 'name', 'translations', 'items', 'structure', 'primary'],
+    props: ['label', 'name', 'translations', 'items', 'options', 'primary'],
     components: { draggable },
     mixins: [ repeatable ],
 
     data() {
         return {
+            showPopup: false,
+
+
             current: null,
             showfields: false,
             id: this._uid,
@@ -118,7 +125,7 @@ export default {
                 parent: this.getAbsoluteParent(),
                 level: this.level + 1,
                 index: index,
-                label: this.primary && this.list[index][this.primary] ? this.list[index][this.primary] : this.structure.label
+                label: this.primary && this.list[index][this.primary] ? this.list[index][this.primary] : this.options[this.list[index].option].label
             });
 
             // This fixes the issue with codemirror (wysiwyg) where the initial value does not appear right away.
@@ -140,26 +147,30 @@ export default {
             EventBus.$emit('removeCrumbsUntil', this.getAbsoluteParent(), this.level);
         },
 
-        add() {
+        add(option) {
             this.snapshot();
             let blank = '';
-            if(this.structure.type == 'group') blank = this.getBlank();
-            this.list.push(blank);
+            if(option.type == 'group') blank = this.getBlank(option);
+            this.list.push({
+                option: option.option,
+                value: blank
+            });
             this.$emit('input', this.list);
             this.current = this.list.length - 1;
+            this.showPopup = false;
 
             EventBus.$emit('addCrumb', {
                 parent: this.getAbsoluteParent(),
                 level: this.level + 1,
                 index: this.list.length - 1,
-                label: this.structure.label 
+                label: option.label 
             });
         },
 
-        getBlank() {
+        getBlank(option) {
             let blank = {};
-            for(let key in this.structure.options) {
-                if(this.structure.options[key].type == 'repeater') blank[key] = [];
+            for(let key in option.options) {
+                if(option.options[key].type == 'repeater') blank[key] = [];
                 else blank[key] = '';
             }
             return blank;
@@ -170,9 +181,9 @@ export default {
                 if(e.index == this.primary) {
                     EventBus.$emit('updateCrumb', this.getAbsoluteParent(), this.level + 1, e.value);
                 }
-                this.list[index][e.index] = e.value;
+                this.list[index].value[e.index] = e.value;
             } else {
-                this.list[index] = e;
+                this.list[index].value = e;
             }
             this.$parent.$emit('input', e);
             this.$forceUpdate();
@@ -187,8 +198,8 @@ export default {
             this.restorepoint = null;
         },
 
-        isComplex() {
-            return this.complexFields.indexOf(this.structure.type) > -1;
+        isComplex(item) {
+            return this.complexFields.indexOf(this.options[item.option].type) > -1;
         },
 
         isEmpty(data) {
