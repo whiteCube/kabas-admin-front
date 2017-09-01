@@ -27,7 +27,7 @@
         border-top: none;
     }
 
-    &--nested {
+    &--parent {
         > .field__container {
             border-color: $cAccent;
 

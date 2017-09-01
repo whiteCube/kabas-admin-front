@@ -154,7 +154,7 @@ export default {
         classes() {
             return {
                 'repeater--empty': !this.list.length,
-                'repeater--nested': this.showfields && this.level == 0
+                'repeater--parent': this.showfields && this.level == 0
             }
         }
     },
