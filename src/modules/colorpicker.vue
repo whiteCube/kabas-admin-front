@@ -2,26 +2,26 @@
     <div class="color__picker">
         <label class="field__label">{{ trans('fields.color.hue') }}</label>
         <div class="color__range color__range--hue" @click="click($event, 'h')">
-            <span class="color__handle" @mousedown="startDrag" :style="{ left: handle('h', hsl.h) + '%' }"></span>
+            <span class="color__handle" tabindex="0" @keydown.left="decrease('h')" @keydown.right="increase('h')" @mousedown="startDrag" :style="{ left: handle('h', hsl.h) + '%' }"></span>
         </div>
         <label class="field__label">{{ trans('fields.color.sat') }}</label>
         <div class="color__range color__range--saturation" @click="click($event, 's')" :style="{ background: saturationBg }">
-            <span class="color__handle" @mousedown="startDrag" :style="{ left: handle('s', hsl.s) + '%' }"></span>
+            <span class="color__handle" tabindex="0"  @keydown.left="decrease('s')" @keydown.right="increase('s')" @mousedown="startDrag" :style="{ left: handle('s', hsl.s) + '%' }"></span>
         </div>
         <label class="field__label">{{ trans('fields.color.lum') }}</label>
         <div class="color__range color__range--luminosity" @click="click($event, 'l')" :style="{ background: luminosityBg }">
-            <span class="color__handle" @mousedown="startDrag" :style="{ left: handle('l', hsl.l) + '%' }"></span>
+            <span class="color__handle"  @keydown.left="decrease('l')" @keydown.right="increase('l')" tabindex="0" @mousedown="startDrag" :style="{ left: handle('l', hsl.l) + '%' }"></span>
         </div>
         <div class="color__footer">
             <div class="color__data">
                 <span class="color__preview" :style="{ background: hex }"></span>
                 <div class="color__line">
                     <span class="color__label">{{ trans('fields.color.red') }}:</span>
-                    <input type="text" class="color__value" v-model="rgb.r" @blur="update(rgb)">
+                    <input type="number" class="color__value" min="0" @change="update(rgb)" v-model="rgb.r" @blur="update(rgb)">
                     <span class="color__label">{{ trans('fields.color.green') }}:</span>
-                    <input type="text" class="color__value" v-model="rgb.g" @blur="update(rgb)">
+                    <input type="number" class="color__value" min="0" @change="update(rgb)" v-model="rgb.g" @blur="update(rgb)">
                     <span class="color__label">{{ trans('fields.color.blue') }}:</span>
-                    <input type="text" class="color__value" v-model="rgb.b" @blur="update(rgb)">
+                    <input type="number" class="color__value" min="0" @change="update(rgb)" v-model="rgb.b" @blur="update(rgb)">
                 </div>
                 <div class="color__line">
                     <span class="color__label">Hex:</span>
@@ -129,6 +129,18 @@ export default {
         finish() {
             this.update(this.hsl);
             this.$emit('finish', this.hex);
+        },
+
+        increase(source) {
+            let amount = source == 'h' ? 5 : 0.01;
+            this.hsl[source] += amount;
+            this.update(this.hsl);
+        },
+
+        decrease(source) {
+            let amount = source == 'h' ? 5 : 0.01;
+            this.hsl[source] -= amount;
+            this.update(this.hsl);
         }
 
     },

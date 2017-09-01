@@ -129,6 +129,11 @@
             margin: auto;
             margin-left: s(-9);
             cursor: ew-resize;
+
+            &:focus {
+                outline: none;
+                box-shadow: 0 0 0 s(4) rgba($cAnthracite2, .4);
+            }
         }
 
         &__footer {
@@ -180,6 +185,14 @@
 
             .color__line + .color__line {
                 margin-top: s(4);
+            }
+
+            input[type=number]::-webkit-inner-spin-button, 
+            input[type=number]::-webkit-outer-spin-button { 
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+                margin: 0; 
             }
 
             .color__value {
