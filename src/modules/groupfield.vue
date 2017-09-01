@@ -10,7 +10,7 @@
                     <template v-for="(field, index) in options">
                     <template v-for="type in nestable">
                     <div :key="index" class="group__nested" v-if="field.type == type" v-show="shouldDisplay(field, type)">
-                        <a class="group__peek" v-show="!showsub" @click="showSubfield(field, level + 1, index)">
+                        <a class="group__peek" tabindex="0" v-show="!showsub" @keyup.enter="showSubfield(field, level + 1, index)" @click="showSubfield(field, level + 1, index)">
                             <label class="field__label">{{ field.label }}
                                 <span class="group__subcount">{{ transchoice('fields.group.sub.' + type, Object.keys(field.options).length) }}</span>
                             </label>
