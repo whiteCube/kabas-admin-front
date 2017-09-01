@@ -78,13 +78,9 @@
             bottom: 0;
             font-size: s($s4, $s1);
             width: s(65, $s4);
-            line-height: s(49, $s4);
+            line-height: s(45, $s4);
             border-left: 1px solid $cAnthracite1;
         }
-    }
-
-    &--cog:after {
-        @include iconInclude(cog);
     }
 
     &--checked:after {
@@ -93,9 +89,13 @@
 
     &--jupit:after {
         font-size: s(23, $s1);
-        line-height: s(48, 23);
+        line-height: s(45, 23);
         width: s(65, 23);
         @include iconInclude(jupit);
+    }
+
+    &--pages:after {
+        @include iconInclude(pages);
     }
 
     &--save:after {
