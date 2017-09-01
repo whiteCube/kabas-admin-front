@@ -181,21 +181,17 @@
 
     // Nested styles
 
-    &--nested {
-        .group .field__container {
-            border: none;
-            padding: 0;
-        }
-
-        .group .group__backlink {
-            margin-top: s(-20, $s2);
-        }
-
-        .repeater .field__footer {
-            margin-bottom: s(-100);
-        }
+    .group .field__container {
+        border: none;
+        padding: 0;
     }
 
+    .group .group__backlink {
+        margin-top: s(-20, $s2);
+    }
 
+    .repeater .field__footer {
+        margin-bottom: s(-100);
+    }
 
 }
