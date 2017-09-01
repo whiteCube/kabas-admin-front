@@ -45,6 +45,7 @@ export default {
         },
 
         query() {
+            if(!this.ajaxUrl) return;
             Axios.get(this.ajaxUrl)
             .then(response => {
                 this.items = response.data.results;
