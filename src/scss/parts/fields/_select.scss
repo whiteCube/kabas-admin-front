@@ -66,6 +66,16 @@
     &__searchbox {
         border-bottom: 1px solid $cWhite5;
         position: relative;
+
+        &:before {
+            @include icon(search);
+            position: absolute;
+            height: s(15);
+            top: 0;
+            left: s(15);
+            bottom: 0;
+            margin: auto;
+        }
     }
 
     &__clear:before {
@@ -81,6 +91,12 @@
     &__search {
         width: 100%;
         border: none;
+        padding-left: s(45, $s2);
+
+        &:hover,
+        &:focus {
+            padding-left: s(45, $s2);
+        }
 
         &:focus {
             outline: none;
