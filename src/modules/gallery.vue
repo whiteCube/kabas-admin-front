@@ -1,8 +1,9 @@
 <template>
     <div class="field gallery repeater" :class="classes" :id="id">
-        <label class="field__label">{{ label }}</label>
-        <div class="field__container" :style="{'height': calculatedHeight}">
-            <transition mode="out-in" @before-leave="beforeAnimate" @enter="calcHeight" @after-leave="showfields = true" name="slide">
+        <label class="field__label" v-if="level == 0">{{ label }}</label>
+        <div class="field__container">
+            <auto-expand @after-leave="showfields = true">
+            <!-- <transition mode="out-in" @before-leave="beforeAnimate" @enter="calcHeight"  name="slide"> -->
             <draggable class="repeater__items" :options="{ animation: 300 }" v-show="!current && current !== 0" v-model="list" @end="cancelDelete">
                 <div class="repeater__item" v-for="(item, index) in list" :key="index">
                     <figure class="gallery__fig" :style="{ 'background-image': background(item.value) }"></figure>
@@ -15,8 +16,9 @@
                     <a @click.prevent="edit(index)" class="repeater__control repeater__control--edit">{{ trans('fields.repeater.edit') }}</a>
                 </div>
             </draggable>
-            </transition>
-            <transition name="slide" @enter="calcHeight" @before-leave="beforeAnimate" @after-leave="current = null">
+            </auto-expand>
+            <auto-expand @after-leave="current = null">
+            <!-- <transition name="slide" @enter="calcHeight" @before-leave="beforeAnimate" > -->
             <div v-show="showfields" class="repeater__editable">
                 <span v-for="(item, i) in list">
                     <div v-show="i == current" class="repeater__fields">
@@ -24,7 +26,7 @@
                     </div>
                 </span>
             </div>
-            </transition>
+            </auto-expand>
             <div class="field__footer">
                 <p class="field__tip">{{ tip }}</p>
                 <div class="field__actions">
@@ -139,14 +141,6 @@ export default {
             if(!data) return false;
             if(data.substr(0, 4) == 'http') return 'url(' + data + ')';
             return data;
-        },
-
-        calcHeight() {
-            EventBus.$emit('resize', this.getAbsoluteParent());
-        },
-
-        beforeAnimate(el) {
-            EventBus.$emit('initialsize', this.getAbsoluteParent(), el.clientHeight);
         }
     },
 

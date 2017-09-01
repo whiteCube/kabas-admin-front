@@ -20,40 +20,38 @@ export default {
     data() {
         return {
             duration: 200,
-            caught: '1px',
+            baseHeight: '1px',
             easing: 'cubic-bezier(0.215,  0.610, 0.355, 1.000)'
         }
     },
 
     created() {
-        EventBus.$on('catch', height => {
-            this.caught = height;
+        EventBus.$on('ae-baseheight', (height, parent) => {
+            if(parent != this.getAbsoluteParent()) return;
+            this.baseHeight = height;
         });
     },
     
     methods: {
 
         enter(el) {
-            el.style.height = 'auto'
-            var endHeight = getComputedStyle(el).height;
-            el.style.height = this.caught
+            el.style.height = 'auto !important';
+            let endHeight = getComputedStyle(el).height;
+            let style = getComputedStyle(el);
+            el.style.height = this.baseHeight;
             this.startTransition(el);
-            el.offsetHeight // force repaint
+            el.offsetHeight; // force repaint
             el.style.height = endHeight;
             this.stopTransition(el);
         },
 
         afterEnter(el) {
-            el.style.height = 'auto'
+            el.style.height = 'auto';
         },
 
         beforeLeave(el) {
-            EventBus.$emit('catch', getComputedStyle(el).height);
-            el.style.height = getComputedStyle(el).height
-            this.startTransition(el);
-            el.offsetHeight // force repaint
-            el.style.height = this.caught
-            this.stopTransition(el);
+            let baseHeight = getComputedStyle(el).height;
+            EventBus.$emit('ae-baseheight', baseHeight, this.getAbsoluteParent());
         },
 
         afterLeave() {
@@ -66,7 +64,7 @@ export default {
 
         stopTransition(el) {
             setTimeout(() => {
-                el.style.transition = 'transform ' + this.duration/2 + 'ms ' + this.easing;
+                el.style.transition = '';
             }, this.duration);
         }
     }

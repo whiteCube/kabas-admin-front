@@ -53,7 +53,7 @@ export default {
             if(this.is('textfield', 'wysiwyg')) this.addTextProps();
             if(this.is('imagefield')) this.addImageProps();
             if(this.is('imagefield', 'filefield')) this.addFileProps();
-            if(this.is('repeater')) this.addRepeaterProps();
+            if(this.is('repeater', 'gallery')) this.addRepeaterProps();
             if(this.is('groupfield')) this.addGroupProps();
             if(this.is('selectfield')) this.addSelectProps();
             return this.properties;

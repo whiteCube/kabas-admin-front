@@ -149,7 +149,6 @@
     }
 
     &__editable {
-        overflow: hidden;
         
         &.slide-leave-to {
             transform: translateX(s(15));
@@ -157,7 +156,6 @@
     }
 
     &__items {
-        overflow: hidden;
 
         &.slide-enter {
             transform: translateX(s(-15));
@@ -166,13 +164,6 @@
 
     &__fields {
         padding: s(20);
-
-        .group__backlink {
-            position: static;
-            margin-top: s(-20, $s2);
-            margin-right: s(-20, $s2);
-            margin-left: s(-20, $s2);
-        }
     }
 
     &__preview {
@@ -187,8 +178,24 @@
         }
     }
 
-    .group__nested .repeater .field__footer {
-        margin-bottom: s(-105);
+
+    // Nested styles
+
+    &--nested {
+        .group .field__container {
+            border: none;
+            padding: 0;
+        }
+
+        .group .group__backlink {
+            margin-top: s(-20, $s2);
+        }
+
+        .repeater .field__footer {
+            margin-bottom: s(-100);
+        }
     }
+
+
 
 }

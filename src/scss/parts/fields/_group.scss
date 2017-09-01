@@ -27,17 +27,6 @@
         margin-top: s(30);
     }
 
-    .repeater & {
-        > .field__label {
-            display: none;
-        }
-
-        .field__container {
-            border: none;
-            padding: 0;
-        }
-    }
-
     &__nested {
         margin-top: s(30);
         margin-bottom: s(10);
@@ -46,11 +35,9 @@
             margin-top: 0;
         }
 
-        
-
-        .group > .field__container {
-            position: static;
-        }
+        // .group > .field__container {
+        //     position: static;
+        // }
     }
 
     &__action {
@@ -98,39 +85,12 @@
         }
     }
 
-    &--nested {
+    &--parent {
         > .field__container {
             &:before {
                 opacity: 1;
                 transform: none;
             }
-        }
-    }
-
-    &--showsub {
-
-        .field__container {
-            padding-top: s(65);
-        }
-
-        > .field__container > .group__nested {
-
-            &:before,
-            > .field__label,
-            > .group__action,
-            .group > .field__label,
-            .repeater > .field__label  {
-                @include hidden();
-            }
-
-            .field__container {
-                padding: 0;
-                border: none;
-            }
-        }
-
-        .repeater {
-            margin: s(-30) s(-20);
         }
     }
 
@@ -140,7 +100,7 @@
         color: $cAccent;
         border-bottom: 1px solid $cWhite5;
         display: block;
-        position: absolute;
+        // position: absolute;
         top: 0;
         right: 0;
         left: 0;
@@ -165,12 +125,16 @@
         }
     }
 
-    .slide-leave-active {
-        display: none;
+    &__fields {
+        &.slide-enter {
+            transform: translateX(s(-15));
+        }
     }
 
-    .repeater .slide-leave-active {
-        display: block;
+    &__subfields {
+        &.slide-leave-to {
+            transform: translateX(s(15));
+        }
     }
 
     &__subcount {
@@ -212,4 +176,44 @@
             font-size: s(10, $s2);
         }
     }
+
+
+
+
+
+
+    // Nested styles
+
+    &--showsub {
+        .field__container {
+            padding: 0;
+            border: none;
+        }
+
+        .group__backlink {
+            margin-top: s(-89, $s2);
+            margin-bottom: s(25, $s2);
+            margin-right: s(-20, $s2);
+            margin-left: s(-20, $s2);
+        }
+
+        .repeater > .field__container {
+            margin: s(-25) s(-20);
+        }
+    }
+
+    &--parent {
+        > .field__container {
+            border: 1px solid $cWhite5;
+            padding: s(25) s(20);
+
+            > .group__backlink {
+                margin-top: s(-25, $s2);
+            }
+        }
+    }
+
+
+
+
 }

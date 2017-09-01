@@ -37,7 +37,7 @@
 }
 
 .slide-enter-active, .slide-leave-active {
-    transition: opacity .22s $ease-out-sine, transform .22s $ease-out-sine;
+    transition: all 200ms $ease-out-sine;
 }
 
 .slide-enter, .slide-leave-to {
