@@ -19,7 +19,7 @@ export default {
                 this.showsub = false;
                 this.$emit('hidesub', level);
             } 
-            if(!this.$refs[index]) return;
+            if(!this.$refs[index] || !this.$refs[index][0].hideRecursivelyUntil) return;
             this.$refs[index][0].hideRecursivelyUntil(level);
         }
     }
