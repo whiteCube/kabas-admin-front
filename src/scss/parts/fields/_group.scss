@@ -34,10 +34,6 @@
         &:first-child {
             margin-top: 0;
         }
-
-        // .group > .field__container {
-        //     position: static;
-        // }
     }
 
     &__action {
@@ -100,7 +96,6 @@
         color: $cAccent;
         border-bottom: 1px solid $cWhite5;
         display: block;
-        // position: absolute;
         top: 0;
         right: 0;
         left: 0;
@@ -204,7 +199,7 @@
 
     &--parent {
         > .field__container {
-            border: 1px solid $cWhite5;
+            border: 1px solid $cAccent;
             padding: s(25) s(20);
 
             > .group__backlink {
