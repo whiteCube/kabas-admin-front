@@ -2,21 +2,66 @@
 
     &__popup {
         position: absolute;
-        // width: s(200);
         border: 1px solid $cWhite5;
         border-radius: 3px;
         right: 0;
-        top: calc(100% + 15px);
+        top: calc(100% + 5px);
         background: $cWhite;
         padding: s(25) s(20);
         text-align: left;
         z-index: 999;
+        box-shadow: 0 5px 10px 0 rgba($cAnthracite1, .15);
+
+        &:before {
+            content: '';
+            display: block;
+            position: absolute;
+            bottom: 100%;
+            right: s(14);
+            width: 0;
+            height: 0;
+            border: 7px solid transparent;
+            border-bottom-color: $cAccent;
+        }
     }
 
     &__option {
         display: block;
         padding: s(10, $s2) 0;
         font-size: s($s2);
+    }
+
+    &__subpreview {
+        font-style: italic;
+        display: inline-block;
+        // margin-left: s(10, $s2);
+
+        &:after {
+            content: ':';
+        }
+
+        &:before {
+            content: '-';
+            margin-left: s(5, $s2);
+            margin-right: s(5, $s2);
+        }
+    }
+
+    .repeater__preview .field__label {
+        &:after {
+            content: '-';
+            margin-left: s(5, $s2);
+            margin-right: s(5, $s2);
+        }
+
+        & + .flexible__subpreview {
+            margin-left: 0;
+
+            &:before {
+                content: '';
+                display: none;
+            }
+        }
     }
 
 }

@@ -9,20 +9,22 @@
                     <p class="repeater__title">
                         <em class="repeater__number">#{{ index + 1 }}</em><!--
                      --><template v-if="isComplex(item)">
-                            <template v-for="(field, i) in options[item.option].options">
-                                <span v-if="primaryCheck(i) && list[index].value[i] && list[index].value[i].length" class="repeater__preview">
-                                <span class="field__label">{{ field.label }}</span>
-                                <span v-if="field.type == 'color'" class="repeater__preview--color repeater__preview" :style="{background: list[index].value[i]}"></span>
-                                    {{ getPreview(field.type, list[index].value[i]) }}
-                                </span>
-                            </template>
-                        </template><!--
-                     --><template v-else>
-                            <span v-if="list[index]" class="repeater__preview">
-
-                                <span class="field__label">{{ options[item.option].label }}</span>
-                                <span v-if="item.type == 'color'" class="repeater__preview--color repeater__preview" :style="{background: list[index]}"></span>
-                                {{ list[index].value }}
+                            <span class="repeater__preview">
+                            <span class="field__label">{{ options[item.option].label }}</span><!--
+                         --><template v-for="(field, i) in options[item.option].options"><!--
+                             --><template v-if="primaryCheck(i) && list[index].value[i] && list[index].value[i].length"><!--
+                             --><span class="flexible__subpreview">{{ field.label }}</span><!--
+                             --><span v-if="field.type == 'color'" class="repeater__preview--color repeater__preview" :style="{background: list[index].value[i]}"></span>
+                                    {{ getPreview(field.type, list[index].value[i]) }}<!--
+                             --></template><!--
+                         --></template><!--
+                         --></span><!--
+                     --></template><!--
+                     --><template v-else><!--
+                         --><span v-if="list[index]" class="repeater__preview"><!--
+                             --><span class="field__label">{{ options[item.option].label }}</span><!--
+                             --><span v-if="item.type == 'color'" class="repeater__preview--color repeater__preview" :style="{background: list[index]}"></span><!--
+                             -->{{ list[index].value }}
                             </span>
                         </template>
                         <span v-if="isEmpty(list[index])" class="repeater__preview">{{ trans('fields.repeater.nopreview') }}</span>
