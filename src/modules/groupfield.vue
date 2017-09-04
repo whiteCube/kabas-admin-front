@@ -2,9 +2,11 @@
     <div class="field group" :class="classes">
         <breadcrumbs :parent="id" ref="crumbs" v-if="level == 0" :items="[{label, level, parent: id}]"></breadcrumbs>
         <div class="field__container">
+            <transition name="slideDown">
             <a v-show="showsub" class="group__backlink" @click="hideSubfield">
                 {{ trans('fields.group.backlink', this.hasProp('primary') && values[primary] ? values[primary] : label) }}
             </a>
+            </transition>
             <auto-expand @after-leave="showfields = true">
                 <div class="group__fields" v-if="!showsub">
                     <template v-for="(field, index) in options">
@@ -120,7 +122,7 @@ export default {
         },
 
         navigateSub(crumb) {
-            if(crumb.parent != this.getAbsoluteParent()) return;
+            if(crumb.parent != this.getAbsoluteParent()) return this.showsub = false;
             this.$emit('hidesub', crumb.level);
             EventBus.$emit('removeCrumbsUntil', this.getAbsoluteParent(), crumb.level);
             this.hideRecursivelyUntil(crumb.level, crumb.index);

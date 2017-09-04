@@ -13,6 +13,11 @@ Vue.mixin({
             return this.$parent.getAbsoluteParent();
         },
 
+        getLastCrumb() {
+            if(this.level !== 0) return this.$parent.getLastCrumb();
+            return this.$refs.crumbs.crumbs[this.$refs.crumbs.crumbs.length -1];
+        },
+
         trans(accessor, value) {
             let parts = accessor.split('.');
             let result = this.$root.translations;

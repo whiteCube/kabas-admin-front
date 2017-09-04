@@ -2,9 +2,11 @@
     <div class="field repeater" :class="classes" :id="id">
         <breadcrumbs :parent="id" ref="crumbs" v-if="level == 0" :items="[{label, level, parent: id}]"></breadcrumbs>
         <div class="field__container">
-            <a v-show="showfields" class="group__backlink" @click="cancel">
+            <transition name="slideDown">
+            <a v-if="showfields && isLastCrumb" class="group__backlink" @click="cancel">
                 {{ trans('fields.group.backlink', this.hasProp('primary') && list[primary] ? list[primary] : label) }}
             </a>
+            </transition>
             <auto-expand @after-leave="showfields = true">
             <draggable class="repeater__items" :options="{ animation: 300 }" v-show="!current && current !== 0" v-model="list" @end="cancelDelete">
                 <transition-group name="squish">
@@ -208,7 +210,7 @@ export default {
         },
 
         navigateSub(crumb) {
-            if(crumb.parent != this.getAbsoluteParent()) return;
+            if(crumb.parent != this.getAbsoluteParent()) return this.showfields = false;
             if(crumb.level <= this.level) this.finish();
         },
 
@@ -229,6 +231,12 @@ export default {
                 'repeater--empty': !this.list.length,
                 'repeater--parent': this.showfields && this.level == 0
             }
+        },
+
+        isLastCrumb() {
+            let lastCrumb = this.getLastCrumb();
+            if(this.showfields) return lastCrumb.level == this.level + 1;
+            return lastCrumb.level == this.level;
         }
     },
 

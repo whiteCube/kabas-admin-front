@@ -101,7 +101,12 @@
         left: 0;
         background: $cWhite;
         padding: s(25, $s2) s(20, $s2);
-        transition: background .2s $ease-out-quad;
+        max-height: 75px;
+        transition: background .2s $ease-out-quad, opacity .2s $ease-out-quad, transform .2s $ease-out-quad;
+
+        &.slideDown-leave-to {
+            display: none !important;
+        }
 
         &:before {
             @include icon(arrow_left);
