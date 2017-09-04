@@ -109,6 +109,20 @@
         color: $cGray;
     }
 
+    .vdp-datepicker__calendar {
+        &:before {
+            content: '';
+            display: block;
+            position: absolute;
+            bottom: 100%;
+            right: s(17);
+            width: 0;
+            height: 0;
+            border: 7px solid transparent;
+            border-bottom-color: $cAccent;
+        }
+    }
+
     .vdp-datepicker__calendar .cell:not(.blank):not(.disabled).day:hover, .vdp-datepicker__calendar .cell:not(.blank):not(.disabled).month:hover, .vdp-datepicker__calendar .cell:not(.blank):not(.disabled).year:hover {
         border-color: $cWhite5;
         background: rgba($cWhite5, .2);
