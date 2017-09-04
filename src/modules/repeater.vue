@@ -2,6 +2,9 @@
     <div class="field repeater" :class="classes" :id="id">
         <breadcrumbs :parent="id" ref="crumbs" v-if="level == 0" :items="[{label, level, parent: id}]"></breadcrumbs>
         <div class="field__container">
+            <a v-show="showfields" class="group__backlink" @click="cancel">
+                {{ trans('fields.group.backlink', this.hasProp('primary') && list[primary] ? list[primary] : label) }}
+            </a>
             <auto-expand @after-leave="showfields = true">
             <draggable class="repeater__items" :options="{ animation: 300 }" v-show="!current && current !== 0" v-model="list" @end="cancelDelete">
                 <transition-group name="squish">

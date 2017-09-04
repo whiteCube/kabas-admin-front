@@ -23,7 +23,6 @@ export default {
             this.$refs[index][0].hideRecursivelyUntil(level);
         },
 
-
         emptyValue(item) {
             if(item == '') return true;
             if(typeof item == 'object') {
