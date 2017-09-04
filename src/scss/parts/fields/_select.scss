@@ -32,6 +32,21 @@
         border-color: $cWhite5 !important;
         transition: all .2s $ease-out-quad;
 
+        &:before {
+            @include icon(checked);
+            margin-right: s(5, $s2);
+            opacity: 0;
+            width: s(15, $s2);
+            display: inline-block;
+            margin-left: s(-24, $s2);
+            transition: margin-left .2s $ease-out-quad, opacity .2s $ease-out-quad;
+        }
+
+        &--selected:before {
+            opacity: 1;
+            margin-left: 0;
+        }
+
         &:last-child {
             border-bottom: none;
         }
@@ -40,7 +55,6 @@
         &:focus {
             outline: none;
             background: rgba($cWhite5, .2);
-            padding-left: s(20);
         }
 
         &:after {
@@ -129,6 +143,14 @@
         *:focus:after,
         .select__option--focus:after {
             opacity: 0;
+        }
+    }
+
+    &__selected {
+        & + & {
+            &:before {
+                content: ', ';
+            }
         }
     }
 

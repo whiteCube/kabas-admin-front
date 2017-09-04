@@ -6,10 +6,19 @@
                 <option value="">{{ this.trans('fields.select.prompt') }}</option>
                 <option :value="key" v-for="(item, key) in options">{{ item }}</option>
             </select>
-            <p class="field__element" @click="expanded = !expanded">{{ selected ? options[selected] : trans('fields.select.prompt') }}</p>
+            <p class="field__element" @click="expanded = !expanded">
+                <template v-if="selected && selected.length">
+                    <template v-if="typeof selected == 'object'">
+                        <transition-group name="fade">
+                        <span :key="key" class="select__selected" v-for="(item, key) in selected">{{ options[item] }}</span>
+                        </transition-group>
+                    </template>
+                    <template v-else>{{ options[selected] }}</template>
+                </template>
+                <template v-else>{{ trans('fields.select.prompt') }}</template>
+            </p>
             <transition name="slideDown">
             <div v-if="expanded" class="select__dropdown">
-
                 <div v-if="withSearch" class="select__searchbox">
                     <input type="text" @focus="isTyping = true" @blur="isTyping = false" @keyup.esc="expanded = false" @keyup.enter="selectItem(Object.keys(filtered)[0])" v-model="search" :placeholder="trans('fields.select.search')" class="select__search select__option">
                     <a class="select__clear" v-if="search" @click="search = ''">
@@ -22,7 +31,6 @@
                     {{ item }}
                 </a>
                 </transition-group>
-                
             </div>
             </transition>
         </div>
@@ -31,12 +39,12 @@
 
 <script>
 export default {
-    props: ['label', 'name', 'options', 'value', 'showSearch'],
+    props: ['label', 'name', 'options', 'value', 'showSearch', 'multiple'],
 
     data() {
         return {
             val: '',
-            selected: this.value,
+            selected: this.hasProp('multiple') ? [] : '',
             expanded: false,
             id: this._uid,
             search: '',
@@ -50,18 +58,28 @@ export default {
 
     methods: {
         selectItem(index) {
-            this.selected = index;
-            this.expanded = false;
+            if(this.hasProp('multiple')) {
+                this.toggleSelected(index);
+            } else {
+                this.selected = index;
+            }
             this.$emit('input', this.options[this.selected]);
+            if(!this.hasProp('multiple')) return this.expanded = false;
         },
 
+        toggleSelected(index) {
+            let i = this.selected.indexOf(index);
+            if(this.selected.includes(index)) return this.selected.splice(i, 1);
+            this.selected.push(index);
+        },
 
         optionClasses(index) {
             let pos = Object.keys(this.filtered).indexOf(index);
             return {
-                'select__option--focus': pos == 0 && this.isTyping
+                'select__option--focus': pos == 0 && this.isTyping,
+                'select__option--selected': this.selected == index || this.selected.indexOf(index) > -1
             }
-        }
+        },
     },
 
     computed: {
@@ -73,7 +91,6 @@ export default {
 
         filtered() {
             if(this.search == '') return this.options;
-
             let results = {};
             for(let option in this.options) {
                 if(this.options[option].like('%' + this.search + '%')) results[option] = this.options[option];
