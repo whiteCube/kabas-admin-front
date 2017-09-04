@@ -7,7 +7,7 @@
         right: 0;
         top: calc(100% + 5px);
         background: $cWhite;
-        padding: s(25) s(20);
+        padding: s(15) s(20);
         text-align: left;
         z-index: 999;
         box-shadow: 0 5px 10px 0 rgba($cAnthracite1, .15);
@@ -34,7 +34,6 @@
     &__subpreview {
         font-style: italic;
         display: inline-block;
-        // margin-left: s(10, $s2);
 
         &:after {
             content: ':';
