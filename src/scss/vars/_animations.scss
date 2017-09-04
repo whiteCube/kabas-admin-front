@@ -86,3 +86,12 @@
     padding-top: 0 !important;
     padding-bottom: 0 !important;
 }
+
+.slideDown-enter-active, .slideDown-leave-active {
+    transition: transform .2s $ease-out-quad, opacity .2s $ease-out-quad;
+}
+
+.slideDown-enter, .slideDown-leave-to {
+    transform: translateY(-15px);
+    opacity: 0;
+}

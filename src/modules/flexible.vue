@@ -50,9 +50,11 @@
                     <a v-if="current || current == 0" @click.prevent="cancel" class="field__action btn btn--tiny">{{ trans('fields.repeater.cancel') }}</a>
                     <a v-if="current || current == 0" @click.prevent="finish" class="field__action btn btn--tiny btn--secondary">{{ trans('fields.repeater.finish') }}</a>
                     <a v-else @click.prevent="showPopup = !showPopup" class="field__action btn btn--tiny btn--secondary">{{ trans('fields.repeater.add') }}</a>
+                    <transition name="slideDown">
                     <div class="flexible__popup" v-if="showPopup">
                         <a @click="add(option)" class="flexible__option" v-for="(option, index) in options">{{ option.label }}</a>
                     </div>
+                    </transition>
                 </div>
             </div>
         </div>
