@@ -8,6 +8,7 @@
                 <div class="repeater__item" v-for="(item, index) in list" :key="index">
                     <p class="repeater__title">
                         <em class="repeater__number">#{{ index + 1 }}</em><!--
+                        --><span class="repeater__preview" v-if="emptyValue(item)">{{ trans('fields.repeater.nopreview') }}</span><!--
                      --><template v-if="isComplex()">
                             <template v-for="(field, i) in structure.options">
                                 <span v-if="primaryCheck(i) && list[index][i] && list[index][i].length" class="repeater__preview">

@@ -11,6 +11,7 @@
                      --><template v-if="isComplex(item)">
                             <span class="repeater__preview">
                             <span class="field__label">{{ options[item.option].label }}</span><!--
+                         --><span class="repeater__preview" v-if="emptyValue(item.value)">{{ trans('fields.repeater.nopreview') }}</span><!--
                          --><template v-for="(field, i) in options[item.option].options"><!--
                              --><template v-if="primaryCheck(i) && list[index].value[i] && list[index].value[i].length"><!--
                              --><span class="flexible__subpreview">{{ field.label }}</span><!--
@@ -23,6 +24,7 @@
                      --><template v-else><!--
                          --><span v-if="list[index]" class="repeater__preview"><!--
                              --><span class="field__label">{{ options[item.option].label }}</span><!--
+                             --><span class="repeater__preview" v-if="emptyValue(item.value)">{{ trans('fields.repeater.nopreview') }}</span><!--
                              --><span v-if="item.type == 'color'" class="repeater__preview--color repeater__preview" :style="{background: list[index]}"></span><!--
                              -->{{ list[index].value }}
                             </span>

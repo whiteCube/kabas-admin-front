@@ -21,6 +21,18 @@ export default {
             } 
             if(!this.$refs[index] || !this.$refs[index][0].hideRecursivelyUntil) return;
             this.$refs[index][0].hideRecursivelyUntil(level);
+        },
+
+
+        emptyValue(item) {
+            if(item == '') return true;
+            if(typeof item == 'object') {
+                for(let index in item) {
+                    if(this.primaryCheck(index) && (item[index] == '' || item[index].length == 0)) return true;
+                    if(item[index] != '' || item[index].length != 0) return false;
+                }
+            }
+            return true;
         }
     }
 }

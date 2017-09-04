@@ -33,6 +33,7 @@
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: s(0.89, $s2);
+        line-height: s($s5, $s2);
         margin-bottom: s(10, $s2);
 
         &:before {
