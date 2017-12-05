@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Tex from '../../dist/illustrations/tex.svg';
+import Tex from '../illustrations/tex.svg';
 
 export default {
     props: ['type'],
