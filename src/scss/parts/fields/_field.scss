@@ -91,4 +91,8 @@
         float: left;
         margin-top: s(10, $s2);
     }
+
+    & + & {
+        margin-top: s(25);
+    }
 }
