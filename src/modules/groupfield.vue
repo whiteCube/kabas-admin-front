@@ -27,7 +27,7 @@
                         </a>
                     </div>
                     </template>
-                    <genericfield v-if="!isNestable(field) && !showsub" :value="values ? values[index] : null" :structure="field" @input="transferInput($event, index)" :key="index"></genericfield>
+                    <genericfield v-if="!isNestable(field) && !showsub" :value="values ? values[index] : null" :name="field.name ? field.name : index" :structure="field" @input="transferInput($event, index)" :key="index"></genericfield>
                     </template>
                 </div>
             </auto-expand>
