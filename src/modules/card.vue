@@ -15,11 +15,11 @@
         </p>
         <div class="card__footer">
             <a :href="view" class="card__view"><slot name="view"></slot></a>
-            <a href="#" class="card__delete" @click.prevent="deleting = true">
+            <a href="#" v-if="this.hasProp('destroy')" class="card__delete" @click.prevent="deleting = true">
                 <span class="sro"><slot name="delete"></slot></span>
             </a>
         </div>
-        <transition name="slideUp">
+        <transition v-if="this.hasProp('destroy')" name="slideUp">
             <div class="delete" v-if="deleting">
                 <p class="delete__warning"><slot name="confirmdelete"></slot></p>
                 <a :href="destroy" class="delete__confirm"><slot name="yes"></slot></a>
