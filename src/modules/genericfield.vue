@@ -1,6 +1,6 @@
 <script>
 export default {
-    props: ['value', 'structure', 'name', 'nestinglevel', 'primary'],
+    props: ['value', 'structure', 'name', 'nestinglevel', 'primary', 'position'],
 
     data() {
         return {
@@ -65,6 +65,7 @@ export default {
             this.properties.name = this.name;
             this.properties.placeholder = this.placeholder;
             this.properties.nestinglevel = this.nestinglevel;
+            this.properties.position = this.position;
         },
 
         addTextProps() {

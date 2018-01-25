@@ -3,7 +3,7 @@
         <label class="field__label" :for="id">{{ label }}</label>
         <div class="field__container">
             <a class="url__switcher" @click.prevent="switchType">{{ trans('fields.url.' + type) }}</a>
-            <input type="text" @keyup.esc="expanded = false" class="field__element" :id="id" v-model="url" :name="name" :placeholder="placeholder" @focus="autocomplete" @input="autocomplete" >
+            <input type="text" @keyup.esc="expanded = false" class="field__element" :id="id" v-model="url" :name="computedName" :placeholder="placeholder" @focus="autocomplete" @input="autocomplete" >
             <transition name="slideDown">
             <div v-if="expanded" class="select__dropdown">
                 <transition-group class="select__results" name="slide">
@@ -22,7 +22,7 @@
 import Axios from 'axios';
 
 export default {
-    props: ['label', 'name', 'placeholder', 'value', 'translations', 'ajaxUrl'],
+    props: ['label', 'name', 'placeholder', 'value', 'translations', 'ajaxUrl', 'position'],
     data() {
         return {
             type: 'external',

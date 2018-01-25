@@ -2,7 +2,7 @@
     <div class="field file" :class="classes">
         <label class="field__label" :for="id">{{ label }}</label>
         <div class="field__container">
-            <input type="file" :id="id" class="field__element" :name="name" @change="update">
+            <input type="file" :id="id" class="field__element" :name="computedName" @change="update">
             <label :for="id" class="file__label"  @dragenter.prevent="highlight = true" @dragover.prevent="highlight = true" @dragleave="highlight = false" @drop.prevent="update">
                 <span class="file__title">
                     <template v-if="file && file.name">{{ file.name }}</template>

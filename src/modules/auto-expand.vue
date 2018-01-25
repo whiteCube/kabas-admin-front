@@ -35,23 +35,23 @@ export default {
     methods: {
 
         enter(el) {
-            el.style.height = 'auto !important';
-            let endHeight = getComputedStyle(el).height;
-            let style = getComputedStyle(el);
-            el.style.height = this.baseHeight;
-            this.startTransition(el);
-            el.offsetHeight; // force repaint
-            el.style.height = endHeight;
-            this.stopTransition(el);
+            // el.style.height = 'auto !important';
+            // let endHeight = getComputedStyle(el).height;
+            // let style = getComputedStyle(el);
+            // el.style.height = this.baseHeight;
+            // this.startTransition(el);
+            // el.offsetHeight; // force repaint
+            // el.style.height = endHeight;
+            // this.stopTransition(el);
         },
 
         afterEnter(el) {
-            el.style.height = 'auto';
+            // el.style.height = 'auto';
         },
 
         beforeLeave(el) {
-            let baseHeight = getComputedStyle(el).height;
-            EventBus.$emit('ae-baseheight', baseHeight, this.getAbsoluteParent());
+            // let baseHeight = getComputedStyle(el).height;
+            // EventBus.$emit('ae-baseheight', baseHeight, this.getAbsoluteParent());
         },
 
         afterLeave() {

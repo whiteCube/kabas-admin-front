@@ -197,6 +197,13 @@
             margin-left: s(-20, $s2);
         }
 
+        .group__subfields .repeater {
+            .group__backlink {
+                margin-left: 0;
+                margin-right: 0;
+            }
+        }
+
         .repeater > .field__container {
             margin: s(-25) s(-20);
         }

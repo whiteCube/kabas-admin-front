@@ -32,6 +32,28 @@ Vue.mixin({
             result = result.split('%s').join(count);
             let choices = result.split('|');
             return count == 1 ? choices[0] : choices[1];
+        },
+
+        concatenateNames(parts)
+        {
+            let name = '';
+            parts.forEach(bit => {
+                if(name == '') {
+                    name += bit;
+                } else {
+                    name += '[' + bit + ']';
+                }
+            })
+            return name;
+        }
+    },
+    computed: {
+        computedName() {
+            if(typeof this.name == 'undefined') return;
+            let parts = this.name.split('>');
+            if(typeof this.position == 'undefined') return this.concatenateNames(parts);
+            if(parts.length < 2) return this.name + '[' + this.position.toString() + ']';
+            return parts[0] + '[' + this.position.toString() + '][' + parts[1] + ']';
         }
     }
 });
@@ -44,6 +66,7 @@ new Vue({
         this.translations = JSON.parse(document.getElementById('app').attributes.translations.value);
     }
 });
+
 
 
 // Helpers

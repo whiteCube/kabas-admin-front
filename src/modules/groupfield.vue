@@ -8,7 +8,7 @@
             </a>
             </transition>
             <auto-expand @after-leave="showfields = true">
-                <div class="group__fields" v-if="!showsub">
+                <div class="group__fields" v-show="!showsub">
                     <template v-for="(field, index) in options">
                     <template v-for="type in nestable">
                     <div :key="index" class="group__nested" v-if="field.type == type" v-show="shouldDisplay(field, type)">
@@ -27,7 +27,7 @@
                         </a>
                     </div>
                     </template>
-                    <genericfield v-if="!isNestable(field) && !showsub" :value="values ? values[index] : null" :name="field.name ? field.name : index" :structure="field" @input="transferInput($event, index)" :key="index"></genericfield>
+                    <genericfield v-show="!isNestable(field) && !showsub" :value="values ? values[index] : null" :name="field.name ? field.name : index" :structure="field" @input="transferInput($event, index)" :key="index" :position="position"></genericfield>
                     </template>
                 </div>
             </auto-expand>
@@ -35,7 +35,7 @@
                 <div class="group__subfields" v-show="showfields">
                     <div :ref="index" :key="index" class="group__sub" v-for="(field, index) in options" v-show="showsub == index">
                         <template v-if="isIn(field, nestable)">
-                            <genericfield  :structure="field" :nestinglevel="level + 1" :value="values[index]"></genericfield>
+                            <genericfield  :structure="field" :nestinglevel="level + 1" :value="values[index]" :position="position"></genericfield>
                         </template>
                     </div>
                 </div>
@@ -51,10 +51,11 @@ import repeatable from '../mixins/repeatable.js';
 /*
 Todo:
 Add flexible
+Rework the transition between subfields
 */
 
 export default {
-    props: ['label', 'options', 'values', 'primary'],
+    props: ['label', 'options', 'values', 'primary', 'position'],
     mixins: [ repeatable ],
 
     data() {

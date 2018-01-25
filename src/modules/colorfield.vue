@@ -6,7 +6,7 @@
                 <transition name="picker" mode="out-in">
                 <div class="color__input" v-if="!expanded">
                     <a href="#" class="color__type" @click.prevent="changeType">{{ type }}</a>
-                    <input type="text" class="field__element" :name="name" :id="randomID" :placeholder="placeholder" v-model="val" @blur="update">
+                    <input type="text" class="field__element" :name="computedName" :id="randomID" :placeholder="placeholder" v-model="val" @blur="update">
                     <a href="#" class="color__expander" @click.prevent="expanded = true">
                         <span class="color__preview" :style="{ background: val ? val : '#000' }"></span>
                         <span class="sro">Edit color</span>
@@ -27,7 +27,7 @@ import colorpicker from './colorpicker.vue';
 import tinycolor from 'tinycolor2';
 
 export default {
-    props: ['placeholder', 'name', 'value', 'label'],
+    props: ['placeholder', 'name', 'value', 'label', 'position'],
     components: { colorpicker },
     data() {
         return {

@@ -2,7 +2,7 @@
     <div class="field file" :class="classes">
         <label class="field__label" :for="id">{{ label }}</label>
         <div class="field__container">
-            <input type="file" :id="id" class="field__element" :name="name" @change="update">
+            <input type="file" :id="id" class="field__element" :name="computedName" @change="update">
             <label tabindex="0" :for="id" class="file__label" @dragenter.prevent="highlight = true" @dragover.prevent="highlight = true" @dragleave="highlight = false" @drop.prevent="update">
                 <span class="file__title">
                     <span :title="file.name" v-if="file && file.name">{{ filename }}</span>
@@ -40,7 +40,7 @@
                 <div v-if="file" class="file__alt textfield">
                     <label class="field__label" :for="id + '_alt'">{{ trans('fields.image.alt') }}</label>
                     <div class="field__container">
-                        <input type="text" :id="id + '_alt'" v-model="altText" @input="updateAlt" :name="name + '_alt'" class="field__element" :placeholder="altPlaceholder">
+                        <input type="text" :id="id + '_alt'" v-model="altText" @input="updateAlt" :name="computedName + '_alt'" class="field__element" :placeholder="altPlaceholder">
                     </div>
                 </div>
             </transition>

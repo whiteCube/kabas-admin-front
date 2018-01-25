@@ -25,7 +25,7 @@
         transition: opacity 4s $ease-out-quad;
     }
     
-    &:nth-child(2n) {
+    &:nth-child(3n + 2) {
         margin: 0 col(0.75, 24) s(40);
     }
     

@@ -2,7 +2,7 @@
     <div class="field wysiwyg">
         <label class="field__label" @click="focus" :for="id">{{ label }}</label>
         <div class="field__container">
-            <textarea class="field__element" :id="id" v-model="val" :name="name"></textarea>
+            <textarea class="field__element" :id="id" v-model="val" :name="computedName"></textarea>
         </div>
     </div>
 </template>
@@ -12,7 +12,7 @@ import SimpleMDE from 'SimpleMDE';
 import EventBus from '../mixins/event-bus.js';
 
 export default {
-    props: ['label', 'name', 'limit', 'placeholder', 'value'],
+    props: ['label', 'name', 'limit', 'placeholder', 'value', 'position'],
     data() {
         return {
             id: this._uid,

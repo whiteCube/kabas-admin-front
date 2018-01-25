@@ -102,3 +102,11 @@
         @include iconInclude(save);
     }
 }
+
+button.btn {
+    &--icon {
+        &:after {
+            line-height: s(49, $s4);
+        }
+    }
+}

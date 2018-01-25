@@ -1,26 +1,26 @@
 <template>
     <div class="field textfield" :class="classes">
-        <label class="field__label" :for="randomID">{{ label }}</label>
+        <label class="field__label" :for="randomID" v-html="label"></label>
         <div class="field__container" :data-remaining="remaining">
             <input  v-if="!this.hasProp('email') && !this.hasProp('password') && !this.hasProp('textarea')" 
                     @input="input" v-model="val" 
-                    type="text" :name="name" 
+                    type="text" :name="computedName" 
                     class="field__element" :id="randomID"
                     :placeholder="placeholder">
             <input  v-if="this.hasProp('email')" 
                     @input="input" 
                     v-model="val" type="email" 
-                    :name="name" class="field__element" 
+                    :name="computedName" class="field__element" 
                     :placeholder="placeholder" :id="randomID">
             <input  v-if="this.hasProp('password')" 
                     @input="input" 
                     v-model="val" type="password" 
-                    :name="name" class="field__element" 
+                    :name="computedName" class="field__element" 
                     :placeholder="placeholder" :id="randomID">
             <textarea   v-if="this.hasProp('textarea')"
                         @input="input" 
                         class="field__element" :id="randomID"
-                        v-model="val" :name="name"
+                        v-model="val" :name="computedName"
                         :placeholder="placeholder"></textarea>
         </div>
     </div>
@@ -33,7 +33,7 @@ Check limit on textarea and wysiwyg
 */
 
 export default {
-    props: ['label', 'placeholder', 'name', 'limit', 'password', 'email', 'textarea', 'value'],
+    props: ['label', 'placeholder', 'name', 'limit', 'password', 'email', 'textarea', 'value', 'position'],
 
     data() {
         return {

@@ -44,7 +44,7 @@
             <div v-show="showfields" class="repeater__editable">
                 <div v-for="(item, i) in list">
                     <div v-show="i == current" class="repeater__fields">
-                        <genericfield :primary="primary" ref="fields" :nestinglevel="level + 1" :value="list[i]" @input="updateItem($event, i)" :structure="structure"></genericfield>
+                        <genericfield :primary="primary" ref="fields" :nestinglevel="level + 1" :value="list[i]" @input="updateItem($event, i)" :structure="structure" :position="position || i"></genericfield>
                     </div>
                 </div>
             </div>
@@ -75,7 +75,7 @@ Investigate why preview is sometimes empty
 */
 
 export default {
-    props: ['label', 'name', 'translations', 'items', 'structure', 'primary'],
+    props: ['label', 'name', 'translations', 'items', 'structure', 'primary', 'position'],
     components: { draggable },
     mixins: [ repeatable ],
 
@@ -172,6 +172,7 @@ export default {
         },
 
         updateItem(e, index) {
+            console.log(e, index, this);
             if(typeof e == 'object') {
                 if(e.index == this.primary) {
                     EventBus.$emit('updateCrumb', this.getAbsoluteParent(), this.level + 1, e.value);
