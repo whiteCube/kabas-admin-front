@@ -9,7 +9,6 @@
 </template>
 
 <script>
-import SimpleMDE from 'SimpleMDE';
 import Editor from 'tui-editor';
 import EventBus from '../mixins/event-bus.js';
 
