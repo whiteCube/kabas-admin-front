@@ -1,41 +1,54 @@
 .wysiwyg {
-    .editor-toolbar, .CodeMirror {
-        border-color: $cWhite5;
-    }
-
-    .CodeMirror-placeholder {
-        opacity: 1;
-        color: $cGray;
-    }
     
-    .CodeMirror {
+    .tui-editor-contents {
         font-size: s($s2);
         line-height: s($s6, $s2);
-        color: $cAnthracite1;
+        color: $cAnthracite1 !important;
 
         .cm-spell-error:not(.cm-url):not(.cm-comment):not(.cm-tag):not(.cm-word) {
             background: transparent;
             border-bottom: 1px dotted $cAccent;
         }
-    }
 
-    .editor-toolbar {
-        opacity: 1;
-
-        a {
+        span.colour {
             color: $cAnthracite1 !important;
-            transition: border-color .2s $ease-out-quad, background .2s $ease-out-quad;
-
-            &:hover,
-            &.active {
-                border-color: $cWhite5;
-                background: rgba($cWhite5, .2);
-            }
-
-            &:focus {
-                outline: none;
-            }
         }
     }
 
+    .te-toolbar-section {
+        height: s(55);
+        padding: s(10) 0;
+    }
+
+    .tui-editor-defaultUI-toolbar {
+        padding: 0 s(15);
+    }
+
+    .tui-editor-defaultUI .te-mode-switch-section {
+        height: s(35, $s2);
+        font-size: s($s2);
+    }
+
+    .tui-editor-defaultUI {
+        border-radius: s(3);
+        border-color: $cWhite5;
+    }
+
+    .tui-editor-defaultUI .te-switch-button.wysiwyg {
+        border-right: none;
+    }
+}
+
+.tui-tooltip {
+    font-size: s($s2);
+    padding: s(10, $s2) s(15, $s2);
+    border-radius: s(3, $s2);
+}
+
+.te-heading-add .tui-popup-body {
+    padding: s(15);
+
+    li + li {
+        margin-top: s(10);
+    }
 }
