@@ -14,8 +14,8 @@
                          --><span class="repeater__preview" v-if="emptyValue(item.value)">{{ trans('fields.repeater.nopreview') }}</span><!--
                          --><template v-for="(field, i) in options[item.option].options"><!--
                              --><template v-if="primaryCheck(i) && list[index].value[i] && list[index].value[i].length"><!--
-                             --><span class="flexible__subpreview">{{ field.label }}</span><!--
-                             --><span v-if="field.type == 'color'" class="repeater__preview--color repeater__preview" :style="{background: list[index].value[i]}"></span>
+                             --><span class="flexible__subpreview" :key="i">{{ field.label }}</span><!--
+                             --><span :key="i" v-if="field.type == 'color'" class="repeater__preview--color repeater__preview" :style="{background: list[index].value[i]}"></span>
                                     {{ getPreview(field.type, list[index].value[i]) }}<!--
                              --></template><!--
                          --></template><!--
@@ -41,9 +41,9 @@
             </auto-expand>
             <auto-expand @after-leave="current = null">
             <div v-show="showfields" class="repeater__editable">
-                <div v-for="(item, i) in list">
+                <div v-for="(item, i) in list" :key="i">
                     <div v-show="i == current" class="repeater__fields">
-                        <genericfield :primary="primary" ref="fields" :nestinglevel="level + 1" :value="list[i].value" @input="updateItem($event, i)" :structure="options[item.option]"></genericfield>
+                        <genericfield :primary="primary" ref="fields" :nestinglevel="level + 1" :value="list[i].value" @input="updateItem($event, i)" :structure="options[item.option]" :position="position || i"></genericfield>
                     </div>
                 </div>
             </div>
@@ -56,7 +56,7 @@
                     <a v-else @click.prevent="showPopup = !showPopup" class="field__action btn btn--tiny btn--secondary">{{ trans('fields.repeater.add') }}</a>
                     <transition name="slideDown">
                     <div class="flexible__popup" v-if="showPopup">
-                        <a @click="add(option)" class="flexible__option" v-for="(option, index) in options">{{ option.label }}</a>
+                        <a @click="add(option)" class="flexible__option" v-for="(option, index) in options" :key="index">{{ option.label }}</a>
                     </div>
                     </transition>
                 </div>
@@ -79,7 +79,7 @@ Investigate why preview is sometimes empty
 */
 
 export default {
-    props: ['label', 'name', 'translations', 'items', 'options', 'primary'],
+    props: ['label', 'name', 'translations', 'items', 'options', 'primary', 'position'],
     components: { draggable },
     mixins: [ repeatable ],
 
