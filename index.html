@@ -33,7 +33,8 @@
             "sub": {
                 "group": "%s field|%s fields",
                 "repeater": "%s item|%s items",
-                "gallery": "%s image|%s images"
+                "gallery": "%s image|%s images",
+                "flexible": "%s item| %s items"
             }
         },
         "date": {
@@ -799,6 +800,25 @@
                 }"
                 >    
             </flexible>
+
+            <groupfield label="Grouped flexible" :options="{
+                flexib: {
+                    label: 'Flexible content',
+                    type: 'flexible',
+                    options: {
+                        one: {
+                            option: 'one',
+                            label: 'One',
+                            type: 'text'
+                        },
+                        two: {
+                            option: 'two',
+                            label: 'Two',
+                            type: 'color'
+                        }
+                    }
+                }
+            }" :values="{flexib: []}"></groupfield>
 
             <gallery 
                 label="Gallery" 

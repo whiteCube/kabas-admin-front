@@ -21,7 +21,8 @@ export default {
                 'group': 'groupfield',
                 'date': 'datefield',
                 'select': 'selectfield',
-                'gallery': 'gallery'
+                'gallery': 'gallery',
+                'flexible': 'flexible'
             }
         }
     },
@@ -53,7 +54,8 @@ export default {
             if(this.is('textfield', 'wysiwyg')) this.addTextProps();
             if(this.is('imagefield')) this.addImageProps();
             if(this.is('imagefield', 'filefield')) this.addFileProps();
-            if(this.is('repeater', 'gallery')) this.addRepeaterProps();
+            if(this.is('repeater', 'gallery', 'flexible')) this.addRepeaterProps();
+            if(this.is('flexible')) this.addFlexibleProps();
             if(this.is('groupfield')) this.addGroupProps();
             if(this.is('selectfield')) this.addSelectProps();
             return this.properties;
@@ -78,9 +80,8 @@ export default {
 
         addImageProps() {
             if(this.value) {
-                this.properties.value = this.value.value;
+                this.properties.value = this.value;
                 this.properties.filedata = this.value.file || null;
-                this.properties.alt = this.value.alt;
             }
             if(!this.structure.rules) return;
             this.addRule('minHeight');
@@ -102,6 +103,11 @@ export default {
             this.properties.items = this.value;
             this.properties.primary = this.primary;
             this.properties.structure = this.structure.options;
+        },
+
+        addFlexibleProps() {
+            if(!this.structure.options) return;
+            this.properties.options = this.structure.options;
         },
 
         addGroupProps() {
