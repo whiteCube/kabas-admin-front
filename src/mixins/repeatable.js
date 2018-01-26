@@ -31,7 +31,7 @@ export default {
                     if(item[index] != '' || item[index].length != 0) return false;
                 }
             }
-            return true;
+            return false;
         }
     }
 }
