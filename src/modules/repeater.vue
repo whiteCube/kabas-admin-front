@@ -16,7 +16,7 @@
                         --><span class="repeater__preview" v-if="emptyValue(item)">{{ trans('fields.repeater.nopreview') }}</span><!--
                      --><template v-if="isComplex()">
                             <template v-for="(field, i) in structure.options">
-                                <span v-if="primaryCheck(i) && list[index][i] && list[index][i].length" class="repeater__preview">
+                                <span v-if="primaryCheck(i) && list[index][i] && list[index][i].length" class="repeater__preview" :key="i">
                                  <span class="field__label">{{ field.label }}</span>
                                  <span v-if="field.type == 'color'" class="repeater__preview--color repeater__preview" :style="{background: list[index][i]}"></span>
                                     {{ getPreview(field.type, list[index][i]) }}
@@ -42,7 +42,7 @@
             </auto-expand>
             <auto-expand @after-leave="current = null">
             <div v-show="showfields" class="repeater__editable">
-                <div v-for="(item, i) in list">
+                <div v-for="(item, i) in list" :key="i">
                     <div v-show="i == current" class="repeater__fields">
                         <genericfield :primary="primary" ref="fields" :nestinglevel="level + 1" :value="list[i]" @input="updateItem($event, i)" :structure="structure" :position="position || i"></genericfield>
                     </div>

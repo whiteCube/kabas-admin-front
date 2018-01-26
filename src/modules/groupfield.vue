@@ -10,8 +10,9 @@
             <auto-expand @after-leave="showfields = true">
                 <div class="group__fields" v-show="!showsub">
                     <template v-for="(field, index) in options">
-                    <template v-for="type in nestable">
-                    <div :key="index" class="group__nested" v-if="field.type == type" v-show="shouldDisplay(field, type)">
+                    <div :key="index" class="group__nested">
+                    <template v-for="(type, j) in nestable">
+                    <div :key="j" v-if="field.type == type" v-show="shouldDisplay(field, type)">
                         <a class="group__peek" tabindex="0" v-show="!showsub" @keyup.enter="showSubfield(field, level + 1, index)" @click="showSubfield(field, level + 1, index)">
                             <label class="field__label">{{ field.label }}
                                 <span class="group__subcount">
@@ -28,6 +29,7 @@
                     </div>
                     </template>
                     <genericfield v-show="!isNestable(field) && !showsub" :value="values ? values[index] : null" :name="field.name ? field.name : index" :structure="field" @input="transferInput($event, index)" :key="index" :position="position"></genericfield>
+                    </div>
                     </template>
                 </div>
             </auto-expand>

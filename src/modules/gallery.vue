@@ -20,7 +20,7 @@
             <auto-expand @after-leave="current = null">
             <!-- <transition name="slide" @enter="calcHeight" @before-leave="beforeAnimate" > -->
             <div v-show="showfields" class="repeater__editable">
-                <span v-for="(item, i) in list">
+                <span v-for="(item, i) in list" :key="i">
                     <div v-show="i == current" class="repeater__fields">
                         <genericfield :value="list[i]" @input="updatePreview($event, i)" :structure="structure" :position="position || i"></genericfield>
                     </div>
