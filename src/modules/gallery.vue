@@ -6,7 +6,7 @@
             <!-- <transition mode="out-in" @before-leave="beforeAnimate" @enter="calcHeight"  name="slide"> -->
             <draggable class="repeater__items" :options="{ animation: 300 }" v-show="!current && current !== 0" v-model="list" @end="cancelDelete">
                 <div class="repeater__item" v-for="(item, index) in list" :key="index">
-                    <figure class="gallery__fig" :style="{ 'background-image': background(item.value) }"></figure>
+                    <figure class="gallery__fig" :style="{ 'background-image': background((item.value) ? item.value : '') }"></figure>
                     <p class="repeater__title">
                         <span v-html="preview(index)"></span>
                     </p>
@@ -76,7 +76,7 @@ export default {
     methods: {
         preview(index) {
             let preview = '';
-            let value = this.list[index];
+            let value = this.list[index].value;
             preview = value.alt || value.file && value.file.name || this.trans('fields.repeater.nopreview');
             return preview;
         },
@@ -139,6 +139,7 @@ export default {
 
         background(data) {
             if(!data) return false;
+            if(typeof data == 'object') data = data.path;
             if(data.substr(0, 4) == 'http') return 'url(' + data + ')';
             return data;
         }

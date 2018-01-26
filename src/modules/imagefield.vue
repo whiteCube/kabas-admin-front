@@ -61,20 +61,22 @@ import FileMethods from '../mixins/file.js';
 export default {
     mixins: [FileMethods],
 
-    props: ['minWidth', 'minHeight', 'maxWidth', 'maxHeight', 'width', 'height', 'altPlaceholder', 'value', 'alt', 'filedata'],
+    props: ['minWidth', 'minHeight', 'maxWidth', 'maxHeight', 'width', 'height', 'altPlaceholder', 'value', 'filedata'],
 
     data() {
         return {
             id: this._uid,
             encoded: '',
-            altText: this.alt,
+            altText: this.value && this.value.alt ? this.value.alt : '',
             highlight: false
         }
     },
 
     created() {
-        this.encoded = 'url(' + this.value + ')';
-        if(this.value) this.file = {name: this.value};
+        if(this.value && this.value.path) {
+            this.encoded = 'url(' + this.value.path + ')';
+            this.file = {name: this.value.path};
+        }
         if(this.filedata) this.file = this.filedata;
     },
 
@@ -170,7 +172,8 @@ export default {
 
     watch: {
         value(newVal) {
-            this.encoded = newVal.indexOf('url(') > -1 ? newVal : 'url(' + newVal + ')'; 
+            if(!newVal.path) return;
+            this.encoded = newVal.path.indexOf('url(') > -1 ? newVal.path : 'url(' + newVal.path + ')'; 
         },
 
         alt(newVal) {
