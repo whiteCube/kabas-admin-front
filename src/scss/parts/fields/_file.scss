@@ -28,6 +28,7 @@
     }
 
     &__title {
+        word-wrap: break-word;
         display: block;
         font-size: s($s2);
         font-weight: 700;

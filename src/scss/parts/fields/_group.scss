@@ -3,7 +3,7 @@
 
     > .field__container {
         border: 1px solid $cWhite5;
-        padding: s(20);
+        padding: s(30);
         border-radius: s(3);
 
         &:before {
@@ -191,31 +191,32 @@
         }
 
         .group__backlink {
-            margin-top: s(-89, $s2);
+            margin-top: s(-94, $s2);
             margin-bottom: s(25, $s2);
-            margin-right: s(-20, $s2);
-            margin-left: s(-20, $s2);
+            margin-right: s(-30, $s2);
+            margin-left: s(-30, $s2);
         }
 
         .group__subfields .repeater {
             .group__backlink {
                 margin-left: 0;
                 margin-right: 0;
+                margin-top: s(-89, $s2);
             }
         }
 
         .repeater > .field__container {
-            margin: s(-25) s(-20);
+            margin: -25px s(-30) s(-30);
         }
     }
 
     &--parent {
         > .field__container {
             border: 1px solid $cAccent;
-            padding: s(25) s(20);
+            padding: s(30);
 
             > .group__backlink {
-                margin-top: s(-25, $s2);
+                margin-top: s(-30, $s2);
             }
         }
     }

@@ -1,6 +1,7 @@
 <template>
     <div class="field repeater flexible" :class="classes" :id="id">
         <breadcrumbs :parent="id" ref="crumbs" v-if="level == 0" :items="[{label, level, parent: id}]"></breadcrumbs>
+        <p class="field__description" v-if="description" v-html="description"></p>
         <div class="field__container">
             <auto-expand @after-leave="showfields = true">
             <draggable class="repeater__items" :options="{ animation: 300 }" v-show="!current && current !== 0" v-model="list" @end="cancelDelete">
@@ -62,6 +63,7 @@
                 </div>
             </div>
         </div>
+        <input type="hidden" :value="encodedList" :name="computedName">
     </div>
 </template>
 
@@ -79,7 +81,7 @@ Investigate why preview is sometimes empty
 */
 
 export default {
-    props: ['label', 'name', 'translations', 'items', 'options', 'primary', 'position'],
+    props: ['label', 'name', 'translations', 'items', 'options', 'primary', 'position', 'description'],
     components: { draggable },
     mixins: [ repeatable ],
 
@@ -242,6 +244,10 @@ export default {
                 'repeater--empty': !this.list.length,
                 'repeater--parent': this.showfields && this.level == 0
             }
+        },
+
+        encodedList() {
+            return JSON.stringify(this.list);
         }
     },
 

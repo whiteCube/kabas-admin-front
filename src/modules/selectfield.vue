@@ -1,6 +1,7 @@
 <template>
     <div class="field select" :class="classes">
         <label class="field__label" :for="id">{{ label }}</label>
+        <p class="field__description" v-if="description" v-html="description"></p>
         <div class="field__container">
             <select v-model="selected" :name="computedName" :id="id" class="sro">
                 <option value="">{{ this.trans('fields.select.prompt') }}</option>
@@ -39,7 +40,7 @@
 
 <script>
 export default {
-    props: ['label', 'name', 'options', 'value', 'showSearch', 'multiple', 'position'],
+    props: ['label', 'name', 'options', 'value', 'showSearch', 'multiple', 'position', 'description'],
 
     data() {
         return {

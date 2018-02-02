@@ -1,6 +1,7 @@
 <template>
     <div class="field repeater" :class="classes" :id="id">
         <breadcrumbs :parent="id" ref="crumbs" v-if="level == 0" :items="[{label, level, parent: id}]"></breadcrumbs>
+        <p class="field__description" v-if="description" v-html="description"></p>
         <div class="field__container">
             <transition name="slideDown">
             <a v-if="showfields && isLastCrumb" class="group__backlink" @click="cancel">
@@ -75,7 +76,7 @@ Investigate why preview is sometimes empty
 */
 
 export default {
-    props: ['label', 'name', 'translations', 'items', 'structure', 'primary', 'position'],
+    props: ['label', 'name', 'translations', 'items', 'structure', 'primary', 'position', 'description'],
     components: { draggable },
     mixins: [ repeatable ],
 

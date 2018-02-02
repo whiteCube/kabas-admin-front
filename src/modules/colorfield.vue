@@ -1,6 +1,7 @@
 <template>
     <div class="field color color--hex" :class="classes">
         <label class="field__label" :for="randomID">{{ label }}</label>
+        <p class="field__description" v-if="description" v-html="description"></p>
         <div class="field__container">
             <div class="color__border">
                 <transition name="picker" mode="out-in">
@@ -27,7 +28,7 @@ import colorpicker from './colorpicker.vue';
 import tinycolor from 'tinycolor2';
 
 export default {
-    props: ['placeholder', 'name', 'value', 'label', 'position'],
+    props: ['placeholder', 'name', 'value', 'label', 'position', 'description'],
     components: { colorpicker },
     data() {
         return {

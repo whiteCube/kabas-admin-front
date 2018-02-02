@@ -1,6 +1,7 @@
 <template>
     <div class="field group" :class="classes">
         <breadcrumbs :parent="id" ref="crumbs" v-if="level == 0" :items="[{label, level, parent: id}]"></breadcrumbs>
+        <p class="field__description" v-if="description" v-html="description"></p>
         <div class="field__container">
             <transition name="slideDown">
             <a v-show="showsub" class="group__backlink" @click="hideSubfield">
@@ -37,7 +38,7 @@
                 <div class="group__subfields" v-show="showfields">
                     <div :ref="index" :key="index" class="group__sub" v-for="(field, index) in options" v-show="showsub == index">
                         <template v-if="isIn(field, nestable)">
-                            <genericfield  :structure="field" :nestinglevel="level + 1" :value="values[index]" :position="position"></genericfield>
+                            <genericfield :structure="field" :nestinglevel="level + 1" :value="values[index]" :position="position"></genericfield>
                         </template>
                     </div>
                 </div>
@@ -57,7 +58,7 @@ Rework the transition between subfields
 */
 
 export default {
-    props: ['label', 'options', 'values', 'primary', 'position'],
+    props: ['label', 'options', 'values', 'primary', 'position', 'description'],
     mixins: [ repeatable ],
 
     data() {

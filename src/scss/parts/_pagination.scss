@@ -1,4 +1,5 @@
 .pagination {
+    margin-top: s(25);
 
     &__previous,
     &__next {
@@ -59,6 +60,7 @@
 
     &--disabled {
         color: $cGray;
+        cursor: default;
 
         &:before,
         &:after {

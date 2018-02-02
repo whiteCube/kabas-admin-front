@@ -1,12 +1,15 @@
 <template>
     <div class="field file" :class="classes">
         <label class="field__label" :for="id">{{ label }}</label>
+        <p class="field__description" v-if="description" v-html="description"></p>
         <div class="field__container">
-            <input type="file" :id="id" class="field__element" :name="computedName" @change="update">
+            <input type="file" :id="id" class="field__element" :name="computedName + '[file]'" @change="update">
+            <input type="hidden" v-if="!modified" :name="computedName + '[path]'" :value="filePath">
             <label tabindex="0" :for="id" class="file__label" @dragenter.prevent="highlight = true" @dragover.prevent="highlight = true" @dragleave="highlight = false" @drop.prevent="update">
                 <span class="file__title">
-                    <span :title="file.name" v-if="file && file.name">{{ filename }}</span>
-                    <template v-else>{{ trans('fields.image.choose') }}</template>
+                    <!-- <span :title="file.name" v-if="file && file.name">{{ filename }}</span> -->
+                    <!-- <template v-else>{{ trans('fields.image.choose') }}</template> -->
+                    <template>{{ trans('fields.image.choose') }}</template>
                 </span>
                 <div class="file__details">
                     <p>{{ trans('fields.image.prompt') }}</p>
@@ -38,9 +41,9 @@
             </label>
             <transition name="slideDown">
                 <div v-if="file" class="file__alt textfield">
-                    <label class="field__label" :for="id + '_alt'">{{ trans('fields.image.alt') }}</label>
+                    <label class="field__label" :for="id + '[alt]'">{{ trans('fields.image.alt') }}</label>
                     <div class="field__container">
-                        <input type="text" :id="id + '_alt'" v-model="altText" @input="updateAlt" :name="computedName + '_alt'" class="field__element" :placeholder="altPlaceholder">
+                        <input type="text" :id="id + '[alt]'" v-model="altText" @input="updateAlt" :name="computedName + '[alt]'" class="field__element" :placeholder="altPlaceholder">
                     </div>
                 </div>
             </transition>
@@ -61,14 +64,15 @@ import FileMethods from '../mixins/file.js';
 export default {
     mixins: [FileMethods],
 
-    props: ['minWidth', 'minHeight', 'maxWidth', 'maxHeight', 'width', 'height', 'altPlaceholder', 'value', 'filedata'],
+    props: ['minWidth', 'minHeight', 'maxWidth', 'maxHeight', 'width', 'height', 'altPlaceholder', 'value', 'filedata', 'description'],
 
     data() {
         return {
             id: this._uid,
             encoded: '',
             altText: this.value && this.value.alt ? this.value.alt : '',
-            highlight: false
+            highlight: false,
+            modified: false
         }
     },
 
@@ -82,6 +86,7 @@ export default {
 
     methods: {
         update(e) {
+            this.modified = true;
             let file = this.getFile(e) || this.getDroppedFile(e);
             if(!file) return e.preventDefault();
             if(!this.isSupported(file)) return this.showError(this.trans('fields.image.errors.notsupported'), e);
@@ -115,7 +120,7 @@ export default {
             reader.readAsDataURL(file);
             reader.addEventListener('load', () => { 
                 this.encoded = 'url(' + reader.result + ')';
-                this.$emit('input', { value: this.encoded, alt: this.altText, file });
+                this.$emit('input', { path: this.encoded, alt: this.altText, file });
             });
         },
 
@@ -124,7 +129,7 @@ export default {
         },
 
         updateAlt(value) {
-            this.$emit('input', { value: this.encoded, alt: this.altText, file: this.file });
+            this.$emit('input', { path: this.encoded, alt: this.altText, file: this.file });
         }
     },
 
@@ -167,6 +172,15 @@ export default {
 
         filename() {
             return this.file.name.length > 70 ? this.file.name.substring(0, 70) + '...' : this.file.name;
+        },
+
+        filePath() {
+            if(!this.value) return '';
+            let value = this.value;
+            console.log('hello', value);
+            if(this.value && this.value.path) value = this.value.path;
+            console.log('hello2', value);
+            return value.replace(/(https?:\/\/[^\/]*\/)/, '');
         }
     },
 

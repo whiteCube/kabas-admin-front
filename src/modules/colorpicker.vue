@@ -1,6 +1,7 @@
 <template>
     <div class="color__picker">
         <label class="field__label">{{ trans('fields.color.hue') }}</label>
+        <p class="field__description" v-if="description" v-html="description"></p>
         <div class="color__range color__range--hue" @click="click($event, 'h')">
             <span class="color__handle" tabindex="0" @keydown.left="decrease('h')" @keydown.right="increase('h')" @mousedown="startDrag" :style="{ left: handle('h', hsl.h) + '%' }"></span>
         </div>
@@ -38,7 +39,7 @@
 import tinycolor from 'tinycolor2';
 
 export default {
-    props: ['value', 'translations'],
+    props: ['value', 'translations', 'description'],
 
     data() {
         return {

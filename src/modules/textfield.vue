@@ -1,6 +1,7 @@
 <template>
     <div class="field textfield" :class="classes">
         <label class="field__label" :for="randomID" v-html="label"></label>
+        <p class="field__description" v-if="description" v-html="description"></p>
         <div class="field__container" :data-remaining="remaining">
             <input  v-if="!this.hasProp('email') && !this.hasProp('password') && !this.hasProp('textarea')" 
                     @input="input" v-model="val" 
@@ -33,7 +34,7 @@ Check limit on textarea and wysiwyg
 */
 
 export default {
-    props: ['label', 'placeholder', 'name', 'limit', 'password', 'email', 'textarea', 'value', 'position'],
+    props: ['label', 'placeholder', 'name', 'limit', 'password', 'email', 'textarea', 'value', 'position', 'description'],
 
     data() {
         return {

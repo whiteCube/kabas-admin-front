@@ -1,6 +1,7 @@
 <template>
     <div class="field date">
         <label class="field__label" :for="id">{{ label }}</label>
+        <p class="field__description" v-if="description" v-html="description"></p>
         <div class="field__container">
             <picker :id="id" v-model="val" format="dd MMMM yyyy" :placeholder="trans('fields.date.placeholder')" :clear-button="true" input-class="field__element" calendar-class="date__calendar" :name="computedName"></picker>
         </div>
@@ -11,7 +12,7 @@
 import picker from 'vuejs-datepicker';
 
 export default {
-    props: ['name', 'label', 'value', 'position'],
+    props: ['name', 'label', 'value', 'position', 'description'],
     components: { picker },
 
     data() {

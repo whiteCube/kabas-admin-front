@@ -1,8 +1,9 @@
 <template>
     <div class="field url select" :class="classes">
         <label class="field__label" :for="id">{{ label }}</label>
+        <p class="field__description" v-if="description" v-html="description"></p>
         <div class="field__container">
-            <a class="url__switcher" @click.prevent="switchType">{{ trans('fields.url.' + type) }}</a>
+            <!-- <a class="url__switcher" @click.prevent="switchType">{{ trans('fields.url.' + type) }}</a> -->
             <input type="text" @keyup.esc="expanded = false" class="field__element" :id="id" v-model="url" :name="computedName" :placeholder="placeholder" @focus="autocomplete" @input="autocomplete" >
             <transition name="slideDown">
             <div v-if="expanded" class="select__dropdown">
@@ -22,7 +23,7 @@
 import Axios from 'axios';
 
 export default {
-    props: ['label', 'name', 'placeholder', 'value', 'translations', 'ajaxUrl', 'position'],
+    props: ['label', 'name', 'placeholder', 'value', 'translations', 'ajaxUrl', 'position', 'description'],
     data() {
         return {
             type: 'external',
@@ -34,6 +35,7 @@ export default {
     },
 
     created() {
+        this.url = this.value;
         Axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
     },
 

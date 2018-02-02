@@ -1,6 +1,7 @@
 <template>
     <div class="field gallery repeater" :class="classes" :id="id">
         <label class="field__label" v-if="level == 0">{{ label }}</label>
+        <p class="field__description" v-if="description" v-html="description"></p>
         <div class="field__container">
             <auto-expand @after-leave="showfields = true">
             <!-- <transition mode="out-in" @before-leave="beforeAnimate" @enter="calcHeight"  name="slide"> -->
@@ -52,7 +53,7 @@ Investigate why filename disappears on cancel
 */
 
 export default {
-    props: ['label', 'name', 'translations', 'items', 'structure', 'position'],
+    props: ['label', 'name', 'translations', 'items', 'structure', 'position', 'description'],
     components: { draggable },
     mixins: [ repeatable ],
 

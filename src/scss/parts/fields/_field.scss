@@ -6,6 +6,16 @@
     display: block;
     // margin-bottom: s(45);
 
+    &__description {
+        color: $cGray;
+        font-size: s($s1);
+        letter-spacing: s(0.25, $s1);
+        line-height: s(19, $s1);
+        margin-top: s(-6, $s1);
+        margin-bottom: s(8, $s1);
+        font-style: italic;
+    }
+
     &--shake {
         animation: shake .4s $ease-out-quad infinite;
     }
