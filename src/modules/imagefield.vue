@@ -13,24 +13,24 @@
                 </span>
                 <div class="file__details">
                     <p>{{ trans('fields.image.prompt') }}</p>
-                    <p v-if="hasSizeConstraints">{{ trans('fields.image.sizes') }}: 
+                    <div v-if="hasSizeConstraints">{{ trans('fields.image.sizes') }}: 
                         <div v-if="hasWidthConstraints">
                             {{ trans('fields.image.width') }}:
-                            <template v-for="(constraint, prefix, index) in widthConstraints">
+                            <span v-for="(constraint, prefix, index) in widthConstraints" v-bind:key="index">
                                 {{ prefix }} <em>{{ constraint }}px</em><!--
                              --><template v-if="isLastConstraint(index, widthConstraints)">, </template>
-                            </template>
+                            </span>
                         </div>
                         <div v-if="hasHeightConstraints">
                             {{ trans('fields.image.height') }}: 
-                            <template v-for="(constraint, prefix, index) in heightConstraints">
+                            <span v-for="(constraint, prefix, index) in heightConstraints" v-bind:key="index">
                                 {{ prefix }} <em>{{ constraint }}px</em><!--
                              --><template v-if="isLastConstraint(index, heightConstraints)">, </template>
-                            </template>
+                            </span>
                         </div>
-                    </p>
+                    </div>
                     <p v-if="formats && formats.length">{{ transchoice('fields.file.formats', formats.length) }}: 
-                        <em v-for="(format, index) in formats">
+                        <em v-for="(format, index) in formats" v-bind:key="index">
                             {{ format }}<template v-if="index < formats.length - 1">, </template>
                         </em>.
                     </p>
@@ -177,9 +177,8 @@ export default {
         filePath() {
             if(!this.value) return '';
             let value = this.value;
-            console.log('hello', value);
             if(this.value && this.value.path) value = this.value.path;
-            console.log('hello2', value);
+            if(this.value.value && this.value.value.path) value = this.value.value.path;
             return value.replace(/(https?:\/\/[^\/]*\/)/, '');
         }
     },

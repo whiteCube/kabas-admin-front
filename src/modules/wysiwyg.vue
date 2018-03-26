@@ -4,7 +4,7 @@
         <p class="field__description" v-if="description" v-html="description"></p>
         <div class="field__container">
             <div :id="id + 'tui'"></div>
-            <textarea class="field__element sro" :id="id" :name="computedName">{{ this.val }}</textarea>
+            <textarea class="field__element sro" :id="id" :name="computedName" v-model="val"></textarea>
         </div>
     </div>
 </template>
@@ -32,7 +32,6 @@ export default {
 
     mounted() {
         this.element = document.getElementById(this._uid + 'tui');
-        console.log(this.computedName);
         this.editor = new Editor({
             el: this.element,
             initialEditType: 'wysiwyg',
