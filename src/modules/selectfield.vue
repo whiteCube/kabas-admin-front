@@ -5,7 +5,7 @@
         <div class="field__container">
             <select v-model="selected" :name="computedName" :id="id" class="sro">
                 <option value="">{{ this.trans('fields.select.prompt') }}</option>
-                <option :value="key" v-for="(item, key) in options">{{ item }}</option>
+                <option :value="key" v-for="(item, key) in options" v-bind:key="key">{{ item }}</option>
             </select>
             <p class="field__element" @click="expanded = !expanded">
                 <template v-if="selected && selected.length">
@@ -55,6 +55,7 @@ export default {
 
     created() {
         this.val = this.value;
+        this.selected = this.val;
     },
 
     methods: {
