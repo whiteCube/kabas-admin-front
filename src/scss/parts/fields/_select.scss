@@ -3,6 +3,7 @@
     .field__element {
         cursor: pointer;
         position: relative;
+        user-select: none;
 
         &:after {
             @include icon(arrow_down);
@@ -31,6 +32,7 @@
         border-bottom: 1px solid $cWhite5;
         border-color: $cWhite5 !important;
         transition: all .2s $ease-out-quad;
+        user-select: none;
 
         &:before {
             @include icon(checked);
