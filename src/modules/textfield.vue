@@ -7,7 +7,7 @@
                     @input="input" v-model="val" 
                     type="text" :name="computedName" 
                     class="field__element" :id="randomID"
-                    :placeholder="placeholder">
+                    :placeholder="placeholder" :disabled="readonly">
             <input  v-if="this.hasProp('email')" 
                     @input="input" 
                     v-model="val" type="email" 
@@ -34,7 +34,7 @@ Check limit on textarea and wysiwyg
 */
 
 export default {
-    props: ['label', 'placeholder', 'name', 'limit', 'password', 'email', 'textarea', 'value', 'position', 'description'],
+    props: ['label', 'placeholder', 'name', 'limit', 'password', 'email', 'textarea', 'value', 'position', 'description', 'readonly'],
 
     data() {
         return {
@@ -71,6 +71,7 @@ export default {
                 'textfield--password': this.hasProp('password'),
                 'textfield--email': this.hasProp('email'),
                 'textfield--textarea': this.hasProp('textarea'),
+                'textfield--readonly': this.hasProp('readonly'),
                 'field--shake': this.shaking
             };
         },

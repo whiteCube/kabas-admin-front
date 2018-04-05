@@ -72,6 +72,7 @@ export default {
         },
 
         addTextProps() {
+            if(this.structure.readonly) this.addProp('readonly');
             if(this.type == 'email') this.addProp('email');
             if(this.type == 'textarea') this.addProp('textarea');
             if(this.type == 'password') this.addProp('password');

@@ -71,6 +71,22 @@
     }
 }
 
+.textfield--readonly {
+    .field__label {
+        &:before {
+            @include icon(lock);
+            opacity: 1;
+            color: $cAnthracite3;
+            margin-left: 0;
+            font-size: s(12, $s2);
+            vertical-align: 0;
+        }
+    }
+    .field__element {
+        background: #f4f4f4;
+    }
+}
+
 .textfield--email .field__container {
     &:before {
         content: '@';
