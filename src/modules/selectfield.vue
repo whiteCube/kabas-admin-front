@@ -55,6 +55,7 @@ export default {
 
     created() {
         this.val = this.value;
+        if(!this.value) return;
         this.selected = this.val;
     },
 
@@ -79,7 +80,7 @@ export default {
             let pos = Object.keys(this.filtered).indexOf(index);
             return {
                 'select__option--focus': pos == 0 && this.isTyping,
-                'select__option--selected': this.selected == index || this.selected.indexOf(index) > -1
+                'select__option--selected': this.selected == index || (typeof this.selected == 'object' && this.selected.indexOf(index) > -1)
             }
         },
     },
