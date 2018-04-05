@@ -32,6 +32,7 @@
     &__heading {
         text-align: left;
         font-weight: 700;
+        line-height: s(20);
         border-bottom: 1px solid $cWhite3;
         border-right: 1px solid $cWhite3;
 
@@ -56,6 +57,7 @@
         display: table-row;
         text-decoration: none;
         color: inherit;
+        line-height: s(20);
         transition: background .2s $ease-out-quad;
         position: relative;
 
