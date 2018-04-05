@@ -98,6 +98,10 @@
         @include iconInclude(pages);
     }
 
+    &--bag:after {
+        @include iconInclude(bag);
+    }
+
     &--save:after {
         @include iconInclude(save);
     }
