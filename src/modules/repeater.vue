@@ -206,7 +206,7 @@ export default {
         },
 
         getPreview(type, value) {
-            if(type == 'repeater') return this.transchoice('fields.group.subrepeateritems', value.length);
+            if(type == 'repeater') return this.transchoice('fields.group.sub.repeater', value.length);
             if(type == 'image') return value.alt;
             return value;
         },
