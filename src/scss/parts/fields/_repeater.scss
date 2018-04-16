@@ -194,4 +194,11 @@
         margin-bottom: s(-100);
     }
 
+
+    .group--showsub .group__subfields .repeater .group > .field__container > .group__backlink {
+        margin-left: s(-30, $s2);
+        margin-right: s(-30, $s2);
+        margin-top: s(-84, $s2);
+    }
+
 }
