@@ -141,6 +141,12 @@
         }
     }
 
+    &__results {
+        max-height: s(320);
+        overflow-y: scroll;
+        display: block;
+    }
+
     &__results:hover {
         *:focus:after,
         .select__option--focus:after {

@@ -71,6 +71,7 @@
         padding-right: s(65 + 25, $s1);
 
         &:after {
+            content: '';
             @include iconBase();
             position: absolute;
             right: 0;
@@ -104,6 +105,35 @@
 
     &--save:after {
         @include iconInclude(save);
+    }
+
+    &--delete:after {
+        @include iconInclude(delete);
+    }
+
+    &--lock:after {
+        @include iconInclude(lock);
+    }
+
+    &--search:after {
+        @include iconInclude(search);
+    }
+
+    &--left {
+        padding-right: s(25, $s1);
+        padding-left: s(65 + 25, $s1);
+
+        &:after {
+            @include iconInclude(arrow_left);
+            right: auto;
+            left: 0;
+            border-left: none;
+            border-right: 1px solid $cAnthracite1;
+        }
+    }
+
+    &--right:after {
+        @include iconInclude(arrow_right);
     }
 }
 
