@@ -57,6 +57,7 @@ export default {
             if(this.is('repeater', 'gallery', 'flexible')) this.addRepeaterProps();
             if(this.is('flexible')) this.addFlexibleProps();
             if(this.is('groupfield')) this.addGroupProps();
+            if(this.is('checkboxfield')) this.addCheckboxProps();
             if(this.is('selectfield')) this.addSelectProps();
             return this.properties;
         },
@@ -78,6 +79,12 @@ export default {
             if(this.type == 'password') this.addProp('password');
             if(!this.structure.rules) return;
             this.addRule('limit');
+        },
+
+        addCheckboxProps() {
+            if(this.structure.readonly) this.addProp('readonly');
+            if(this.value) this.addProp('checked');
+            this.properties.value = '1';
         },
 
         addImageProps() {

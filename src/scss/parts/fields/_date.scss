@@ -17,6 +17,19 @@
         font-weight: 700;
     }
 
+    .vdp-datepicker__timepicker {
+        height: 80px;
+    }
+    
+    .vdp-datepicker__control {
+        width: 50px;
+        cursor: pointer;
+
+        &--minus {
+            bottom: -3px;
+        }
+    }
+
     .vdp-datepicker__clear-button {
         position: absolute;
         z-index: 15;

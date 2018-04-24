@@ -1,5 +1,6 @@
 <template>
     <div class="field checkbox">
+        <input type="hidden" :name="computedName" value="0">
         <input class="field__element" type="checkbox" :id="id" :name="computedName" :value="value" v-model="isChecked">
         <label class="field__label" :for="id">{{ label }}</label>
     </div>
