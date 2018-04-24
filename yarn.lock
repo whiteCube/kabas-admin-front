@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@voidgraphics/vue2-date-time-picker@^0.0.2":
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/@voidgraphics/vue2-date-time-picker/-/vue2-date-time-picker-0.0.2.tgz#eb19cd79338d1aa0effb84583ae9775bbd479715"
+"@voidgraphics/vue2-date-time-picker@^0.0.3":
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/@voidgraphics/vue2-date-time-picker/-/vue2-date-time-picker-0.0.3.tgz#d2e23674293ac5439e6afa3dfae66b4976163514"
   dependencies:
     vue-server-renderer "^2.5.16"
 
