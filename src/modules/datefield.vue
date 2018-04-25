@@ -3,7 +3,7 @@
         <label class="field__label" :for="id">{{ label }}</label>
         <p class="field__description" v-if="description" v-html="description"></p>
         <div class="field__container">
-            <picker datetime :id="id" v-model="val" format="dd MMMM yyyy - hh:mm" :placeholder="trans('fields.date.placeholder')" :clear-button="true" input-class="field__element" calendar-class="date__calendar" :name="computedName"></picker>
+            <picker language="fr" datetime :id="id" v-model="val" format="dd MMMM yyyy - hh:mm" :placeholder="trans('fields.date.placeholder')" :clear-button="true" input-class="field__element" calendar-class="date__calendar" :name="computedName"></picker>
         </div>
     </div>
 </template>
