@@ -9,7 +9,7 @@
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {
-    "@voidgraphics/vue2-date-time-picker": "^0.0.3",
+    "@voidgraphics/vue2-date-time-picker": "^0.0.5",
     "style-loader": "^0.19.0",
     "vue": "^2.5.9"
   },
