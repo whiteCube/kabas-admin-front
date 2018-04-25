@@ -3,6 +3,12 @@
         cursor: pointer;
     }
 
+    .vdp-datepicker__calendar .cell.selected,
+    .vdp-datepicker__calendar .cell.selected.highlighted,
+    .vdp-datepicker__calendar .cell.selected:hover {
+        background: $cAccent;
+    }
+
     &__calendar {
         right: 0;
         margin-top: s(15);
@@ -19,6 +25,10 @@
 
     .vdp-datepicker__timepicker {
         height: 80px;
+    }
+
+    .vdp-datepicker__timeunit--minutes:before {
+        margin-top: 9px;
     }
     
     .vdp-datepicker__control {
