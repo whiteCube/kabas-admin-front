@@ -8,6 +8,7 @@
         height: 100%;
         background: $cAnthracite1;
         border-radius: s(3);
+        transition: width 100ms $ease-out-quad;
     }
 
     &--danger .progressbar__fill {
