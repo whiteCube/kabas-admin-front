@@ -3,7 +3,7 @@
         <label class="field__label" :for="id">{{ label }}</label>
         <p class="field__description" v-if="description" v-html="description"></p>
         <div class="field__container">
-            <select v-model="selected" :name="computedName" :id="id" class="sro">
+            <select :multiple="hasProp('multiple') && multiple == true" v-model="selected" :name="nameAttribute" :id="id" class="sro">
                 <option value="">{{ this.trans('fields.select.prompt') }}</option>
                 <option :value="key" v-for="(item, key) in options" v-bind:key="key">{{ item }}</option>
             </select>
@@ -11,10 +11,10 @@
                 <template v-if="selected && selected.length">
                     <template v-if="typeof selected == 'object'">
                         <transition-group name="fade">
-                        <span :key="key" class="select__selected" v-for="(item, key) in selected">{{ options[item] }}</span>
+                        <span :key="key" class="select__selected" v-for="(item, key) in selected">{{ options[item.toString()] }}</span>
                         </transition-group>
                     </template>
-                    <template v-else>{{ options[selected] }}</template>
+                    <template v-else>{{ options[selected.toString()] }}</template>
                 </template>
                 <template v-else>{{ trans('fields.select.prompt') }}</template>
             </p>
@@ -56,6 +56,16 @@ export default {
     created() {
         this.val = this.value;
         if(!this.value) return;
+
+        // Convert values to strings, cause we're working with JSON and cannot have integer keys
+        if(typeof this.val == 'object') {
+            for(var i = 0; i < this.val.length; i++) {
+                this.val[i] = this.val[i].toString();
+            }
+        } else {
+            this.val = this.val.toString();
+        }
+
         this.selected = this.val;
     },
 
@@ -86,6 +96,11 @@ export default {
     },
 
     computed: {
+        nameAttribute() {
+            if (this.hasProp('multiple')) return this.computedName + '[]';
+            return this.computedName;
+        },
+
         classes() {
             return {
                 'select--expanded': this.expanded

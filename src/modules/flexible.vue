@@ -44,7 +44,8 @@
             <div v-show="showfields" class="repeater__editable">
                 <div v-for="(item, i) in list" :key="i">
                     <div v-show="i == current" class="repeater__fields">
-                        <genericfield :primary="primary" ref="fields" :nestinglevel="level + 1" :value="list[i].value" @input="updateItem($event, i)" :structure="options[item.option]" :position="position || i"></genericfield>
+                        <input type="hidden" :name="computedName + '[' + i + '][option]'" :value="item.option">
+                        <genericfield :name="computedName" :primary="primary" ref="fields" :nestinglevel="level + 1" :value="list[i].value" @input="updateItem($event, i)" :structure="options[item.option]" :position="position || i"></genericfield>
                     </div>
                 </div>
             </div>
@@ -63,7 +64,7 @@
                 </div>
             </div>
         </div>
-        <input type="hidden" :value="encodedList" :name="computedName">
+        <input v-if="!hasProp('raw')" type="hidden" :value="encodedList" :name="computedName">
     </div>
 </template>
 
@@ -81,7 +82,7 @@ Investigate why preview is sometimes empty
 */
 
 export default {
-    props: ['label', 'name', 'translations', 'items', 'options', 'primary', 'position', 'description'],
+    props: ['label', 'name', 'raw', 'translations', 'items', 'options', 'primary', 'position', 'description'],
     components: { draggable },
     mixins: [ repeatable ],
 
@@ -135,12 +136,6 @@ export default {
                 index: index,
                 label: this.primary && this.list[index][this.primary] ? this.list[index][this.primary] : this.options[this.list[index].option].label
             });
-
-            // This fixes the issue with codemirror (wysiwyg) where the initial value does not appear right away.
-            // Can be removed safely the day we stop using simplemde.
-            setTimeout(() => {
-                EventBus.$emit('updateWysiwyg');
-            }, 300);
         },
 
         cancel() {

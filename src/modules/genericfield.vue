@@ -4,6 +4,7 @@ export default {
 
     data() {
         return {
+            isField: false,
             properties: {},
             tags: {
                 'text': 'textfield',
@@ -130,6 +131,9 @@ export default {
             if(!this.structure.options) return;
             this.addProp('showSearch', this.structure.showSearch);
             this.addProp('options', this.structure.options);
+            if(this.structure.multiple) {
+                this.addProp('multiple', this.structure.multiple);
+            }
         }
 
     }, 

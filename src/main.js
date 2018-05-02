@@ -3,6 +3,11 @@ import components from './mixins/components.js';
 
 // Global mixins, available in each component
 Vue.mixin({
+    data() {
+        return {
+            isField: true
+        }
+    },
     methods: {
         hasProp(prop) {
             return typeof this[prop] !== 'undefined';
@@ -43,8 +48,14 @@ Vue.mixin({
                 } else {
                     name += '[' + bit + ']';
                 }
-            })
+            });
             return name;
+        },
+
+        getParent()
+        {
+            if(this.$parent.isField) return this.$parent;
+            else return this.$parent.getParent();
         }
     },
     computed: {
@@ -52,8 +63,22 @@ Vue.mixin({
             if(typeof this.name == 'undefined') return;
             let parts = this.name.split('>');
             if(typeof this.position == 'undefined') return this.concatenateNames(parts);
-            if(parts.length < 2) return this.name + '[' + this.position.toString() + ']';
-            return parts[0] + '[' + this.position.toString() + '][' + parts[1] + ']';
+            let str = '';
+            for(var i = parts.length - 1; i > 0; i--) {
+                let pos = 0;
+                if(i == 1) {
+                    pos = this.position
+                } else {
+                    let parent = this;
+                    for(var j = 0; j < i - 1; j++) {
+                        parent = parent.getParent();
+                    }
+                    pos = parent.position
+                }
+                str += '[' + pos + ']' + '[' + parts[parts.length - i] + ']';
+            }
+            str = parts[0] + str;
+            return str;
         }
     }
 });

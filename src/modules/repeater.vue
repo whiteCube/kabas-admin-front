@@ -45,7 +45,7 @@
             <div v-show="showfields" class="repeater__editable">
                 <div v-for="(item, i) in list" :key="i">
                     <div v-show="i == current" class="repeater__fields">
-                        <genericfield :primary="primary" ref="fields" :nestinglevel="level + 1" :value="list[i]" @input="updateItem($event, i)" :structure="structure" :position="position || i"></genericfield>
+                        <genericfield :primary="primary" ref="fields" :nestinglevel="level + 1" :value="list[i]" @input="updateItem($event, i)" :structure="structure" :position="i"></genericfield>
                     </div>
                 </div>
             </div>
@@ -127,12 +127,6 @@ export default {
                 index: index,
                 label: this.primary && this.list[index][this.primary] ? this.list[index][this.primary] : this.structure.label
             });
-
-            // This fixes the issue with codemirror (wysiwyg) where the initial value does not appear right away.
-            // Can be removed safely the day we stop using simplemde.
-            setTimeout(() => {
-                EventBus.$emit('updateWysiwyg');
-            }, 300);
         },
 
         cancel() {

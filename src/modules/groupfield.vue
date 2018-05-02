@@ -63,6 +63,7 @@ export default {
 
     data() {
         return {
+            isField: false,
             id: this._uid,
             showsub: false,
             showfields: false,

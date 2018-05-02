@@ -19,6 +19,7 @@ export default {
 
     data() {
         return {
+            isField: false,
             duration: 200,
             baseHeight: '1px',
             easing: 'cubic-bezier(0.215,  0.610, 0.355, 1.000)'
