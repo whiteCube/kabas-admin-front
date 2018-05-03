@@ -3,8 +3,8 @@
         <label class="field__label" :for="id">{{ label }}</label>
         <p class="field__description" v-if="description" v-html="description"></p>
         <div class="field__container">
-            <select :multiple="hasProp('multiple') && multiple == true" v-model="selected" :name="nameAttribute" :id="id" class="sro">
-                <option value="">{{ this.trans('fields.select.prompt') }}</option>
+            <select :multiple="hasProp('multiple')" v-model="selected" :name="nameAttribute" :id="id" class="sro">
+                <option>{{ this.trans('fields.select.prompt') }}</option>
                 <option :value="key" v-for="(item, key) in options" v-bind:key="key">{{ item }}</option>
             </select>
             <p class="field__element" @click="expanded = !expanded">
