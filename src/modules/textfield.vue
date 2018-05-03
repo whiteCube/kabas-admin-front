@@ -45,7 +45,7 @@ export default {
     },
 
     created() {
-        if(this.value && typeof this.value !== 'undefined') this.val = this.value;
+        if(this.value && typeof this.value !== 'undefined') this.val = '' + this.value;
     },
 
     methods: {
@@ -84,7 +84,8 @@ export default {
 
     watch: {
         value(newVal) {
-            this.val = this.val.substring(0, this.limit);
+            newVal = '' + newVal;
+            this.val = newVal.substring(0, this.limit);
         }
     }
 }

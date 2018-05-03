@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://highlightjs.org/static/demo/styles/ocean.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAEKnV1Egl0Jt5FzhGHFLVC4nZHkRayxFg&libraries=places"></script>
     <!-- <link rel="stylesheet" href="./dist/app.css"> -->
   </head>
   <body>
@@ -839,6 +840,8 @@
             <selectfield multiple name="selectmultiple" label="Select (multiple)" :options="{ one: 'One', two: 'Two', three: 'Three' }" :value="['one', 'three']"></selectfield>
 
             <datefield name="date" label="Date"></datefield>
+
+            <locationfield label="Latitude and longitude selector"></locationfield>
             
             <submit></submit>
 

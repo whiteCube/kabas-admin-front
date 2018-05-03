@@ -29,3 +29,4 @@ Vue.component('illu', require('../modules/illu.vue'));
 Vue.component('breadcrumbs', require('../modules/breadcrumbs.vue'));
 Vue.component('auto-expand', require('../modules/auto-expand.vue'));
 Vue.component('flexible', require('../modules/flexible.vue'));
+Vue.component('locationfield', require('../modules/locationfield.vue'));

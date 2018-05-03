@@ -40,7 +40,7 @@
                 </transition>
             </label>
             <transition name="slideDown">
-                <div v-if="file" class="file__alt textfield">
+                <div v-if="file && !hasProp('noAlt')" class="file__alt textfield">
                     <label class="field__label" :for="id + '[alt]'">{{ trans('fields.image.alt') }}</label>
                     <div class="field__container">
                         <input type="text" :id="id + '[alt]'" v-model="altText" @input="updateAlt" :name="computedName + '[alt]'" class="field__element" :placeholder="altPlaceholder">
@@ -64,7 +64,7 @@ import FileMethods from '../mixins/file.js';
 export default {
     mixins: [FileMethods],
 
-    props: ['minWidth', 'minHeight', 'maxWidth', 'maxHeight', 'width', 'height', 'altPlaceholder', 'value', 'filedata', 'description'],
+    props: ['minWidth', 'minHeight', 'maxWidth', 'maxHeight', 'width', 'height', 'altPlaceholder', 'value', 'filedata', 'description', 'noAlt'],
 
     data() {
         return {

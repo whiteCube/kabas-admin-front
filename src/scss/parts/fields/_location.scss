@@ -1,0 +1,21 @@
+.location {
+    .latlng-picker {
+        height: s(400);
+    }
+
+    &__inputs {
+        border: 1px solid $cWhite5;
+        border-radius: 0 0 3px 3px;
+        padding: 30px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .textfield {
+        width: 48%;
+
+        & + .field {
+            margin-top: 0;
+        }
+    }
+}
