@@ -2,7 +2,7 @@
      <div class="field location" :class="classes">
         <label class="field__label">{{ label }}</label>
         <p class="field__description" v-if="description" v-html="description"></p>
-        <map-selector :zoom="8" :latitude="latitude" :longitude="longitude" @locationUpdated="locationUpdated"></map-selector>
+        <map-selector :zoom="zoom || 12" :latitude="latitude" :longitude="longitude" @locationUpdated="locationUpdated"></map-selector>
 
         <div class="location__inputs">
             <textfield label="Latitude" :value="latitude" :name="computedName + '[lat]'"></textfield>
@@ -15,7 +15,7 @@
 import MapSelector from 'vue-latlng-picker';
 
 export default {
-    props: ['label', 'description', 'name', 'lat', 'lng'],
+    props: ['label', 'description', 'name', 'lat', 'lng', 'zoom'],
     components: { 'map-selector': MapSelector },
 
     data() {
