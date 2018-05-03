@@ -25,7 +25,7 @@ export default {
         }
     },
 
-    mounted() {
+    created() {
         this.latitude = this.lat || 50.63356990;
         this.longitude = this.lng || 5.56318220;
     },
