@@ -92,6 +92,8 @@ new Vue({
     }
 });
 
+Vue.config.devtools = true
+
 
 
 // Helpers
