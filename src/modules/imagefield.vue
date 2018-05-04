@@ -77,6 +77,10 @@ export default {
     },
 
     created() {
+        if(this.value && typeof this.value == 'string') {
+            this.value = JSON.parse(this.value);
+        }
+
         if(this.value && this.value.path) {
             this.encoded = 'url(' + this.value.path + ')';
             this.file = {name: this.value.path};
