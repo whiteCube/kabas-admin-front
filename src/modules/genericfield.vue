@@ -93,6 +93,7 @@ export default {
                 this.properties.value = this.value;
                 this.properties.filedata = this.value.file || null;
             }
+            if(this.structure.noAlt) this.addProp('noAlt');
             if(!this.structure.rules) return;
             this.addRule('minHeight');
             this.addRule('height');
