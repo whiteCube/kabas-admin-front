@@ -167,7 +167,6 @@ export default {
         },
 
         updateItem(e, index) {
-            console.log(e, index, this);
             if(typeof e == 'object') {
                 if(e.index == this.primary) {
                     EventBus.$emit('updateCrumb', this.getAbsoluteParent(), this.level + 1, e.value);
