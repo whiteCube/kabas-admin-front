@@ -79,6 +79,7 @@ export default {
     computed: {
         classes() {
             return {
+                'field--error': this.errormessage,
                 'url--expanded': this.expanded,
                 'url--internal': this.type == 'internal'
             }

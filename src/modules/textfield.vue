@@ -70,6 +70,7 @@ export default {
     computed: {
         classes() {
             return {
+                'field--error': this.errormessage,
                 'textfield--limited': this.hasProp('limit'),
                 'textfield--password': this.hasProp('password'),
                 'textfield--email': this.hasProp('email'),

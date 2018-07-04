@@ -1,5 +1,5 @@
 <template>
-    <div class="field wysiwyg">
+    <div class="field wysiwyg" :class="classes">
         <label class="field__label" @click="focus" :for="id">{{ label }}</label>
         <p class="field__description" v-if="description" v-html="description"></p>
         <div class="field__container">
@@ -48,6 +48,14 @@ export default {
                 }
             }
         });
+    },
+
+    computed: {
+        classes() {
+            return {
+                'field--error': this.errormessage
+            };
+        },
     }
 }
 </script>
