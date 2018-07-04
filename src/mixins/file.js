@@ -52,7 +52,7 @@ export default {
 
         classes() {
             return {
-                'field--error': this.error,
+                'field--error': this.errormessage,
                 'file--highlighted': this.highlight
             }
         }

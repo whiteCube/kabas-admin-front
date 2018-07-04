@@ -7,7 +7,7 @@
             <textarea class="field__element sro" :id="id" :name="computedName" v-model="val"></textarea>
         </div>
         <transition name="slideDown">
-            <p class="field__error" v-if="error">{{ error }}</p>
+            <p class="field__error" v-if="errormessage">{{ errormessage }}</p>
         </transition>
     </div>
 </template>

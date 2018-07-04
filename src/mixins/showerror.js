@@ -3,18 +3,22 @@ export default {
     
     data() {
         return {
-            error: ''
+            errormessage: ''
         }
+    },
+
+    created() {
+        this.errormessage = this.error;
     },
 
     methods: {
         showError(message, e = false) {
             if(e) e.preventDefault();
-            this.error = message;
+            this.errormessage = message;
         },
 
         hideError() {
-            this.error = '';
+            this.errormessage = '';
         }
     }
 }

@@ -66,6 +66,7 @@ export default {
         addCommonProps() {
             this.properties.label = this.label;
             this.properties.value = this.value;
+            this.properties.error = this.structure.error;
             this.properties.name = this.structure.name || this.name;
             this.properties.placeholder = this.placeholder;
             this.properties.nestinglevel = this.nestinglevel;
