@@ -16,6 +16,9 @@
             </div>
             </transition>
         </div>
+        <transition name="slideDown">
+            <p class="field__error" v-if="error">{{ error }}</p>
+        </transition>
     </div>
 </template>
 

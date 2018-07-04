@@ -5,6 +5,9 @@
         <div class="field__container">
             <picker datetime :id="id" v-model="val" format="dd/MM/yyyy - hh:mm" :placeholder="trans('fields.date.placeholder')" :clear-button="true" input-class="field__element" calendar-class="date__calendar" :name="computedName"></picker>
         </div>
+        <transition name="slideDown">
+            <p class="field__error" v-if="error">{{ error }}</p>
+        </transition>
     </div>
 </template>
 

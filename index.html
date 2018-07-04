@@ -492,7 +492,7 @@
         <section>
             <div><h2>Fields</h2></div>
 
-            <textfield label="Text" name="text" description="Some description text here" placeholder="A simple text field"></textfield>
+            <textfield label="Text" name="text" description="Some description text here" error="yoo" placeholder="A simple text field"></textfield>
             <label for="cheat14" class="cheatlabel">Show/hide code example</label>
             <input type="checkbox" class="cheat" id="cheat14">
             <pre class="cheatcode"><code class="html">
@@ -842,6 +842,9 @@
             <datefield name="date" label="Date"></datefield>
 
             <locationfield name="location" :lat="43.52622789042316" :lng="-5.657820370030322" label="Latitude and longitude selector"></locationfield>
+
+            <genericfield name="png" description="" :structure="{&quot;label&quot;:&quot;Logo au format PNG&quot;,&quot;type&quot;:&quot;file&quot;}"
+                :value="&quot;{\&quot;path\&quot;: \&quot;uploads\/partners\/total.png\&quot;, \&quot;alt\&quot;: \&quot;\&quot;}&quot;"></genericfield>
             
             <submit></submit>
 

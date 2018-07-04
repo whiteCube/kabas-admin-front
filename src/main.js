@@ -1,8 +1,10 @@
 import Vue from 'vue';
 import components from './mixins/components.js';
+import ShowError from './mixins/showerror.js';
 
 // Global mixins, available in each component
 Vue.mixin({
+    mixins: [ShowError],
     data() {
         return {
             isField: true

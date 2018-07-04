@@ -6,6 +6,9 @@
             <div :id="id + 'tui'"></div>
             <textarea class="field__element sro" :id="id" :name="computedName" v-model="val"></textarea>
         </div>
+        <transition name="slideDown">
+            <p class="field__error" v-if="error">{{ error }}</p>
+        </transition>
     </div>
 </template>
 

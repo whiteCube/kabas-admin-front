@@ -1,4 +1,6 @@
 export default {
+    props: ['error'],
+    
     data() {
         return {
             error: ''
