@@ -23,10 +23,10 @@
                         class="field__element" :id="randomID"
                         v-model="val" :name="computedName"
                         :placeholder="placeholder"></textarea>
-            <transition name="slideDown">
-                <p class="field__error" v-if="errormessage">{{ errormessage }}</p>
-            </transition>
         </div>
+        <transition name="slideDown">
+            <p class="field__error" v-if="errormessage">{{ errormessage }}</p>
+        </transition>
     </div>
 </template>
 
