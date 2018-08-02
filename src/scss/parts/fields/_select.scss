@@ -4,6 +4,10 @@
         cursor: pointer;
         position: relative;
         user-select: none;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        padding-right: s(45, $s2);
 
         &:after {
             @include icon(arrow_down);
