@@ -23,7 +23,7 @@
             <div v-show="showfields" class="repeater__editable">
                 <span v-for="(item, i) in list" :key="i">
                     <div v-show="i == current" class="repeater__fields">
-                        <genericfield :value="list[i]" @input="updatePreview($event, i)" :structure="structure" :position="position || i"></genericfield>
+                        <genericfield :value="list[i].value" @input="updatePreview($event, i)" :structure="structure" :position="position || i"></genericfield>
                     </div>
                 </span>
             </div>
