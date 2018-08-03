@@ -45,7 +45,7 @@
             <div v-show="showfields" class="repeater__editable">
                 <div v-for="(item, i) in list" :key="i">
                     <div v-show="i == current" class="repeater__fields">
-                        <genericfield :primary="primary" ref="fields" :nestinglevel="level + 1" :value="list[i]" @input="updateItem($event, i)" :structure="structure" :position="i"></genericfield>
+                        <genericfield :name="computedName" :primary="primary" ref="fields" :nestinglevel="level + 1" :value="list[i]" @input="updateItem($event, i)" :structure="structure" :position="i"></genericfield>
                     </div>
                 </div>
             </div>

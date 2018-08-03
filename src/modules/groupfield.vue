@@ -38,7 +38,7 @@
                 <div class="group__subfields" v-show="showfields">
                     <div :ref="index" :key="index" class="group__sub" v-for="(field, index) in options" v-show="showsub == index">
                         <template v-if="isIn(field, nestable)">
-                            <genericfield :structure="field" :nestinglevel="level + 1" :value="values[index]" :position="position"></genericfield>
+                            <genericfield :name="computedName" :structure="field" :nestinglevel="level + 1" :value="values[index]" :position="position"></genericfield>
                         </template>
                     </div>
                 </div>
