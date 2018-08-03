@@ -124,5 +124,11 @@
         resize: vertical;
         line-height: s($s6, $s2);
     }
+
+    &.textfield--readonly {
+        &:after {
+            background: #f4f4f4;
+        }
+    }
 }
 

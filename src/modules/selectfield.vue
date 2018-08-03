@@ -40,7 +40,7 @@
 
 <script>
 export default {
-    props: ['label', 'name', 'options', 'value', 'showSearch', 'multiple', 'position', 'description'],
+    props: ['label', 'name', 'options', 'value', 'showSearch', 'multiple', 'position', 'description', 'readonly'],
 
     data() {
         return {
@@ -71,6 +71,7 @@ export default {
 
     methods: {
         selectItem(index) {
+            if(this.hasProp('readonly')) return;
             if(this.hasProp('multiple')) {
                 this.toggleSelected(index);
             } else {
@@ -103,6 +104,7 @@ export default {
 
         classes() {
             return {
+                'select--readonly': this.hasProp('readonly'),
                 'select--expanded': this.expanded
             }
         },
