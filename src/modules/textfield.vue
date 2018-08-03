@@ -9,20 +9,20 @@
                     class="field__element" :id="randomID"
                     :placeholder="placeholder" :disabled="readonly">
             <input  v-if="this.hasProp('email')" 
-                    @input="input" 
+                    @input="input" :disabled="readonly"
                     v-model="val" type="email" 
                     :name="computedName" class="field__element" 
                     :placeholder="placeholder" :id="randomID">
             <input  v-if="this.hasProp('password')" 
-                    @input="input" 
+                    @input="input" :disabled="readonly"
                     v-model="val" type="password" 
                     :name="computedName" class="field__element" 
-                    :placeholder="placeholder" :id="randomID">
+                    :placeholder="placeholder" :id="randomID" >
             <textarea   v-if="this.hasProp('textarea')"
                         @input="input" 
                         class="field__element" :id="randomID"
                         v-model="val" :name="computedName"
-                        :placeholder="placeholder"></textarea>
+                        :placeholder="placeholder" :disabled="readonly"></textarea>
         </div>
         <transition name="slideDown">
             <p class="field__error" v-if="errormessage">{{ errormessage }}</p>
