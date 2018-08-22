@@ -89,8 +89,6 @@ export default {
     data() {
         return {
             showPopup: false,
-
-
             current: null,
             showfields: false,
             id: this._uid,
@@ -107,6 +105,13 @@ export default {
         this.restore();
         this.level = this.hasProp('nestinglevel') ? this.nestinglevel : 0;
         EventBus.$on('navigateCrumb', this.navigateSub);
+
+        if(this.nestinglevel > 0) return;
+        this.$store.commit('registerField', {
+            name: this.computedName,
+            type: 'flexible',
+            value: this.list
+        });
     },
 
     methods: {
@@ -224,6 +229,10 @@ export default {
 
         primaryCheck(name) {
             return (!this.hasProp('primary') || (this.hasProp('primary') && this.primary == name));
+        },
+
+        getUpdateValue() {
+            return this.list;
         }
     },
 

@@ -67,7 +67,12 @@ export default {
             setTimeout(() => {
                 el.style.transition = '';
             }, this.duration);
-        }
+        },
+
+        updateValue() {
+            if(!this.$parent) return;
+            this.$parent.$emit('updateValue');
+        },
     }
 }
 </script>

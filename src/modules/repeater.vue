@@ -98,6 +98,13 @@ export default {
         this.restore();
         this.level = this.hasProp('nestinglevel') ? this.nestinglevel : 0;
         EventBus.$on('navigateCrumb', this.navigateSub);
+
+        if(this.nestinglevel > 0) return;
+        this.$store.commit('registerField', {
+            name: this.computedName,
+            type: 'repeater',
+            value: this.list
+        });
     },
 
     methods: {
@@ -176,6 +183,9 @@ export default {
                 this.list[index] = e;
             }
             this.$parent.$emit('input', e);
+
+            this.updateValue();
+
             this.$forceUpdate();
         },
 
@@ -211,7 +221,12 @@ export default {
 
         primaryCheck(name) {
             return (!this.hasProp('primary') || (this.hasProp('primary') && this.primary == name));
+        },
+
+        getUpdateValue() {
+            return this.list;
         }
+
     },
 
     computed: {

@@ -67,6 +67,13 @@ export default {
         }
 
         this.selected = this.val;
+
+        this.$store.commit('registerField', {
+            name: this.computedName,
+            type: 'select',
+            value: this.selected,
+            multiple: this.hasProp('multiple') || this.multiple
+        });
     },
 
     methods: {
@@ -94,6 +101,11 @@ export default {
                 'select__option--selected': this.selected == index || (typeof this.selected == 'object' && this.selected.indexOf(index) > -1)
             }
         },
+
+        getUpdateValue() {
+            console.log(this.selected);
+            return this.selected;
+        }
     },
 
     computed: {

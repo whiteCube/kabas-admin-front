@@ -133,6 +133,11 @@ export default {
             this.hideRecursivelyUntil(crumb.level, crumb.index);
         },
 
+        updateValue() {
+            if(!this.$parent) return;
+            this.$parent.$emit('updateValue');
+        },
+
         updateItem(index, event) {
             this.values[index] = event;
         }

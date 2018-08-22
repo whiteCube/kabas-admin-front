@@ -136,6 +136,15 @@ export default {
             if(this.structure.multiple) {
                 this.addProp('multiple', this.structure.multiple);
             }
+        },
+
+        updateValue() {
+            if(!this.$parent) return;
+            this.$parent.$emit('updateValue');
+        },
+
+        getUpdateValue() {
+            return this.value;
         }
 
     }, 

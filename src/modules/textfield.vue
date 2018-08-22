@@ -49,11 +49,18 @@ export default {
 
     created() {
         if(this.value && typeof this.value !== 'undefined') this.val = '' + this.value;
+        
+        this.$store.commit('registerField', {
+            name: this.computedName,
+            type: 'text',
+            value: this.value
+        });
     },
 
     methods: {
         input(e) {
             this.$emit('input', this.val);
+            this.updateValue();
             if(!this.hasProp('limit') || this.remaining != 0) return;
             this.shake();
             this.val = this.val.substring(0, this.limit);
@@ -64,6 +71,10 @@ export default {
             setTimeout(() => {
                 this.shaking = false;
             }, 400);
+        },
+
+        getUpdateValue() {
+            return this.val;
         }
     },
 
@@ -90,6 +101,7 @@ export default {
         value(newVal) {
             newVal = '' + newVal;
             this.val = newVal.substring(0, this.limit);
+            this.updateValue();
         }
     }
 }

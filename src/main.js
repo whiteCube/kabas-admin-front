@@ -1,6 +1,8 @@
 import Vue from 'vue';
+import Vuex from 'vuex';
 import components from './mixins/components.js';
 import ShowError from './mixins/showerror.js';
+import Store from './store.js';
 
 // Global mixins, available in each component
 Vue.mixin({
@@ -9,6 +11,9 @@ Vue.mixin({
         return {
             isField: true
         }
+    },
+    created() {
+        this.$on('updateValue', this.updateValue);
     },
     methods: {
         hasProp(prop) {
@@ -58,6 +63,19 @@ Vue.mixin({
         {
             if(this.$parent.isField) return this.$parent;
             else return this.$parent.getParent();
+        },
+
+        updateValue() {
+            this.$store.commit('updateValue', {
+                name: this.computedName,
+                value: this.getUpdateValue()
+            });
+            if(!this.$parent) return;
+            this.$parent.$emit('updateValue');
+        },
+
+        getUpdateValue() {
+            return null;
         }
     },
     computed: {
@@ -85,10 +103,11 @@ Vue.mixin({
     }
 });
 
+
 // Create the vue instance
 new Vue({
     el: '#app',
-    
+    store: Store,
     beforeCreate() {
         this.translations = JSON.parse(document.getElementById('app').attributes.translations.value);
     }
