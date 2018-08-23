@@ -136,6 +136,9 @@ export default {
             if(this.structure.multiple) {
                 this.addProp('multiple', this.structure.multiple);
             }
+            if(this.structure.max) {
+                this.addProp('max', this.structure.max);
+            }
         },
 
         updateValue() {

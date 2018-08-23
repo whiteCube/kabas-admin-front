@@ -40,7 +40,7 @@
 
 <script>
 export default {
-    props: ['label', 'name', 'options', 'value', 'showSearch', 'multiple', 'position', 'description', 'readonly'],
+    props: ['label', 'name', 'options', 'value', 'showSearch', 'multiple', 'position', 'description', 'readonly', 'max'],
 
     data() {
         return {
@@ -91,6 +91,7 @@ export default {
         toggleSelected(index) {
             let i = this.selected.indexOf(index);
             if(this.selected.includes(index)) return this.selected.splice(i, 1);
+            if(this.selected.length >= parseInt(this.max)) return;
             this.selected.push(index);
         },
 
@@ -103,7 +104,6 @@ export default {
         },
 
         getUpdateValue() {
-            console.log(this.selected);
             return this.selected;
         }
     },
