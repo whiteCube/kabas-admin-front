@@ -4,6 +4,7 @@
         <p class="field__description" v-if="description" v-html="description"></p>
         <div class="field__container">
             <input type="file" :id="id" class="field__element" :name="computedName" @change="update">
+            <input type="hidden" v-if="!modified" :name="computedName + '[path]'" :value="filePath">
             <label :for="id" class="file__label"  @dragenter.prevent="highlight = true" @dragover.prevent="highlight = true" @dragleave="highlight = false" @drop.prevent="update">
                 <span class="file__title">
                     <template v-if="file && file.name">{{ file.name }}</template>
@@ -30,12 +31,24 @@ import FileMethods from '../mixins/file.js';
 
 export default {
     mixins: [FileMethods],
-    props: ['description'],
+    props: ['description', 'value'],
 
     data() {
         return {
             id: this._uid
         }
+    },
+
+    created() {
+        if(this.value && typeof this.value == 'string') {
+            this.value = JSON.parse(this.value);
+        }
+
+        if(this.value && this.value.path) {
+            this.encoded = 'url(' + this.value.path + ')';
+            this.file = {name: this.value.path};
+        }
+        if(this.filedata) this.file = this.filedata;
     },
 
     methods: {
@@ -45,6 +58,16 @@ export default {
             if(!this.isSupported(file)) return this.showError(this.translations.errors.notsupported, e);
             if(this.exceedsSize(file)) return this.showError(this.translations.errors.size, e);
             this.file = file;
+        }
+    },
+
+    computed: {
+        filePath() {
+            if(!this.value) return '';
+            let value = this.value;
+            if(this.value && this.value.path) value = this.value.path;
+            if(this.value.value && this.value.value.path) value = this.value.value.path;
+            return value.replace(/(https?:\/\/[^\/]*\/)/, '');
         }
     }
 }
