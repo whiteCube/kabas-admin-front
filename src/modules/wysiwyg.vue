@@ -29,7 +29,6 @@ Editor.codeBlockManager.setReplacer('youtube', function(youtubeId) {
 });
 
 function renderYoutube(wrapperId, youtubeId) {
-    console.log('render youtube', wrapperId, youtubeId);
     var el = document.querySelector('#' + wrapperId);
     el.innerHTML = '<iframe width="420" height="315" src="https://www.youtube.com/embed/' + youtubeId + '"></iframe>';
 }
