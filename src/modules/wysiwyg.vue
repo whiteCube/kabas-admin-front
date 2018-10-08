@@ -4,7 +4,7 @@
         <p class="field__description" v-if="description" v-html="description"></p>
         <div class="field__container">
             <div :id="id + 'tui'"></div>
-            <textarea class="field__element sro" :id="id" :name="computedName" v-model="val"></textarea>
+            <textarea class="field__element sro" :id="id" :name="computedName" v-model="val" :required="required"></textarea>
         </div>
         <transition name="slideDown">
             <p class="field__error" v-if="errormessage">{{ errormessage }}</p>
@@ -34,7 +34,7 @@ function renderYoutube(wrapperId, youtubeId) {
 }
 
 export default {
-    props: ['label', 'name', 'limit', 'placeholder', 'value', 'position', 'description'],
+    props: ['label', 'name', 'limit', 'placeholder', 'value', 'position', 'description', 'required'],
     data() {
         return {
             id: this._uid,

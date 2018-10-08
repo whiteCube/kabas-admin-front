@@ -10,6 +10,12 @@ export default {
     created() {
         this.errormessage = this.error;
     },
+    
+    mounted() {
+        this.$el.addEventListener('kabas-error', (e) => {
+            this.errormessage = e.detail.message;
+        });
+    },
 
     methods: {
         showError(message, e = false) {
