@@ -72,6 +72,7 @@ export default {
             this.properties.nestinglevel = this.nestinglevel;
             this.properties.position = this.position;
             this.properties.description = this.structure.description;
+            this.properties.required = this.structure.required;
         },
 
         addTextProps() {

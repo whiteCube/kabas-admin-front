@@ -3,7 +3,7 @@
         <label class="field__label" :for="id">{{ label }}</label>
         <p class="field__description" v-if="description" v-html="description"></p>
         <div class="field__container">
-            <select :multiple="hasProp('multiple')" v-model="selected" :name="nameAttribute" :id="id" class="sro">
+            <select :multiple="hasProp('multiple')" v-model="selected" :name="nameAttribute" :id="id" class="sro" :required="required">
                 <option>{{ this.trans('fields.select.prompt') }}</option>
                 <option :value="key" v-for="(item, key) in options" v-bind:key="key">{{ item }}</option>
             </select>
@@ -40,7 +40,7 @@
 
 <script>
 export default {
-    props: ['label', 'name', 'options', 'value', 'showSearch', 'multiple', 'position', 'description', 'readonly', 'max'],
+    props: ['label', 'name', 'options', 'value', 'showSearch', 'multiple', 'position', 'description', 'readonly', 'max', 'required'],
 
     data() {
         return {

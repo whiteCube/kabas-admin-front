@@ -1,7 +1,7 @@
 import ShowError from '../mixins/showerror.js';
 
 export default {
-    props: ['label', 'name', 'formats', 'maxSize', 'position'],
+    props: ['label', 'name', 'formats', 'maxSize', 'position', 'required'],
     mixins: [ShowError],
 
     data() {

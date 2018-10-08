@@ -3,7 +3,7 @@
         <label class="field__label" :for="id">{{ label }}</label>
         <p class="field__description" v-if="description" v-html="description"></p>
         <div class="field__container">
-            <input type="file" :id="id" class="field__element" :name="computedName" @change="update">
+            <input type="file" :id="id" class="field__element" :name="computedName" @change="update" :required="required">
             <input type="hidden" v-if="!modified" :name="computedName + '[path]'" :value="filePath">
             <label :for="id" class="file__label"  @dragenter.prevent="highlight = true" @dragover.prevent="highlight = true" @dragleave="highlight = false" @drop.prevent="update">
                 <span class="file__title">

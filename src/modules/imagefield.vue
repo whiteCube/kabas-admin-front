@@ -43,7 +43,7 @@
                 <div v-if="file && !hasProp('noAlt')" class="file__alt textfield">
                     <label class="field__label" :for="id + '[alt]'">{{ trans('fields.image.alt') }}</label>
                     <div class="field__container">
-                        <input type="text" :id="id + '[alt]'" v-model="altText" @input="updateAlt" :name="computedName + '[alt]'" class="field__element" :placeholder="altPlaceholder">
+                        <input type="text" :id="id + '[alt]'" v-model="altText" @input="updateAlt" :name="computedName + '[alt]'" class="field__element" :placeholder="altPlaceholder" :required="required">
                     </div>
                 </div>
             </transition>

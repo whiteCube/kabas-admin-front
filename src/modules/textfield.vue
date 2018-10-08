@@ -7,22 +7,22 @@
                     @input="input" v-model="val" 
                     type="text" :name="computedName" 
                     class="field__element" :id="randomID"
-                    :placeholder="placeholder" :disabled="readonly">
+                    :placeholder="placeholder" :disabled="readonly" :required="required">
             <input  v-if="this.hasProp('email')" 
                     @input="input" :disabled="readonly"
                     v-model="val" type="email" 
                     :name="computedName" class="field__element" 
-                    :placeholder="placeholder" :id="randomID">
+                    :placeholder="placeholder" :id="randomID" :required="required">
             <input  v-if="this.hasProp('password')" 
                     @input="input" :disabled="readonly"
                     v-model="val" type="password" 
                     :name="computedName" class="field__element" 
-                    :placeholder="placeholder" :id="randomID" >
+                    :placeholder="placeholder" :id="randomID" :required="required">
             <textarea   v-if="this.hasProp('textarea')"
                         @input="input" 
                         class="field__element" :id="randomID"
                         v-model="val" :name="computedName"
-                        :placeholder="placeholder" :disabled="readonly"></textarea>
+                        :placeholder="placeholder" :disabled="readonly" :required="required"></textarea>
         </div>
         <transition name="slideDown">
             <p class="field__error" v-if="errormessage">{{ errormessage }}</p>
@@ -37,7 +37,7 @@ Check limit on textarea and wysiwyg
 */
 
 export default {
-    props: ['label', 'placeholder', 'name', 'limit', 'password', 'email', 'textarea', 'value', 'position', 'description', 'readonly'],
+    props: ['label', 'placeholder', 'name', 'limit', 'password', 'email', 'textarea', 'value', 'position', 'description', 'readonly', 'required'],
 
     data() {
         return {
