@@ -22,7 +22,7 @@
         transition: border-color .3s $ease-out-quad;
         overflow: hidden;
 
-        .field--error & {
+        .field--error > .field__container > & {
             border-color: $cAccent;
         }
     }
