@@ -34,6 +34,6 @@
     "vue-template-compiler": "^2.5.9",
     "vuedraggable": "^2.14.1",
     "webpack": "^3.4.1",
-    "webpack-dev-server": "^2.4.5"
+    "webpack-dev-server": "^3.10.3"
   }
 }
