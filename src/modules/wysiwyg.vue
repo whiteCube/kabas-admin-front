@@ -57,7 +57,7 @@ export default {
             initialEditType: 'wysiwyg',
             previewStyle: 'vertical',
             initialValue: this.value,
-            height: 'auto',
+            height: '300px',
             exts: ['youtube'],
             events: {
                 change: (e) => {
