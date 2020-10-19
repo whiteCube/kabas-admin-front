@@ -1,0 +1,24 @@
+.filters {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 25px;
+
+    &__items {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+
+        .field__label {
+            margin-bottom: 0;
+        }
+    }
+
+    &__item {
+        margin-right: 25px;
+    }
+
+    &__spacer {
+        flex-grow: 1;
+    }
+}
