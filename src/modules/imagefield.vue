@@ -3,7 +3,7 @@
         <label class="field__label" :for="id">{{ label }}</label>
         <p class="field__description" v-if="description" v-html="description"></p>
         <div class="field__container">
-            <input type="file" :id="id" class="field__element" :name="computedName + '[file]'" @change="update">
+            <input type="file" :id="id" class="field__element" :name="computedName + '[file]'" @change="update" ref="fileInput">
             <input type="hidden" v-if="!modified" :name="computedName + '[path]'" :value="filePath">
             <label tabindex="0" :for="id" class="file__label" @dragenter.prevent="highlight = true" @dragover.prevent="highlight = true" @dragleave="highlight = false" @drop.prevent="update">
                 <span class="file__title">
@@ -13,7 +13,7 @@
                 </span>
                 <div class="file__details">
                     <p>{{ trans('fields.image.prompt') }}</p>
-                    <div v-if="hasSizeConstraints">{{ trans('fields.image.sizes') }}: 
+                    <div v-if="hasSizeConstraints">{{ trans('fields.image.sizes') }}:
                         <div v-if="hasWidthConstraints">
                             {{ trans('fields.image.width') }}:
                             <span v-for="(constraint, prefix, index) in widthConstraints" v-bind:key="index">
@@ -22,14 +22,14 @@
                             </span>
                         </div>
                         <div v-if="hasHeightConstraints">
-                            {{ trans('fields.image.height') }}: 
+                            {{ trans('fields.image.height') }}:
                             <span v-for="(constraint, prefix, index) in heightConstraints" v-bind:key="index">
                                 {{ prefix }} <em>{{ constraint }}px</em><!--
                              --><template v-if="isLastConstraint(index, heightConstraints)">, </template>
                             </span>
                         </div>
                     </div>
-                    <p v-if="formats && formats.length">{{ transchoice('fields.file.formats', formats.length) }}: 
+                    <p v-if="formats && formats.length">{{ transchoice('fields.file.formats', formats.length) }}:
                         <em v-for="(format, index) in formats" v-bind:key="index">
                             {{ format }}<template v-if="index < formats.length - 1">, </template>
                         </em>.
@@ -93,14 +93,20 @@ export default {
             this.modified = true;
             let file = this.getFile(e) || this.getDroppedFile(e);
             if(!file) return e.preventDefault();
-            if(!this.isSupported(file)) return this.showError(this.trans('fields.image.errors.notsupported'), e);
-            if(this.exceedsSize(file)) return this.showError(this.trans('fields.image.errors.size'), e);
+            if(!this.isSupported(file)) return this.errorAndCancel(this.trans('fields.image.errors.notsupported'), e);
+            if(this.exceedsSize(file)) return this.errorAndCancel(this.trans('fields.image.errors.size'), e);
             this.checkDimensions(file, (passes) => {
-                if(!passes) return this.showError(this.trans('fields.image.errors.dimensions'), e);
+                if(!passes) return this.errorAndCancel(this.trans('fields.image.errors.dimensions'), e);
                 this.hideError();
                 this.setBase64(file);
                 this.file = file;
             });
+        },
+
+        errorAndCancel(message, e) {
+            this.$refs.fileInput.value = null;
+
+            this.showError(message, e);
         },
 
         checkDimensions(file, callback) {
@@ -122,7 +128,7 @@ export default {
             if(!file) return '';
             var reader = new FileReader();
             reader.readAsDataURL(file);
-            reader.addEventListener('load', () => { 
+            reader.addEventListener('load', () => {
                 this.encoded = 'url(' + reader.result + ')';
                 this.$emit('input', { path: this.encoded, alt: this.altText, file });
             });
@@ -190,7 +196,7 @@ export default {
     watch: {
         value(newVal) {
             if(!newVal.path) return;
-            this.encoded = newVal.path.indexOf('url(') > -1 ? newVal.path : 'url(' + newVal.path + ')'; 
+            this.encoded = newVal.path.indexOf('url(') > -1 ? newVal.path : 'url(' + newVal.path + ')';
         },
 
         alt(newVal) {
