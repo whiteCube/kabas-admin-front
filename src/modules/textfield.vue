@@ -3,23 +3,23 @@
         <label class="field__label" :for="randomID" v-html="label"></label>
         <p class="field__description" v-if="description" v-html="description"></p>
         <div class="field__container" :data-remaining="remaining">
-            <input  v-if="!this.hasProp('email') && !this.hasProp('password') && !this.hasProp('textarea')" 
-                    @input="input" v-model="val" 
-                    type="text" :name="computedName" 
+            <input  v-if="!this.hasProp('email') && !this.hasProp('password') && !this.hasProp('textarea')"
+                    @input="input" v-model="val"
+                    type="text" :name="computedName"
                     class="field__element" :id="randomID"
                     :placeholder="placeholder" :disabled="readonly" :required="required">
-            <input  v-if="this.hasProp('email')" 
+            <input  v-if="this.hasProp('email')"
                     @input="input" :disabled="readonly"
-                    v-model="val" type="email" 
-                    :name="computedName" class="field__element" 
+                    v-model="val" type="email"
+                    :name="computedName" class="field__element"
                     :placeholder="placeholder" :id="randomID" :required="required">
-            <input  v-if="this.hasProp('password')" 
+            <input  v-if="this.hasProp('password')"
                     @input="input" :disabled="readonly"
-                    v-model="val" type="password" 
-                    :name="computedName" class="field__element" 
+                    v-model="val" type="password"
+                    :name="computedName" class="field__element"
                     :placeholder="placeholder" :id="randomID" :required="required">
             <textarea   v-if="this.hasProp('textarea')"
-                        @input="input" 
+                        @input="input"
                         class="field__element" :id="randomID"
                         v-model="val" :name="computedName"
                         :placeholder="placeholder" :disabled="readonly" :required="required"></textarea>
@@ -48,8 +48,8 @@ export default {
     },
 
     created() {
-        if(this.value && typeof this.value !== 'undefined') this.val = '' + this.value;
-        
+        if(this.value && typeof this.value !== 'undefined' && !this.hasProp('password')) this.val = '' + this.value;
+
         this.$store.commit('registerField', {
             name: this.computedName,
             type: 'text',
