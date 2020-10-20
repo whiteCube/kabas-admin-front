@@ -7,6 +7,7 @@ Vue.component('tablecell', require('../modules/tablecell.vue'));
 Vue.component('tableheading', require('../modules/tableheading.vue'));
 Vue.component('progressbar', require('../modules/progressbar.vue'));
 Vue.component('searchbox', require('../modules/searchbox.vue'));
+Vue.component('searchfield', require('../modules/searchfield.vue'));
 Vue.component('switcher', require('../modules/switcher.vue'));
 Vue.component('switchbtn', require('../modules/switch.vue'));
 Vue.component('card', require('../modules/card.vue'));
