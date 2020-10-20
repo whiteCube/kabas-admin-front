@@ -13,8 +13,9 @@
         background: $cAccent;
         color: $cWhite2;
         height: s(24, $s1);
-        width: s(24, $s1);
-        border-radius: 50%;
+        min-width: s(24, $s1);
+        border-radius: s(25, $s1);
+        padding: 0 s(5, $s1);
         font-size: s($s1);
         text-align: center;
         line-height: s(23, $s1);
