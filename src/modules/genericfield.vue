@@ -7,6 +7,7 @@ export default {
             isField: false,
             properties: {},
             tags: {
+                'hidden': 'hiddenfield',
                 'text': 'textfield',
                 'email': 'textfield',
                 'textarea': 'textfield',
@@ -151,7 +152,7 @@ export default {
             return this.value;
         }
 
-    }, 
+    },
 
     computed: {
         type() {

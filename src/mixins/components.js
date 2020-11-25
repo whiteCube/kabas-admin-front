@@ -11,6 +11,7 @@ Vue.component('searchfield', require('../modules/searchfield.vue'));
 Vue.component('switcher', require('../modules/switcher.vue'));
 Vue.component('switchbtn', require('../modules/switch.vue'));
 Vue.component('card', require('../modules/card.vue'));
+Vue.component('hiddenfield', require('../modules/hiddenfield.vue'));
 Vue.component('textfield', require('../modules/textfield.vue'));
 Vue.component('colorfield', require('../modules/colorfield.vue'));
 Vue.component('urlfield', require('../modules/urlfield.vue'));
